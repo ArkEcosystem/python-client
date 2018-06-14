@@ -1,0 +1,10 @@
+__pycache__/
+*.egg-info/
+*.DS_Store
+*.sublime-*
+*.py[co]
+*.python-version
+*.eggs
+*.pytest_cache/
+coverage.xml
+.coverage
