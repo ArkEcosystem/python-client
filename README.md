@@ -22,6 +22,7 @@ install instructions
 add docstrings for parameters
 add v2 API calls
 add P2P API calls
+fix Peer().peer()
 error handling
 ```
 
