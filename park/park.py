@@ -5,7 +5,6 @@ from park.one.account import Account
 from park.one.block import Block
 from park.one.delegate import Delegate
 from park.one.loader import Loader
-from park.one.multisignature import MultiSignature
 from park.one.peer import Peer
 from park.one.signature import Signature
 from park.one.transaction import Transaction
@@ -27,13 +26,6 @@ from park.two.vote import Vote2
 '''
 
 # TO DO - ADD P2P CALLS
-
-from park.builder.delegate import DelegateBuilder
-from park.builder.multisignature import MultiSignatureBuilder
-from park.builder.signature import SignatureBuilder
-from park.builder.transaction import TransactionBuilder
-from park.builder.vote import VoteBuilder
-
 
 class Park:
     def __init__(self, ip, port, nethash, version, api_version = "v1"):
@@ -70,12 +62,6 @@ class Park:
         else:
             return Loader2(self)
 
-    def multiSignatures(self):
-        if self.api_version == "v1":
-            return MultiSignature(self)
-        else:
-            return MultiSignature2(self)
-
     def peers(self):
         if self.api_version == "v1":
             return Peer(self)
@@ -105,19 +91,3 @@ class Park:
             return Vote(self)
         else:
             return Vote2(self)
-
-    # WORK IN PROGRESS
-    def delegateBuilder(self):
-        return DelegateBuilder(self)
-
-    def multiSignatureBuilder(self):
-        return MultiSignatureBuilder(self)
-
-    def signatureBuilder(self):
-        return SignatureBuilder(self)
-
-    def transactionBuilder(self):
-        return TransactionBuilder(self)
-
-    def voteBuilder(self):
-        return VoteBuilder(self)
