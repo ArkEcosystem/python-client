@@ -12,8 +12,13 @@ class Account(API):
     def delegates(self, address):
         return self.get('api/'+self.client.api_version+'/accounts/delegates', {"address": address})
 
+    '''
     def delegatesFee(self, address):
         return self.get('api/'+self.client.api_version+'/accounts/delegates/fee', {"address": address})
+    '''
+
+    def delegatesFee(self):
+        return self.get('api/' + self.client.api_version + '/accounts/delegates/fee')
 
     def vote(self, secret, publicKey, secondSecret):
         return self.put('api/'+self.client.api_version+'/accounts/delegates', {
