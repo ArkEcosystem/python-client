@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 
 from abc import ABC
-import json
 import requests
 
 class API(ABC):
