@@ -1,20 +1,35 @@
-#!/usr/bin/env python
+import setuptools
 
-try:
-    from setuptools import setup
-    import wheel
-except ImportError:
-    from distutils.core import setup
+requires = [
+    'requests>=2.19.1',
+]
 
-setup(
-    name='python-client',
+tests_require = [
+    'flake8>=3.5.0',
+    'flake8-bugbear>=18.2.0',
+    'flake8-import-order>=0.17.1',
+    'flake8-quotes>=1.0.0',
+]
+
+extras_require = {
+    'test': tests_require,
+    'dev': requires + tests_require
+}
+
+setuptools.setup(
+    name='ark-client',
     description='A simple Python API client for the ARK Blockchain.',
     version='0.0.1',
     author='',
     author_email='',
     url='https://github.com/ArkEcosystem/python-client',
-    packages=['ark', 'ark.one', 'ark.two', 'ark.p2p'],
-    install_requires=[
-        'wheel', 'requests', 'pyyaml', 'MarkupSafe',
-        'certifi', 'chardet', 'idna'
-    ])
+    packages=[
+        'ark',
+        'ark.one',
+        'ark.two',
+        'ark.p2p'
+    ],
+    install_requires=requires,
+    extras_require=extras_require,
+    tests_require=tests_require,
+)
