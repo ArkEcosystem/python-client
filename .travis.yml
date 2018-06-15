@@ -1,0 +1,16 @@
+language: python
+python:
+    - 3.4
+    - 3.5
+    - 3.6
+cache: pip
+install: 
+    - pip install .[test]
+
+script:
+    - flake8 .
+
+branches:
+  only:
+    - master
+    - develop
