@@ -4,6 +4,10 @@ from park.one.api import API
 
 
 class Delegate(API):
+    def __init__(self, client):
+        self.client = client
+        print(self.client.port)
+    
     def count(self):
         return self.get('api/'+self.api_version+'/delegates/count')
 
