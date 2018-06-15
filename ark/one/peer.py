@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from park.one.api import API
+from ark.one.api import API
 
 class Peer(API):
     # TO FIX - PEER FUNCTION NOT WORKING

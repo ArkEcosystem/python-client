@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 
-from park.one.api import API
-
+from ark.one.api import API
 
 class Transport(API):
     def __init__(self, client):

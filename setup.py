@@ -13,7 +13,7 @@ setup(
     author='',
     author_email='',
     url='https://github.com/ArkEcosystem/python-client',
-    packages=['park', 'park.one', 'park.two', 'park.p2p'],
+    packages=['ark', 'ark.one', 'ark.two', 'ark.p2p'],
     install_requires=[
         'wheel', 'requests', 'pyyaml', 'MarkupSafe',
         'certifi', 'chardet', 'idna'

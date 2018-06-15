@@ -19,17 +19,18 @@ sudo python3 setup.py install
 ```
 
 ## Usage
-```bash
-from park.park import Park
 
-park = Park(
+```py
+from ark.ark import ArkClient
+
+ark = ArkClient(
     '127.0.0.1',
     4003,
     '578e820911f24e039733b45e4882b73e301f813a0d2c31330dafda84534ffa23',
     '2.0.0'
 )
 
-delegates = park.delegates().delegates()
+delegates = ark.delegates().delegates()
 ```
 
 ## To Do

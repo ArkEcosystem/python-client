@@ -1,34 +1,35 @@
 #!/usr/bin/env python
 
 # WORK IN PROGRESS
-from park.one.account import Account
-from park.one.block import Block
-from park.one.delegate import Delegate
-from park.one.loader import Loader
-from park.one.peer import Peer
-from park.one.signature import Signature
-from park.one.transaction import Transaction
-from park.one.transport import Transport
-from park.one.vote import Vote
+from ark.one.account import Account
+from ark.one.block import Block
+from ark.one.delegate import Delegate
+from ark.one.loader import Loader
+from ark.one.peer import Peer
+from ark.one.signature import Signature
+from ark.one.transaction import Transaction
+from ark.one.transport import Transport
+from ark.one.vote import Vote
 
 '''
 # WORK IN PROGRESS
-from park.two.account import Account2
-from park.two.block import Block2
-from park.two.delegate import Delegate2
-from park.two.loader import Loader2
-from park.two.multisignature import MultiSignature2
-from park.two.peer import Peer2
-from park.two.signature import Signature2
-from park.two.transaction import Transaction2
-from park.two.transport import Transport2
-from park.two.vote import Vote2
+from ark.two.account import Account2
+from ark.two.block import Block2
+from ark.two.delegate import Delegate2
+from ark.two.loader import Loader2
+from ark.two.multisignature import MultiSignature2
+from ark.two.peer import Peer2
+from ark.two.signature import Signature2
+from ark.two.transaction import Transaction2
+from ark.two.transport import Transport2
+from ark.two.vote import Vote2
 '''
 
 # TO DO - ADD P2P CALLS
 
-class Park:
-    def __init__(self, ip, port, nethash, version, api_version = "v1"):
+
+class ArkClient:
+    def __init__(self, ip, port, nethash, version, api_version="v1"):
         self.connection(ip, port, nethash, version, api_version)
 
     def connection(self, ip, port, nethash, version, api_version):
