@@ -13,8 +13,8 @@ setup(
     author='',
     author_email='',
     url='https://github.com/galperins4/python-client',
-    packages=['park', 'park.one', 'park.two', 'park.p2p', 'park.builder', 'park.builder.templates'],
+    packages=['park', 'park.one', 'park.two', 'park.p2p'],
     install_requires=[
-        'wheel', 'Naked', 'Jinja2', 'requests', 'pyyaml', 'MarkupSafe',
-        'certifi', 'urllib3', 'chardet', 'idna'
+        'wheel', 'requests', 'pyyaml', 'MarkupSafe',
+        'certifi', 'chardet', 'idna'
     ])
