@@ -7,7 +7,7 @@ class Account(API):
         return self.get('api/'+self.client.api_version+'/accounts/getBalance', {"address": address})
 
     def publickey(self, address):
-        return self.get('api/'+self.client.api_version+'/accounts/getPublickey', {"address": address})
+        return self.get('api/'+self.client.api_version+'/accounts/getPublicKey', {"address": address})
 
     def delegates(self, address):
         return self.get('api/'+self.client.api_version+'/accounts/delegates', {"address": address})
