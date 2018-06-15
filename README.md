@@ -13,9 +13,8 @@
 ## Installation
 
 ```bash
-git clone https://github.com/ArkEcosystem/python-client
-cd python-client
-sudo python3 setup.py install
+pip3 install setuptools
+pip3 install https://github.com/galperins4/python-client/archive/develop.zip
 ```
 
 ## Usage
@@ -40,7 +39,6 @@ delegates = ark.delegates().delegates()
 - [ ] add P2P API calls
 - [ ] fix Peer().peer()
 - [ ] fix both UnconfirmedTransactions functions in Transaction()
-- [ ] Transport function is wonky when installed
 - [ ] error handling
 
 ## Security

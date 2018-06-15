@@ -79,6 +79,7 @@ class ArkClient:
             raise NotImplementedError()
 
     def transport(self):
+        self.port = 4002
         if self.api_version == 'v1':
             return Transport(self)
         else:
