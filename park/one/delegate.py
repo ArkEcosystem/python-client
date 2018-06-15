@@ -15,9 +15,22 @@ class Delegate(API):
         return self.get('api/delegates/voters', {"publicKey": publicKey})
 
     def delegate(self, parameters={}):
+        '''
+        :param publicKey: Unique public key for the delegate.
+        :param username: Unique username for the delegate.
+        :return: delegate
+        '''
+
         return self.get('api/delegates/get', parameters)
 
     def delegates(self, parameters={}):
+        '''
+         :param offset: The offset of resources that will be returned.
+         :param limit: The number of resources per page.
+         :param orderBy: The column by which the resources will be sorted.
+         :return: delegates
+         '''
+
         return self.get('api/delegates', parameters)
 
     def fee(self):
