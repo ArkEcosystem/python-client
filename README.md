@@ -47,6 +47,12 @@ delegates = ark.delegates().delegates()
 
 If you discover a security vulnerability within this package, please send an e-mail to security@ark.io. All security vulnerabilities will be promptly addressed.
 
+
+## Development environment
+
+To install all development requiremenets, simply run `pip install .[dev]`.
+
+
 ## Credits
 
 - [Brian Faust](https://github.com/faustbrian)
