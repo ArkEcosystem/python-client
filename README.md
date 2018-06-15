@@ -15,6 +15,15 @@
 ```bash
 ...
 ```
+## To Do
+
+```bash
+install instructions
+add docstrings for parameters
+add v2 API calls
+add P2P API calls
+error handling
+```
 
 ## Security
 
