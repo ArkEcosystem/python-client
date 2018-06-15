@@ -29,7 +29,7 @@ park = Park(
     '2.0.0'
 )
 
-delegates = park.park.delegates().delegates()
+delegates = park.delegates().delegates()
 ```
 
 ## To Do
