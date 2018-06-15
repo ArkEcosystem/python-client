@@ -42,69 +42,69 @@ class Park:
         self.port = port
         self.nethash = nethash
         self.version = version
-		self.api_version = api_version
+        self.api_version = api_version
 
     def accounts(self):
-	    if self.api_version == "v1":
-			return Account(self)
-		else:
-			return Account2(self)
+        if self.api_version == "v1":
+            return Account(self)
+        else:
+            return Account2(self)
 
     def blocks(self):
-		if self.api_version == "v1":
-			return Block(self)
-		else:
-			return Block2(self)
+        if self.api_version == "v1":
+            return Block(self)
+        else:
+            return Block2(self)
 
     def delegates(self):
         if self.api_version == "v1":
-			return Delegate(self)
-		else:
-			return Delegate2(self)
+            return Delegate(self)
+        else:
+            return Delegate2(self)
 
     def loaders(self):
         if self.api_version == "v1":
-			return Loader(self)
-		else:
-			return Loader2(self)
+            return Loader(self)
+        else:
+            return Loader2(self)
 
     def multiSignatures(self):
         if self.api_version == "v1":
-			return MultiSignature(self)
-		else:
-			return MultiSignature2(self)
-		
+            return MultiSignature(self)
+        else:
+            return MultiSignature2(self)
+
     def peers(self):
         if self.api_version == "v1":
-			return Peer(self)
-		else:
-			return Peer2(self)
+            return Peer(self)
+        else:
+            return Peer2(self)
 
     def signatures(self):
         if self.api_version == "v1":
-			return Signature(self)
-		else:
-			return Signature2(self)
+            return Signature(self)
+        else:
+            return Signature2(self)
 
     def transactions(self):
         if self.api_version == "v1":
-			return Transaction(self)
-		else:
-			return Transaction2(self)
-		
+            return Transaction(self)
+        else:
+            return Transaction2(self)
+
     def transport(self):
         if self.api_version == "v1":
-			return Transport(self)
-		else:
-			return Transport2(self)
+            return Transport(self)
+        else:
+            return Transport2(self)
 
     def votes(self):
         if self.api_version == "v1":
-			return Vote(self)
-		else:
-			return Vote2(self)
+            return Vote(self)
+        else:
+            return Vote2(self)
 
-	# WORK IN PROGRESS
+    # WORK IN PROGRESS
     def delegateBuilder(self):
         return DelegateBuilder(self)
 
