@@ -12,7 +12,7 @@ setup(
     version='0.0.1',
     author='',
     author_email='',
-    url='https://github.com/galperins4/python-client',
+    url='https://github.com/ArkEcosystem/python-client',
     packages=['park', 'park.one', 'park.two', 'park.p2p'],
     install_requires=[
         'wheel', 'requests', 'pyyaml', 'MarkupSafe',
