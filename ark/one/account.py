@@ -1,27 +1,26 @@
-#!/usr/bin/env python
-
 from ark.one.api import API
+
 
 class Account(API):
     def balance(self, address):
-        return self.get('api/accounts/getBalance', {"address": address})
+        return self.get('api/accounts/getBalance', {'address': address})
 
     def publickey(self, address):
-        return self.get('api/accounts/getPublicKey', {"address": address})
+        return self.get('api/accounts/getPublicKey', {'address': address})
 
     def delegates(self, address):
-        return self.get('api/accounts/delegates', {"address": address})
+        return self.get('api/accounts/delegates', {'address': address})
 
     def delegatesFee(self):
         return self.get('api/accounts/delegates/fee')
 
     def account(self, address):
-        return self.get('api/accounts', {"address": address})
+        return self.get('api/accounts', {'address': address})
 
-    def accounts(self, parameters={}):
+    def accounts(self, parameters=None):
         return self.get('api/accounts/getAllAccounts', parameters)
 
-    def top(self, parameters={}):
+    def top(self, parameters=None):
         return self.get('api/accounts/top', parameters)
 
     def count(self):

@@ -1,6 +1,5 @@
-#!/usr/bin/env python
-
 from ark.one.api import API
+
 
 class Vote(API):
     def vote(self, transaction):

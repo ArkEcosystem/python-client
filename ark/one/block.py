@@ -1,12 +1,11 @@
-#!/usr/bin/env python
-
 from ark.one.api import API
+
 
 class Block(API):
     def block(self, id):
-        return self.get('api/blocks/get', {"id": id})
+        return self.get('api/blocks/get', {'id': id})
 
-    def blocks(self, parameters={}):
+    def blocks(self, parameters=None):
         return self.get('api/blocks', parameters)
 
     def epoch(self):
