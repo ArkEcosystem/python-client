@@ -13,17 +13,34 @@
 ## Installation
 
 ```bash
-...
+git clone https://github.com/ArkEcosystem/python-client
+cd python-client
+sudo install setup.py
 ```
+
+## Usage
+```bash
+from park.park import Park
+
+park = Park(
+    '127.0.0.1',
+    4003,
+    '578e820911f24e039733b45e4882b73e301f813a0d2c31330dafda84534ffa23',
+    '2.0.0'
+)
+
+delegates = park.park.delegates().delegates()
+```
+
 ## To Do
 
 ```bash
-install instructions
 add docstrings for parameters
 add v2 API calls
 add P2P API calls
 fix Peer().peer()
 fix both UnconfirmedTransactions functions in Transaction()
+Transport function is wonky when installed
 error handling
 ```
 
