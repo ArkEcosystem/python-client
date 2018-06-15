@@ -30,11 +30,11 @@ class Account(API):
     def account(self, address):
         return self.get('api/'+self.client.api_version+'/accounts', {"address": address})
 
-    def accounts(self):
-        return self.get('api/'+self.client.api_version+'/accounts/getAllAccounts')
+    def accounts(self, parameters={}):
+        return self.get('api/'+self.client.api_version+'/accounts/getAllAccounts', parameters)
 
-    def top(self):
-        return self.get('api/'+self.client.api_version+'/accounts/top')
+    def top(self, parameters={}):
+        return self.get('api/'+self.client.api_version+'/accounts/top', parameters)
 
     def count(self):
         return self.get('api/'+self.client.api_version+'/accounts/count')
