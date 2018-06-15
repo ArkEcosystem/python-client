@@ -14,7 +14,7 @@
 
 ```bash
 pip3 install setuptools
-pip3 install https://github.com/galperins4/python-client/archive/develop.zip
+pip3 install https://github.com/ArkEcosystem/python-client/archive/develop.zip
 ```
 
 ## Usage
