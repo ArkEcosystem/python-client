@@ -65,10 +65,5 @@ class Delegate(API):
             **parameters
         })
 
-    def forgingStatus(self, publicKey, parameters={}):
-        return self.get('api/delegates/forging/status', {
-            **{
-                "publicKey": publicKey
-            },
-            **parameters
-        })
+    def forgingStatus(self, publicKey):
+        return self.get('api/delegates/forging/status', {"publicKey": publicKey})
