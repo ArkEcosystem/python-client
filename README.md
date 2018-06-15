@@ -15,7 +15,7 @@
 ```bash
 git clone https://github.com/ArkEcosystem/python-client
 cd python-client
-sudo install setup.py
+sudo python3 setup.py install
 ```
 
 ## Usage
