@@ -9,6 +9,7 @@ class Transaction(API):
     def transactions(self, parameters={}):
         return self.get('api/transactions', parameters)
 
+    # TO FIX - BOTH UNCONFIRMED TRANSACTION FUNCTIONS SEEM BROKEN
     def unconfirmedTransaction(self, id):
         return self.get('api/transactions/unconfirmed/get', {"id": id})
 
