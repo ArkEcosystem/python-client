@@ -5,7 +5,7 @@ from park.one.api import API
 
 class Transport(API):
     def __init__(self, client):
-        sself.client.port = 4002
+        self.client.port = 4002
 
     def list(self):
         return self.get('peer/list')

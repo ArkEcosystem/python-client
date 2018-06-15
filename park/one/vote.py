@@ -2,16 +2,9 @@
 
 from park.one.api import API
 
-
 class Vote(API):
-    def vote(secret, delegate, secondSecret=None):
-        transaction = self.client.voteBuilder().create(secret, delegate,
-                                                       secondSecret)
+    def vote(self, transaction):
+    return self.client.transport().createTransaction(transaction)
 
-        return self.client.transport().createTransaction(transaction)
-
-    def unvote(secret, delegate, secondSecret=None):
-        transaction = self.client.voteBuilder().delete(secret, delegate,
-                                                       secondSecret)
-
+    def unvote(self, transaction):
         return self.client.transport().createTransaction(transaction)

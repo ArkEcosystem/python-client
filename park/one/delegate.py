@@ -2,7 +2,6 @@
 
 from park.one.api import API
 
-
 class Delegate(API):
 
     def count(self):
@@ -40,27 +39,8 @@ class Delegate(API):
         return self.get('api/delegates/forging/getForgedByAccount',
                         {"generatorPublicKey": generatorPublicKey})
 
-    def create(self, secret, username, secondSecret=None):
-        transaction = self.client.delegateBuilder().create(
-            secret, username, secondSecret)
-
+    def create(self, transaction):
         return self.client.transport().createTransaction(transaction)
 
     def nextForgers(self):
         return self.get('api/delegates/getNextForgers')
-
-    def enableForging(self, secret, parameters={}):
-        return self.post('api/delegates/forging/enable', {
-            **{
-                "secret": secret
-            },
-            **parameters
-        })
-
-    def disableForging(self, secret, parameters={}):
-        return self.post('api/delegates/forging/disable', {
-            **{
-                "secret": secret
-            },
-            **parameters
-        })

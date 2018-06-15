@@ -2,7 +2,6 @@
 
 from park.one.api import API
 
-
 class Block(API):
     def block(self, id):
         return self.get('api/blocks/get', {"id": id})

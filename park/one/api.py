@@ -4,7 +4,6 @@ from abc import ABC
 import json
 import requests
 
-
 class API(ABC):
     def __init__(self, client):
         self.client = client
