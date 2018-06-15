@@ -4,7 +4,7 @@ from park.one.api import API
 
 class Account(API):
     def balance(self, address):
-        return self.get('api/'+self.client.api_version+'/accounts/getBalance', {"address": address})
+        return self.get('api/accounts/getBalance', {"address": address})
 
     def publickey(self, address):
         return self.get('api/'+self.client.api_version+'/accounts/getPublicKey', {"address": address})
