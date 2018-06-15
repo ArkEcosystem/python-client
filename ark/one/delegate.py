@@ -7,7 +7,10 @@ class Delegate(API):
         return self.get('api/delegates/count')
 
     def search(self, query, parameters=None):
-        return self.get('api/delegates/search', {**{'q': query}, **parameters})
+        if not parameters:
+            parameters = {}
+        parameters['q'] = query
+        return self.get('api/delegates/search', parameters)
 
     def voters(self, publicKey):
         return self.get('api/delegates/voters', {'publicKey': publicKey})
