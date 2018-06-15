@@ -5,7 +5,7 @@ from park.one.api import API
 
 class Signature(API):
     def fee(self):
-        return self.get('api/signatures/fee')
+        return self.get('api/'+self.client.api_version+'/signatures/fee')
 
     def create(self, secret, secondSecret):
         transaction = self.client.signatureBuilder().create(
