@@ -1,19 +1,18 @@
-#!/usr/bin/env python
-
 from ark.one.api import API
+
 
 class Transaction(API):
     def transaction(self, id):
-        return self.get('api/transactions/get', {"id": id})
+        return self.get('api/transactions/get', {'id': id})
 
-    def transactions(self, parameters={}):
+    def transactions(self, parameters=None):
         return self.get('api/transactions', parameters)
 
     # TO FIX - BOTH UNCONFIRMED TRANSACTION FUNCTIONS SEEM BROKEN
     def unconfirmedTransaction(self, id):
-        return self.get('api/transactions/unconfirmed/get', {"id": id})
+        return self.get('api/transactions/unconfirmed/get', {'id': id})
 
-    def unconfirmedTransactions(self, parameters={}):
+    def unconfirmedTransactions(self, parameters=None):
         return self.get('api/transactions/unconfirmed', parameters)
 
     def create(self, transaction):
