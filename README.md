@@ -39,6 +39,7 @@ delegates = ark.delegates().delegates()
 - [ ] add P2P API calls
 - [ ] fix Peer().peer()
 - [ ] fix both UnconfirmedTransactions functions in Transaction()
+- [X] Transport function is wonky when installed 
 - [ ] error handling
 
 ## Security
