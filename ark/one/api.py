@@ -1,6 +1,10 @@
 from abc import ABC
+import logging
 
 import requests
+
+
+logger = logging.getLogger(__name__)
 
 
 class API(ABC):
@@ -35,7 +39,8 @@ class API(ABC):
         body = response.json()
 
         if body['success'] is False:
-            print(body['error'])
+            log_msg = '{} {} - {}'.format(method.upper(), path, body['error'])
+            logger.error(log_msg)
 
         return body
 
