@@ -8,22 +8,14 @@ from ark.one.transaction import Transaction
 from ark.one.transport import Transport
 from ark.one.vote import Vote
 
-"""
-# WORK IN PROGRESS
-from ark.two.account import Account2
+from ark.two.wallet import Wallet
 from ark.two.block import Block2
 from ark.two.delegate import Delegate2
-from ark.two.loader import Loader2
-from ark.two.multisignature import MultiSignature2
+from ark.two.node import Node
 from ark.two.peer import Peer2
-from ark.two.signature import Signature2
 from ark.two.transaction import Transaction2
-from ark.two.transport import Transport2
+from ark.two.p2p import P2p
 from ark.two.vote import Vote2
-"""
-
-# TO DO - ADD P2P CALLS
-
 
 class ArkClient:
     def __init__(self, ip, port, nethash, version, api_version='v1'):
@@ -40,52 +32,66 @@ class ArkClient:
         if self.api_version == 'v1':
             return Account(self)
         else:
-            raise NotImplementedError()
+            return Wallet(self)
 
     def blocks(self):
         if self.api_version == 'v1':
             return Block(self)
         else:
-            raise NotImplementedError()
+            return Block2(self)
 
     def delegates(self):
         if self.api_version == 'v1':
             return Delegate(self)
         else:
-            raise NotImplementedError()
+            return Delegate2(self)
 
     def loaders(self):
         if self.api_version == 'v1':
             return Loader(self)
         else:
-            raise NotImplementedError()
+            return Node(self)
 
     def peers(self):
         if self.api_version == 'v1':
             return Peer(self)
         else:
-            raise NotImplementedError()
+            return Peer2(self)
 
     def signatures(self):
         if self.api_version == 'v1':
             return Signature(self)
-        else:
-            raise NotImplementedError()
 
     def transactions(self):
         if self.api_version == 'v1':
             return Transaction(self)
         else:
-            raise NotImplementedError()
+            return Transaction2(self)
 
     def transport(self):
+        self.port = self.switchConfig("p2p", self.nethash)
+
         if self.api_version == 'v1':
             return Transport(self)
         else:
-            raise NotImplementedError()
+            return P2p(self)
 
     def votes(self):
         if self.api_version == 'v1':
             return Vote(self)
         else:
-            raise NotImplementedError()
+            return Vote2(self)
+
+    def switchConfig(self, service, nethash):
+        switch = {
+            '6e84d08bd299ed97c212c886c98a57e36545c8f5d645ca7eeae63a8bd62d8988': {
+                "public": 0000,
+                "p2p": 0000,
+                "webhook": 0000},  # ark mainnet
+            '578e820911f24e039733b45e4882b73e301f813a0d2c31330dafda84534ffa23': {
+                "public": 4003,
+                "p2p": 4002,
+                "webhook": 4004}  # ark devnet
+        }
+
+        return switch[nethash][service]

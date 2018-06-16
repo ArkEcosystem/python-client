@@ -1,16 +1,13 @@
-from ark.one.api import API
+from ark.two.api import API
 
 
-class Transport(API):
+class P2p(API):
 
     def list(self):
         return self.get('peer/list')
 
     def blocksCommon(self, ids):
         return self.get('peer/blocks/common', {'ids': ','.join(ids)})
-
-    def block(self, id):
-        return self.get('peer/block', {'id': id})
 
     def blocks(self):
         return self.get('peer/blocks')
@@ -35,3 +32,13 @@ class Transport(API):
 
     def status(self):
         return self.get('peer/status')
+
+
+
+
+
+
+
+
+
+
