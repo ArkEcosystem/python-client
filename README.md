@@ -35,11 +35,12 @@ delegates = ark.delegates().delegates()
 ## To Do
 
 - [ ] add docstrings for parameters
-- [ ] add v2 API calls
-- [ ] add P2P API calls
-- [ ] fix Peer().peer()
-- [ ] fix both UnconfirmedTransactions functions in Transaction()
+- [X] add v2 API calls
+- [X] add P2P API calls
+- [ ] fix Peer().peer() - APIv1
+- [ ] fix both UnconfirmedTransactions functions in Transaction() - APIv1
 - [X] Transport function is wonky when installed 
+- [ ] finish API v2 Post methods (blockSearch, transactionSearch, transaction.Create, walletSearch)
 - [ ] error handling
 
 ## Security
