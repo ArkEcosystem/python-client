@@ -1,5 +1,5 @@
-from abc import ABC
 import logging
+from abc import ABC
 
 import requests
 
