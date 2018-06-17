@@ -13,7 +13,6 @@
 ## Installation
 
 ```bash
-pip3 install setuptools
 pip3 install git+git://github.com/ArkEcosystem/python-client.git
 ```
 
