@@ -6,10 +6,10 @@ class Block2(API):
         return self.get('api/v2/blocks', parameters)
 
     def block(self, id, parameters=None):
-        return self.get(f'api/v2/blocks/{id}', parameters)
+        return self.get('api/v2/blocks/{0}'.format(id), parameters)
 
     def blockTransactions(self, id, parameters=None):
-        return self.get(f'api/v2/blocks/{id}/transactions', parameters)
+        return self.get('api/v2/blocks/{0}/transactions'.format(id), parameters)
 
     def blockSearch(self, parameters=None):
         raise NotImplementedError()
