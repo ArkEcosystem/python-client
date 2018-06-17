@@ -1,9 +1,7 @@
-from abc import ABC
-
 import requests
 
 
-class API(ABC):
+class API():
     def __init__(self, client):
         self.client = client
 
