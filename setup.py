@@ -22,12 +22,7 @@ setuptools.setup(
     author='',
     author_email='',
     url='https://github.com/ArkEcosystem/python-client',
-    packages=[
-        'ark',
-        'ark.one',
-        'ark.two',
-        'ark.p2p'
-    ],
+    packages=setuptools.find_packages(exclude=['tests', 'tests.*']),
     install_requires=requires,
     extras_require=extras_require,
     tests_require=tests_require,
