@@ -9,20 +9,20 @@ class Transaction2(API):
     def transaction(self, id):
         return self.get('api/v2/transactions/{0}'.format(id))
 
-    def unconfirmedTransaction(self, id):
+    def unconfirmed_transaction(self, id):
         return self.get('api/v2/transactions/unconfirmed/{0}'.format(id))
 
     def transactions(self, parameters=None):
         return self.get('api/v2/transactions', parameters)
 
-    def unconfirmedTransactions(self, parameters=None):
+    def unconfirmed_transactions(self, parameters=None):
         return self.get('api/v2/transactions/unconfirmed', parameters)
 
-    def transactionTypes(self, parameters=None):
+    def transaction_types(self, parameters=None):
         return self.get('api/v2/transactions/types', parameters)
 
-    def transactionFees(self, parameters=None):
+    def transaction_fees(self, parameters=None):
         return self.get('api/v2/transactions/fees', parameters)
 
-    def transactionSearch(self, parameters=None):
+    def transactio_search(self, parameters=None):
         raise NotImplementedError()
