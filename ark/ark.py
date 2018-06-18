@@ -17,6 +17,7 @@ from ark.two.transaction import Transaction2
 from ark.two.p2p import P2p
 from ark.two.vote import Vote2
 
+
 class ArkClient:
     def __init__(self, ip, port, nethash, version, api_version='v1'):
         self.connection(ip, port, nethash, version, api_version)
@@ -69,7 +70,7 @@ class ArkClient:
             return Transaction2(self)
 
     def transport(self):
-        self.port = self.switchConfig("p2p", self.nethash)
+        self.port = self.switch_config('p2p', self.nethash)
 
         if self.api_version == 'v1':
             return Transport(self)
@@ -82,16 +83,17 @@ class ArkClient:
         else:
             return Vote2(self)
 
-    def switchConfig(self, service, nethash):
+    def switch_config(self, service, nethash):
         switch = {
             '6e84d08bd299ed97c212c886c98a57e36545c8f5d645ca7eeae63a8bd62d8988': {
-                "public": 0000,
-                "p2p": 0000,
-                "webhook": 0000},  # ark mainnet
+                'public': 0000,
+                'p2p': 0000,
+                'webhook': 0000},  # ark mainnet
             '578e820911f24e039733b45e4882b73e301f813a0d2c31330dafda84534ffa23': {
-                "public": 4003,
-                "p2p": 4002,
-                "webhook": 4004}  # ark devnet
+                'public': 4003,
+                'p2p': 4002,
+                'webhook': 4004}  # ark devnet
         }
 
         return switch[nethash][service]
+      
