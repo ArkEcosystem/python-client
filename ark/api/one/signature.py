@@ -1,9 +1,9 @@
-from ark.one.api import API
+from ark.api.resource import Resource
 
 
-class Signature(API):
+class Signature(Resource):
     def fee(self):
-        return self.get('api/signatures/fee')
+        return self._request_get('api/signatures/fee')
 
     def create(self, transaction):
         return self.client.transport().create_transaction(transaction)

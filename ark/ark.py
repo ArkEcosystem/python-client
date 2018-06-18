@@ -1,91 +1,41 @@
-from ark.one.account import Account
-from ark.one.block import Block
-from ark.one.delegate import Delegate
-from ark.one.loader import Loader
-from ark.one.peer import Peer
-from ark.one.signature import Signature
-from ark.one.transaction import Transaction
-from ark.one.transport import Transport
-from ark.one.vote import Vote
+import inspect
+import pkgutil
+from importlib import import_module
+from pathlib import Path
 
-"""
-# WORK IN PROGRESS
-from ark.two.account import Account2
-from ark.two.block import Block2
-from ark.two.delegate import Delegate2
-from ark.two.loader import Loader2
-from ark.two.multisignature import MultiSignature2
-from ark.two.peer import Peer2
-from ark.two.signature import Signature2
-from ark.two.transaction import Transaction2
-from ark.two.transport import Transport2
-from ark.two.vote import Vote2
-"""
-
-# TO DO - ADD P2P CALLS
+from ark.api.resource import Resource
+from ark.connection import Connection
 
 
-class ArkClient:
-    def __init__(self, ip, port, nethash, version, api_version='v1'):
-        self.connection(ip, port, nethash, version, api_version)
+VERSION_TO_STRING_MAPPING = {
+    'v1': 'one',
+    'v2': 'two',
+}
 
-    def connection(self, ip, port, nethash, version, api_version):
-        self.ip = ip
-        self.port = port
-        self.nethash = nethash
-        self.version = version
+
+class ArkClient(object):
+
+    def __init__(self, host, port, nethash=None, version=None, api_version='v2'):
+        if api_version not in ['v1', 'v2']:
+            raise Exception('Only versions "v1" and "v2" are supported')
+
         self.api_version = api_version
 
-    def accounts(self):
-        if self.api_version == 'v1':
-            return Account(self)
-        else:
-            raise NotImplementedError()
+        self.connection = Connection(self, host, port, nethash, version)
+        self.import_api()
+        self.connection.autoconfigure()
 
-    def blocks(self):
-        if self.api_version == 'v1':
-            return Block(self)
-        else:
-            raise NotImplementedError()
+    def import_api(self):
+        version = VERSION_TO_STRING_MAPPING[self.api_version]
+        modules = pkgutil.iter_modules([Path(__file__).parent / 'api' / version])
 
-    def delegates(self):
-        if self.api_version == 'v1':
-            return Delegate(self)
-        else:
-            raise NotImplementedError()
+        for _, name, _ in modules:
+            module = import_module('.{}'.format(name), package='ark.api.{}'.format(version))
 
-    def loaders(self):
-        if self.api_version == 'v1':
-            return Loader(self)
-        else:
-            raise NotImplementedError()
+            for attr in dir(module):
+                if attr == 'Resource':
+                    continue
 
-    def peers(self):
-        if self.api_version == 'v1':
-            return Peer(self)
-        else:
-            raise NotImplementedError()
-
-    def signatures(self):
-        if self.api_version == 'v1':
-            return Signature(self)
-        else:
-            raise NotImplementedError()
-
-    def transactions(self):
-        if self.api_version == 'v1':
-            return Transaction(self)
-        else:
-            raise NotImplementedError()
-
-    def transport(self):
-        if self.api_version == 'v1':
-            return Transport(self)
-        else:
-            raise NotImplementedError()
-
-    def votes(self):
-        if self.api_version == 'v1':
-            return Vote(self)
-        else:
-            raise NotImplementedError()
+                attribute = getattr(module, attr)
+                if inspect.isclass(attribute) and issubclass(attribute, Resource):
+                    setattr(self, name, attribute(self.connection))
