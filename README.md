@@ -17,9 +17,7 @@ We will not be accepting new PRs until we are happy with the base of the client 
 ## Installation
 
 ```bash
-git clone https://github.com/ArkEcosystem/python-client
-cd python-client
-sudo python3 setup.py install
+pip3 install git+git://github.com/ArkEcosystem/python-client.git
 ```
 
 ## Guide for contributing
@@ -53,12 +51,14 @@ delegates = ark.delegates().delegates()
 ## To Do
 
 - [ ] add docstrings for parameters
-- [ ] add v2 API calls
-- [ ] add P2P API calls
-- [ ] fix Peer().peer()
-- [ ] fix both UnconfirmedTransactions functions in Transaction()
-- [ ] Transport function is wonky when installed
+- [X] add v2 API calls
+- [X] add P2P API calls
+- [ ] fix Peer().peer() - APIv1
+- [ ] fix both UnconfirmedTransactions functions in Transaction() - APIv1
+- [X] Transport function is wonky when installed 
+- [ ] finish API v2 Post methods (blockSearch, transactionSearch, transaction.Create, walletSearch)
 - [ ] error handling
+- [ ] add pytests
 
 ## Security
 

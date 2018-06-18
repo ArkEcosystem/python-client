@@ -25,8 +25,7 @@ setuptools.setup(
     packages=[
         'ark',
         'ark.one',
-        'ark.two',
-        'ark.p2p'
+        'ark.two'
     ],
     install_requires=requires,
     extras_require=extras_require,
