@@ -6,41 +6,41 @@ class API():
         self.client = client
 
     def get(self, path, payload=None):
-        return self.sendRequest('get', path, payload)
+        return self.send_request('get', path, payload)
 
     def post(self, path, payload=None):
-        return self.sendRequest('post', path, payload)
+        return self.send_request('post', path, payload)
 
     def put(self, path, payload=None):
-        return self.sendRequest('put', path, payload)
+        return self.send_request('put', path, payload)
 
     def patch(self, path, payload=None):
-        return self.sendRequest('patch', path, payload)
+        return self.send_request('patch', path, payload)
 
     def delete(self, path, payload=None):
-        return self.sendRequest('delete', path, payload)
+        return self.send_request('delete', path, payload)
 
-    def sendRequest(self, method, path, payload):
-        url = self.buildUrl(path)
+    def send_request(self, method, path, payload):
+        url = self.build_url(path)
 
         if method in ['get', 'delete']:
             response = getattr(requests, method)(
-                url, headers=self.buildHeaders(), params=payload)
+                url, headers=self.build_headers(), params=payload)
         else:
             response = getattr(requests, method)(
-                url, headers=self.buildHeaders(), json=payload)
+                url, headers=self.build_headers(), json=payload)
 
         body = response.json()
 
         return body
 
-    def buildUrl(self, path):
+    def build_url(self, path):
         ip = self.client.ip
         port = self.client.port
 
         return 'http://{}:{}/{}'.format(ip, port, path)
 
-    def buildHeaders(self):
+    def build_headers(self):
         return {
             'nethash': self.client.nethash,
             'version': self.client.version,
