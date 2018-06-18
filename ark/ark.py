@@ -7,15 +7,14 @@ from ark.one.signature import Signature
 from ark.one.transaction import Transaction
 from ark.one.transport import Transport
 from ark.one.vote import Vote
-
-from ark.two.wallet import Wallet
 from ark.two.block import Block2
 from ark.two.delegate import Delegate2
 from ark.two.node import Node
 from ark.two.peer import Peer2
-from ark.two.transaction import Transaction2
 from ark.two.p2p import P2p
+from ark.two.transaction import Transaction2
 from ark.two.vote import Vote2
+from ark.two.wallet import Wallet
 
 
 class ArkClient:
