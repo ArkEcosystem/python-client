@@ -10,6 +10,7 @@ requires = [
 tests_require = [
     'flake8>=3.5.0',
     'flake8-import-order>=0.17.1',
+    'flake8-print>=3.1.0',
     'flake8-quotes>=1.0.0',
     'pytest>=3.6.1',
 ]
