@@ -6,4 +6,4 @@ class Signature(API):
         return self.get('api/signatures/fee')
 
     def create(self, transaction):
-        return self.client.transport().createTransaction(transaction)
+        return self.client.transport().create_transaction(transaction)

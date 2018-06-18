@@ -12,8 +12,8 @@ class Delegate(API):
         parameters['q'] = query
         return self.get('api/delegates/search', parameters)
 
-    def voters(self, publicKey):
-        return self.get('api/delegates/voters', {'publicKey': publicKey})
+    def voters(self, public_key):
+        return self.get('api/delegates/voters', {'publicKey': public_key})
 
     def delegate(self, parameters=None):
         """
@@ -37,12 +37,12 @@ class Delegate(API):
     def fee(self):
         return self.get('api/delegates/fee')
 
-    def forgedByAccount(self, generatorPublicKey):
+    def forged_by_account(self, generator_public_key):
         return self.get('api/delegates/forging/getForgedByAccount',
-                        {'generatorPublicKey': generatorPublicKey})
+                        {'generatorPublicKey': generator_public_key})
 
     def create(self, transaction):
-        return self.client.transport().createTransaction(transaction)
+        return self.client.transport().create_transaction(transaction)
 
-    def nextForgers(self):
+    def next_forgers(self):
         return self.get('api/delegates/getNextForgers')

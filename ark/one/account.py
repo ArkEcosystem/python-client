@@ -5,13 +5,13 @@ class Account(API):
     def balance(self, address):
         return self.get('api/accounts/getBalance', {'address': address})
 
-    def publickey(self, address):
+    def public_key(self, address):
         return self.get('api/accounts/getPublicKey', {'address': address})
 
     def delegates(self, address):
         return self.get('api/accounts/delegates', {'address': address})
 
-    def delegatesFee(self):
+    def delegates_fee(self):
         return self.get('api/accounts/delegates/fee')
 
     def account(self, address):
