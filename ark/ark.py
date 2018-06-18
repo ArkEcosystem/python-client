@@ -26,16 +26,22 @@ class ArkClient(object):
         self.connection.autoconfigure()
 
     def import_api(self):
+        """
+        Dinamically imports endpoints for correct api version.
+        """
         version = VERSION_TO_STRING_MAPPING[self.api_version]
+        # Get all modules under the wanted version folder
         modules = pkgutil.iter_modules([Path(__file__).parent / 'api' / version])
-
         for _, name, _ in modules:
             module = import_module('.{}'.format(name), package='ark.api.{}'.format(version))
 
             for attr in dir(module):
+                # If attr name is `Resource`, skip it as it's a class and also has a
+                # subclass of Resource
                 if attr == 'Resource':
                     continue
 
                 attribute = getattr(module, attr)
                 if inspect.isclass(attribute) and issubclass(attribute, Resource):
+                    # Set module class as a property on the client
                     setattr(self, name, attribute(self.connection))
