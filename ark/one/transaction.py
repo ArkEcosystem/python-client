@@ -9,11 +9,11 @@ class Transaction(API):
         return self.get('api/transactions', parameters)
 
     # TO FIX - BOTH UNCONFIRMED TRANSACTION FUNCTIONS SEEM BROKEN
-    def unconfirmedTransaction(self, id):
+    def unconfirmed_transaction(self, id):
         return self.get('api/transactions/unconfirmed/get', {'id': id})
 
-    def unconfirmedTransactions(self, parameters=None):
+    def unconfirmed_transactions(self, parameters=None):
         return self.get('api/transactions/unconfirmed', parameters)
 
     def create(self, transaction):
-        return self.client.transport().createTransaction(transaction)
+        return self.client.transport().create_transaction(transaction)
