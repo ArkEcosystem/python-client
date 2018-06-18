@@ -16,10 +16,10 @@ We will not be accepting new PRs until we are happy with the base of the client 
 
 ## Installation
 
+For current develop branch instalation please use the following
+
 ```bash
-git clone https://github.com/ArkEcosystem/python-client
-cd python-client
-sudo python3 setup.py install
+pip install -e git://github.com/ArkEcosystem/python-client.git@develop#egg=ark-client
 ```
 
 ## Guide for contributing
@@ -50,16 +50,6 @@ ark = ArkClient(
 delegates = ark.delegates().delegates()
 ```
 
-## To Do
-
-- [ ] add docstrings for parameters
-- [ ] add v2 API calls
-- [ ] add P2P API calls
-- [ ] fix Peer().peer()
-- [ ] fix both UnconfirmedTransactions functions in Transaction()
-- [ ] Transport function is wonky when installed
-- [ ] error handling
-
 ## Security
 
 If you discover a security vulnerability within this package, please send an e-mail to security@ark.io. All security vulnerabilities will be promptly addressed.
@@ -72,6 +62,8 @@ To install all development requiremenets, simply run `pip install .[dev]`.
 
 ## Credits
 
+- [Rok Halužan](https://github.com/roks0n)
+- [Tomaž Šifrer](https://github.com/tsifrer)
 - [Brian Faust](https://github.com/faustbrian)
 - [All Contributors](../../../../contributors)
 

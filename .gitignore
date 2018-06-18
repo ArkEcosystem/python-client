@@ -4,3 +4,5 @@ __pycache__/
 *.sublime-*
 *.py[co]
 *.python-version
+*.eggs
+*.pytest_cache/
