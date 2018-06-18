@@ -1,15 +1,15 @@
 language: python
 python:
-    - 3.4
-    - 3.5
-    - 3.6
+  - 3.4
+  - 3.5
+  - 3.6
 cache: pip
 install:
-    - pip install .[test]
-
+  - pip install .[test]
+before_script:
+  - flake8 .
 script:
-    - flake8 .
-
+  - python setup.py test
 branches:
   only:
     - master
