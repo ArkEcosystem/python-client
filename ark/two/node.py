@@ -5,8 +5,8 @@ class Node(API):
     def status(self):
         return self.get('api/v2/node/status')
 
-    def sync(self):
+    def syncing(self):
         return self.get('api/v2/node/syncing')
 
-    def autoconfigure(self):
+    def configuration(self):
         return self.get('api/v2/node/configuration')
