@@ -9,20 +9,20 @@ class Wallet(API):
     def wallets(self, parameters=None):
         return self.get('api/v2/wallets', parameters)
 
-    def walletsTop(self, parameters=None):
+    def wallets_top(self, parameters=None):
         return self.get('api/v2/wallets/top', parameters)
 
-    def walletTransactions(self, id, parameters=None):
+    def wallet_transactions(self, id, parameters=None):
         return self.get('api/v2/wallets/{0}/transactions'.format(id), parameters)
 
-    def walletSend(self, id, parameters=None):
+    def wallet_send(self, id, parameters=None):
         return self.get('api/v2/wallets/{0}/transactions/sent'.format(id), parameters)
 
-    def walletReceive(self, id, parameters=None):
+    def wallet_receive(self, id, parameters=None):
         return self.get('api/v2/wallets/{0}/transactions/received'.format(id), parameters)
 
-    def walletVotes(self, id, parameters=None):
+    def wallet_votes(self, id, parameters=None):
         return self.get('api/v2/wallets/{0}/votes'.format(id), parameters)
 
-    def walletSearch(self, parameters=None):
+    def wallet_search(self, parameters=None):
         raise NotImplementedError()
