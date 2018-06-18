@@ -41,6 +41,7 @@ delegates = ark.delegates().delegates()
 - [X] Transport function is wonky when installed 
 - [ ] finish API v2 Post methods (blockSearch, transactionSearch, transaction.Create, walletSearch)
 - [ ] error handling
+- [ ] add pytests
 
 ## Security
 
