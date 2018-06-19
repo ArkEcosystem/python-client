@@ -39,7 +39,7 @@ class Delegate(Resource):
 
     def forged_by_account(self, generator_public_key):
         return self.request_get('api/delegates/forging/getForgedByAccount',
-                                 {'generatorPublicKey': generator_public_key})
+                                {'generatorPublicKey': generator_public_key})
 
     def create(self, transaction):
         return self.client.transport().create_transaction(transaction)
