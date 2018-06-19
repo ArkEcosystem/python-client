@@ -4,16 +4,16 @@ from ark.api.resource import Resource
 class Delegate(Resource):
 
     def count(self):
-        return self._request_get('api/delegates/count')
+        return self.request_get('api/delegates/count')
 
     def search(self, query, parameters=None):
         if not parameters:
             parameters = {}
         parameters['q'] = query
-        return self._request_get('api/delegates/search', parameters)
+        return self.request_get('api/delegates/search', parameters)
 
     def voters(self, public_key):
-        return self._request_get('api/delegates/voters', {'publicKey': public_key})
+        return self.request_get('api/delegates/voters', {'publicKey': public_key})
 
     def delegate(self, parameters=None):
         """
@@ -22,7 +22,7 @@ class Delegate(Resource):
         :return: delegate
         """
 
-        return self._request_get('api/delegates/get', parameters)
+        return self.request_get('api/delegates/get', parameters)
 
     def delegates(self, parameters=None):
         """
@@ -32,17 +32,17 @@ class Delegate(Resource):
          :return: delegates
         """
 
-        return self._request_get('api/delegates', parameters)
+        return self.request_get('api/delegates', parameters)
 
     def fee(self):
-        return self._request_get('api/delegates/fee')
+        return self.request_get('api/delegates/fee')
 
     def forged_by_account(self, generator_public_key):
-        return self._request_get('api/delegates/forging/getForgedByAccount',
+        return self.request_get('api/delegates/forging/getForgedByAccount',
                                  {'generatorPublicKey': generator_public_key})
 
     def create(self, transaction):
         return self.client.transport().create_transaction(transaction)
 
     def next_forgers(self):
-        return self._request_get('api/delegates/getNextForgers')
+        return self.request_get('api/delegates/getNextForgers')

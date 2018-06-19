@@ -7,34 +7,34 @@ class Transport(Resource):
         self.client.port = 4002
 
     def list(self):
-        return self._request_get('peer/list')
+        return self.request_get('peer/list')
 
     def blocks_common(self, ids):
-        return self._request_get('peer/blocks/common', {'ids': ','.join(ids)})
+        return self.request_get('peer/blocks/common', {'ids': ','.join(ids)})
 
     def block(self, id):
-        return self._request_get('peer/block', {'id': id})
+        return self.request_get('peer/block', {'id': id})
 
     def blocks(self):
-        return self._request_get('peer/blocks')
+        return self.request_get('peer/blocks')
 
     def create_block(self, block):
-        return self._request_post('peer/blocks', data={'block': block})
+        return self.request_post('peer/blocks', data={'block': block})
 
     def transactions(self):
-        return self._request_get('peer/transactions')
+        return self.request_get('peer/transactions')
 
     def transactions_from_ids(self, ids):
-        return self._request_get('peer/transactionsFromIds', {'ids': ','.join(ids)})
+        return self.request_get('peer/transactionsFromIds', {'ids': ','.join(ids)})
 
     def create_transaction(self, transaction):
-        return self._request_post('peer/transactions', data={'transactions': [transaction]})
+        return self.request_post('peer/transactions', data={'transactions': [transaction]})
 
     def create_batch_transaction(self, transaction):
-        return self._request_post('peer/transactions', data={'transactions': transaction})
+        return self.request_post('peer/transactions', data={'transactions': transaction})
 
     def height(self):
-        return self._request_get('peer/height')
+        return self.request_get('peer/height')
 
     def status(self):
-        return self._request_get('peer/status')
+        return self.request_get('peer/status')
