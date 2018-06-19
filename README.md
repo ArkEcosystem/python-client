@@ -38,7 +38,7 @@ If you have any questions, requests or ideas open an issue or ask us in #python 
 ## Usage
 
 ```py
-from ark.ark import ArkClient
+from ark import ArkClient
 
 ark = ArkClient(
     '127.0.0.1',

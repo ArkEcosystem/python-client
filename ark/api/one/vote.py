@@ -1,7 +1,7 @@
-from ark.one.api import API
+from ark.api.resource import Resource
 
 
-class Vote(API):
+class Vote(Resource):
     def vote(self, transaction):
         return self.client.transport().create_transaction(transaction)
 
