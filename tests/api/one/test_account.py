@@ -48,7 +48,7 @@ def test_account():
 
 
 @pytest.mark.skip('Server is returning "API endpoint was not found"')
-def test_account():
+def test_accounts():
     res = ARK.account.account()
     assert res['success'] is True
     assert len(res['accounts']) == 100
