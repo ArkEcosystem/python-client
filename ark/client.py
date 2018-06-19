@@ -23,7 +23,9 @@ class ArkClient(object):
 
         self.connection = Connection(self, host, port, nethash, version)
         self.import_api()
-        self.connection.autoconfigure()
+
+        if not nethash and not version:
+            self.connection.autoconfigure()
 
     def import_api(self):
         """
