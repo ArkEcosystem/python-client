@@ -4,71 +4,30 @@ import requests
 
 import responses
 
-from ark.client import ArkClient
 from ark.connection import Connection
 
 
-def test_connection_init_sets_default_session_headers_and_variables():
-    client = ArkClient('192.168.5.5', 4002, nethash='12345', version='2.0.0', api_version='v2')
-    connection = Connection(
-        client=client,
-        host='127.0.0.1',
-        port=4003,
-        nethash='12345',
-        version='2.0.0'
-    )
-
-    assert connection.client == client
-    assert connection.host == '127.0.0.1'
-    assert connection.port == 4003
-    assert connection.nethash == '12345'
-    assert connection.version == '2.0.0'
-
+def test_connection_creation_sets_default_session_headers_and_variables():
+    connection = Connection('http://127.0.0.1:4003', '2')
+    assert connection.hostname == 'http://127.0.0.1:4003'
     assert isinstance(connection.session, requests.Session)
     assert connection.session.headers['port'] == '1'
     assert connection.session.headers['API-Version'] == '2'
 
 
-def test_setting_nethash_adds_it_to_session_headers():
-    client = ArkClient('192.168.5.5', 4002, nethash='12345', version='2.0.0', api_version='v2')
-    connection = Connection(client, None)
-    connection.nethash = 'nethash12345'
-
-    assert connection.session.headers['nethash'] == 'nethash12345'
-
-
-def test_setting_nethash_to_none_removes_it_from_headers():
-    client = ArkClient('192.168.5.5', 4002, nethash='12345', version='2.0.0', api_version='v2')
-    connection = Connection(client, None, nethash='nethash12345')
-    assert connection.session.headers['nethash'] == 'nethash12345'
-
-    connection.nethash = None
-    assert 'nethash' not in connection.session.headers
-
-
-def test_setting_version_adds_it_to_session_headers():
-    client = ArkClient('192.168.5.5', 4002, nethash='12345', version='2.0.0', api_version='v2')
-    connection = Connection(client, None)
-    connection.version = '2.0.0'
-
-    assert connection.session.headers['version'] == '2.0.0'
-
-
-def test_setting_version_to_none_removes_it_from_headers():
-    client = ArkClient('192.168.5.5', 4002, nethash='12345', version='2.0.0', api_version='v2')
-    connection = Connection(client, None, version='2.0.0')
-    assert connection.session.headers['version'] == '2.0.0'
-
-    connection.version = None
-    assert 'version' not in connection.session.headers
+@pytest.mark.parametrize('version_number', [
+    'foo',
+    123
+])
+def test_connection_creation_raises_with_wrong_api_version_number(version_number):
+    with pytest.raises(Exception) as error:
+        Connection('http://127.0.0.1:4003', version_number)
+    assert 'Only versions "1" and "2" are supported' in str(error.value)
 
 
 def test_build_url_correctly_builds_url():
-    client = ArkClient('192.168.5.5', 4002, nethash='12345', version='2.0.0', api_version='v2')
-    connection = Connection(client, '127.0.0.1', 4003)
-
+    connection = Connection('http://127.0.0.1:4003', '2')
     url = connection._build_url('spongebob')
-
     assert url == 'http://127.0.0.1:4003/spongebob'
 
 
@@ -79,11 +38,8 @@ def test_handle_response_raises_for_invalid_response():
         status=404
     )
 
-    client = ArkClient('192.168.5.5', 4002, nethash='12345', version='2.0.0', api_version='v2')
-    connection = Connection(client, '127.0.0.1', 4003)
-
+    connection = Connection('http://127.0.0.1:4003', '2')
     response = requests.get('http://127.0.0.1:4003/spongebob')
-
     with pytest.raises(requests.exceptions.HTTPError):
         connection._handle_response(response)
 
@@ -96,9 +52,7 @@ def test_handle_response_retuns_body_from_request():
         status=200
     )
 
-    client = ArkClient('192.168.5.5', 4002, nethash='12345', version='2.0.0', api_version='v2')
-    connection = Connection(client, '127.0.0.1', 4003)
-
+    connection = Connection('http://127.0.0.1:4003', '2')
     response = requests.get('http://127.0.0.1:4003/spongebob')
     body = connection._handle_response(response)
     assert body == {'success': True}
@@ -119,9 +73,7 @@ def test_http_methods_call_correct_url_and_return_correct_response(method, func_
         status=200
     )
 
-    client = ArkClient('192.168.5.5', 4002, nethash='12345', version='2.0.0', api_version='v2')
-    connection = Connection(client, '127.0.0.1', 4003)
-
+    connection = Connection('http://127.0.0.1:4003', '2')
     data = getattr(connection, func_name)('spongebob')
     assert data == {'success': True}
     assert len(responses.calls) == 1
@@ -143,49 +95,8 @@ def test_http_methods_call_correct_url_with_params_and_return_correct_response(m
         status=200
     )
 
-    client = ArkClient('192.168.5.5', 4002, nethash='12345', version='2.0.0', api_version='v2')
-    connection = Connection(client, '127.0.0.1', 4003)
-
+    connection = Connection('http://127.0.0.1:4003', '2')
     data = getattr(connection, func_name)('spongebob', params={'foo': 'bar'})
     assert data == {'success': True}
     assert len(responses.calls) == 1
     assert responses.calls[0].request.url == 'http://127.0.0.1:4003/spongebob?foo=bar'
-
-
-def test_autoconfigure_against_v1():
-    responses.add(
-        responses.GET,
-        'http://192.168.5.5:4002/api/loader/autoconfigure',
-        json={'success': True, 'network': {'nethash': 'hash12345'}},
-        status=200
-    )
-
-    responses.add(
-        responses.GET,
-        'http://192.168.5.5:4002/api/peers/version',
-        json={'success': True, 'version': '1.1.1'},
-        status=200
-    )
-
-    client = ArkClient('192.168.5.5', 4002, nethash='12345', version='2.0.0', api_version='v1')
-    connection = Connection(client, '127.0.0.1', 4003)
-
-    connection.autoconfigure()
-    assert connection.nethash == 'hash12345'
-    assert connection.version == '1.1.1'
-
-
-def test_autoconfigure_against_v2():
-    responses.add(
-        responses.GET,
-        'http://192.168.5.5:4002/node/configuration',
-        json={'success': True, 'data': {'nethash': 'hash12345', 'version': '2.2.2'}},
-        status=200
-    )
-
-    client = ArkClient('192.168.5.5', 4002, nethash='12345', version='2.0.0', api_version='v2')
-    connection = Connection(client, '127.0.0.1', 4003)
-
-    connection.autoconfigure()
-    assert connection.nethash == 'hash12345'
-    assert connection.version == '2.2.2'
