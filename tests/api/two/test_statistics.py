@@ -26,8 +26,8 @@ def test_transactions_calls_correct_url_with_passed_in_params():
     assert responses.calls[0].request.url.startswith(
         'http://127.0.0.1:4002/statistics/transactions?'
     )
-    assert 'from=1527804000' in responses.calls[0].request.url
-    assert 'to=1529445600' in responses.calls[0].request.url
+    assert 'from=1527811200.0' in responses.calls[0].request.url
+    assert 'to=1529452800.0' in responses.calls[0].request.url
 
 
 def test_blocks_calls_correct_url_with_passed_in_params():
@@ -47,8 +47,8 @@ def test_blocks_calls_correct_url_with_passed_in_params():
     assert responses.calls[0].request.url.startswith(
         'http://127.0.0.1:4002/statistics/blocks?'
     )
-    assert 'from=1527804000' in responses.calls[0].request.url
-    assert 'to=1529445600' in responses.calls[0].request.url
+    assert 'from=1527811200.0' in responses.calls[0].request.url
+    assert 'to=1529452800.0' in responses.calls[0].request.url
 
 
 def test_votes_calls_correct_url_with_passed_in_params():
@@ -68,8 +68,8 @@ def test_votes_calls_correct_url_with_passed_in_params():
     assert responses.calls[0].request.url.startswith(
         'http://127.0.0.1:4002/statistics/votes?'
     )
-    assert 'from=1527804000' in responses.calls[0].request.url
-    assert 'to=1529445600' in responses.calls[0].request.url
+    assert 'from=1527811200.0' in responses.calls[0].request.url
+    assert 'to=1529452800.0' in responses.calls[0].request.url
 
 
 def test_unvotes_calls_correct_url_with_passed_in_params():
@@ -89,5 +89,5 @@ def test_unvotes_calls_correct_url_with_passed_in_params():
     assert responses.calls[0].request.url.startswith(
         'http://127.0.0.1:4002/statistics/unvotes?'
     )
-    assert 'from=1527804000' in responses.calls[0].request.url
-    assert 'to=1529445600' in responses.calls[0].request.url
+    assert 'from=1527811200.0' in responses.calls[0].request.url
+    assert 'to=1529452800.0' in responses.calls[0].request.url
