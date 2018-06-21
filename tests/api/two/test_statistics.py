@@ -1,8 +1,12 @@
-from datetime import datetime
+from datetime import datetime, timezone
 
 import responses
 
 from ark import ArkClient
+
+
+def _utc_datetime(*args, **kwargs):
+    return datetime(tzinfo=timezone.utc, *args, **kwargs)
 
 
 def test_transactions_calls_correct_url_with_passed_in_params():
@@ -15,8 +19,8 @@ def test_transactions_calls_correct_url_with_passed_in_params():
 
     client = ArkClient('http://127.0.0.1:4002', api_version='v2')
     client.statistics.transactions(
-        datetime(2018, 6, 1),
-        datetime(2018, 6, 20)
+        _utc_datetime(2018, 6, 1),
+        _utc_datetime(2018, 6, 20)
     )
     assert len(responses.calls) == 1
     assert responses.calls[0].request.url.startswith(
@@ -36,8 +40,8 @@ def test_blocks_calls_correct_url_with_passed_in_params():
 
     client = ArkClient('http://127.0.0.1:4002', api_version='v2')
     client.statistics.blocks(
-        datetime(2018, 6, 1),
-        datetime(2018, 6, 20)
+        _utc_datetime(2018, 6, 1),
+        _utc_datetime(2018, 6, 20)
     )
     assert len(responses.calls) == 1
     assert responses.calls[0].request.url.startswith(
@@ -57,8 +61,8 @@ def test_votes_calls_correct_url_with_passed_in_params():
 
     client = ArkClient('http://127.0.0.1:4002', api_version='v2')
     client.statistics.votes(
-        datetime(2018, 6, 1),
-        datetime(2018, 6, 20)
+        _utc_datetime(2018, 6, 1),
+        _utc_datetime(2018, 6, 20)
     )
     assert len(responses.calls) == 1
     assert responses.calls[0].request.url.startswith(
@@ -78,8 +82,8 @@ def test_unvotes_calls_correct_url_with_passed_in_params():
 
     client = ArkClient('http://127.0.0.1:4002', api_version='v2')
     client.statistics.unvotes(
-        datetime(2018, 6, 1),
-        datetime(2018, 6, 20)
+        _utc_datetime(2018, 6, 1),
+        _utc_datetime(2018, 6, 20)
     )
     assert len(responses.calls) == 1
     assert responses.calls[0].request.url.startswith(
