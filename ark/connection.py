@@ -17,8 +17,7 @@ class Connection(object):
 
         self.session.headers.update({
             'port': '1',
-            'API-Version': api_version_number,
-            'nethash': '578e820911f24e039733b45e4882b73e301f813a0d2c31330dafda84534ffa23',
+            'API-Version': api_version_number
         })
 
     def _build_url(self, path):
