@@ -47,7 +47,7 @@ def test_create_calls_correct_url_with_data():
     client.transactions.create([{'random': 'data'}])
     assert len(responses.calls) == 1
     assert responses.calls[0].request.url == 'http://127.0.0.1:4002/transactions'
-    assert json.loads(responses.calls[0].request.body) == [{'random': 'data'}]
+    assert json.loads(responses.calls[0].request.body.decode()) == [{'random': 'data'}]
 
 
 def test_get_calls_correct_url():
@@ -112,7 +112,7 @@ def test_search_calls_correct_url_with_default_params():
     client.transactions.search({'blockId': '1337'})
     assert len(responses.calls) == 1
     assert responses.calls[0].request.url == 'http://127.0.0.1:4002/transactions/search?limit=20'
-    assert json.loads(responses.calls[0].request.body) == {'blockId': '1337'}
+    assert json.loads(responses.calls[0].request.body.decode()) == {'blockId': '1337'}
 
 
 def test_search_calls_correct_url_with_passed_in_params():
@@ -129,4 +129,4 @@ def test_search_calls_correct_url_with_passed_in_params():
     assert responses.calls[0].request.url.startswith('http://127.0.0.1:4002/transactions/search?')
     assert 'page=5' in responses.calls[0].request.url
     assert 'limit=69' in responses.calls[0].request.url
-    assert json.loads(responses.calls[0].request.body) == {'blockId': '1337'}
+    assert json.loads(responses.calls[0].request.body.decode()) == {'blockId': '1337'}

@@ -207,7 +207,7 @@ def test_search_calls_correct_url_with_default_params():
     client.wallets.search({'address': 'my-address'})
     assert len(responses.calls) == 1
     assert responses.calls[0].request.url == 'http://127.0.0.1:4002/wallets/search?limit=20'
-    assert json.loads(responses.calls[0].request.body) == {'address': 'my-address'}
+    assert json.loads(responses.calls[0].request.body.decode()) == {'address': 'my-address'}
 
 
 def test_search_calls_correct_url_with_passed_in_params():
@@ -224,4 +224,4 @@ def test_search_calls_correct_url_with_passed_in_params():
     assert responses.calls[0].request.url.startswith('http://127.0.0.1:4002/wallets/search?')
     assert 'page=5' in responses.calls[0].request.url
     assert 'limit=69' in responses.calls[0].request.url
-    assert json.loads(responses.calls[0].request.body) == {'address': 'my-address'}
+    assert json.loads(responses.calls[0].request.body.decode()) == {'address': 'my-address'}

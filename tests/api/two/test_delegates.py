@@ -63,7 +63,7 @@ def test_search_calls_correct_url_with_default_params():
     client.delegates.search({'username': 'deadlock'})
     assert len(responses.calls) == 1
     assert responses.calls[0].request.url == 'http://127.0.0.1:4002/delegates/search?limit=20'
-    assert json.loads(responses.calls[0].request.body) == {'username': 'deadlock'}
+    assert json.loads(responses.calls[0].request.body.decode()) == {'username': 'deadlock'}
 
 
 def test_search_calls_correct_url_with_passed_in_params():
@@ -80,7 +80,7 @@ def test_search_calls_correct_url_with_passed_in_params():
     assert responses.calls[0].request.url.startswith('http://127.0.0.1:4002/delegates/search?')
     assert 'page=5' in responses.calls[0].request.url
     assert 'limit=69' in responses.calls[0].request.url
-    assert json.loads(responses.calls[0].request.body) == {'username': 'deadlock'}
+    assert json.loads(responses.calls[0].request.body.decode()) == {'username': 'deadlock'}
 
 
 def test_blocks_calls_correct_url_with_default_params():
