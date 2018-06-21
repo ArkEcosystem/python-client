@@ -4,6 +4,7 @@ from importlib import import_module
 from pathlib import Path
 
 from ark.connection import Connection
+from ark.exceptions import ArkParameterException
 from ark.resource import Resource
 
 
@@ -25,7 +26,7 @@ class ArkClient(object):
         :param string api_version: Version of the API you want to use. Defaults to v2.
         """
         if api_version not in ['v1', 'v2']:
-            raise Exception('Only versions "v1" and "v2" are supported')
+            raise ArkParameterException('Only versions "v1" and "v2" are supported')
 
         self.api_version = api_version
 
@@ -38,10 +39,10 @@ class ArkClient(object):
         """
         version = VERSION_TO_STRING_MAPPING[self.api_version]
         # Get all modules under the wanted version folder
-        modules = pkgutil.iter_modules([Path(__file__).parent / 'api' / version])
-        for _, name, _ in modules:
-            module = import_module('.{}'.format(name), package='ark.api.{}'.format(version))
 
+        modules = pkgutil.iter_modules([str(Path(__file__).parent / 'api' / version)])
+        for _, name, _ in modules:
+            module = import_module('ark.api.{}.{}'.format(version, name))
             for attr in dir(module):
                 # If attr name is `Resource`, skip it as it's a class and also has a
                 # subclass of Resource

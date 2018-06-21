@@ -1,16 +1,15 @@
-import logging
 import os.path
 
 import requests
 
-logger = logging.getLogger(__name__)
+from ark.exceptions import ArkHTTPException, ArkParameterException
 
 
 class Connection(object):
 
     def __init__(self, hostname, api_version_number):
         if not isinstance(api_version_number, str) or api_version_number not in ['1', '2']:
-            raise Exception('Only versions "1" and "2" are supported')
+            raise ArkParameterException('Only versions "1" and "2" are supported')
 
         self.session = requests.Session()
         self.hostname = hostname
@@ -24,17 +23,20 @@ class Connection(object):
         return os.path.join(self.hostname, path)
 
     def _handle_response(self, response):
-        response.raise_for_status()
+        if not response.content:
+            raise ArkHTTPException('No content in response', response=response)
 
         body = response.json()
-
         if body['success'] is False:
-            log_msg = '{} {} - {}'.format(
-                response.request.method,
-                response.request.url,
-                body['error']
+            raise ArkHTTPException(
+                '{} {} {} - {}'.format(
+                    response.request.method,
+                    response.status_code,
+                    response.request.url,
+                    body.get('error')
+                ),
+                response=response
             )
-            logger.error(log_msg)
 
         return body
 
