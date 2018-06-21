@@ -4,6 +4,7 @@ from importlib import import_module
 from pathlib import Path
 
 from ark.connection import Connection
+from ark.exceptions import ArkParameterException
 from ark.resource import Resource
 
 
@@ -25,7 +26,7 @@ class ArkClient(object):
         :param string api_version: Version of the API you want to use. Defaults to v2.
         """
         if api_version not in ['v1', 'v2']:
-            raise Exception('Only versions "v1" and "v2" are supported')
+            raise ArkParameterException('Only versions "v1" and "v2" are supported')
 
         self.api_version = api_version
 

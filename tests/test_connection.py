@@ -5,6 +5,7 @@ import requests
 import responses
 
 from ark.connection import Connection
+from ark.exceptions import ArkHTTPException
 
 
 def test_connection_creation_sets_default_session_headers_and_variables():
@@ -31,7 +32,7 @@ def test_build_url_correctly_builds_url():
     assert url == 'http://127.0.0.1:4003/spongebob'
 
 
-def test_handle_response_raises_for_invalid_response():
+def test_handle_response_raises_for_no_content_in_response():
     responses.add(
         responses.GET,
         'http://127.0.0.1:4003/spongebob',
@@ -40,8 +41,28 @@ def test_handle_response_raises_for_invalid_response():
 
     connection = Connection('http://127.0.0.1:4003', '2')
     response = requests.get('http://127.0.0.1:4003/spongebob')
-    with pytest.raises(requests.exceptions.HTTPError):
+    with pytest.raises(ArkHTTPException) as exception:
         connection._handle_response(response)
+
+    assert str(exception.value) == 'No content in response'
+    assert exception.value.response == response
+
+
+def test_handle_response_raises_for_success_false_in_response():
+    responses.add(
+        responses.GET,
+        'http://127.0.0.1:4003/spongebob',
+        json={'success': False, 'error': 'Best error ever'},
+        status=404
+    )
+
+    connection = Connection('http://127.0.0.1:4003', '2')
+    response = requests.get('http://127.0.0.1:4003/spongebob')
+    with pytest.raises(ArkHTTPException) as exception:
+        connection._handle_response(response)
+
+    assert str(exception.value) == 'GET 404 http://127.0.0.1:4003/spongebob - Best error ever'
+    assert exception.value.response == response
 
 
 def test_handle_response_retuns_body_from_request():
