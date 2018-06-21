@@ -1,0 +1,94 @@
+import test.api.one.env as env_v1
+import tests.env as env
+
+from ark.client import ArkClient
+
+
+ARK = ArkClient(
+    env.HOST,
+    env.PORT,
+    env.NETHASH,
+    env_v1.VERSION,
+    api_version=env_v1.API_VERSION
+)
+
+
+def test_block():
+    res = ARK.blocks().block(env.BLOCK_ID)
+    assert res['success'] is True
+    assert 'block' in res
+
+
+def test_blocks():
+    res = ARK.blocks().blocks()
+    assert res['success'] is True
+    assert 'blocks' in res
+    assert len(res['blocks']) == 100
+
+
+def test_blocks_with_parameters():
+    parameters = {'limit': 1}
+    res = ARK.blocks().blocks(parameters=parameters)
+    assert res['success'] is True
+    assert 'blocks' in res
+    assert len(res['blocks']) == 1
+
+
+def test_epoch():
+    res = ARK.blocks().epoch()
+    assert res['success'] is True
+    assert res['epoch'] == '2017-03-21T13:00:00.000Z'
+
+
+def test_height():
+    res = ARK.blocks().height()
+    assert res['success'] is True
+    assert 'height' in res
+
+
+def test_nethash():
+    res = ARK.blocks().nethash()
+    assert res['success'] is True
+    assert res['nethash'] == env.NETHASH
+
+
+def test_fee():
+    res = ARK.blocks().fee()
+    assert res['success'] is True
+    assert 'fee' in res
+
+
+def test_fees():
+    res = ARK.blocks().fees()
+    assert res['success'] is True
+    assert 'fees' in res
+
+
+def test_milestone():
+    res = ARK.blocks().milestone()
+    assert res['success'] is True
+    assert 'milestone' in res
+
+
+def test_reward():
+    res = ARK.blocks().reward()
+    assert res['success'] is True
+    assert 'reward' in res
+
+
+def test_supply():
+    res = ARK.blocks().supply()
+    assert res['success'] is True
+    assert 'supply' in res
+
+
+def test_status():
+    res = ARK.blocks().status()
+    assert res['success'] is True
+    assert 'epoch' in res
+    assert 'height' in res
+    assert 'fee' in res
+    assert 'milestone' in res
+    assert 'reward' in res
+    assert 'supply' in res
+    assert res['nethash'] == env.NETHASH
