@@ -7,56 +7,21 @@ logger = logging.getLogger(__name__)
 
 
 class Connection(object):
-    _nethash = None
-    _version = None
 
-    def __init__(self, client, host, port=None, nethash=None, version=None):
+    def __init__(self, hostname, api_version_number):
+        if not isinstance(api_version_number, str) or api_version_number not in ['1', '2']:
+            raise Exception('Only versions "1" and "2" are supported')
+
         self.session = requests.Session()
-
-        self.host = host
-        self.port = port
-        self.nethash = nethash
-        self.version = version
-        self.client = client
+        self.hostname = hostname
 
         self.session.headers.update({
             'port': '1',
-            'API-Version': self.client.api_version.replace('v', '')
+            'API-Version': api_version_number
         })
 
-    @property
-    def nethash(self):
-        return self._nethash
-
-    @nethash.setter
-    def nethash(self, nethash):
-        self._nethash = nethash
-        if nethash:
-            self.session.headers['nethash'] = nethash
-        else:
-            try:
-                del self.session.headers['nethash']
-            except KeyError:
-                pass
-
-    @property
-    def version(self):
-        return self._version
-
-    @version.setter
-    def version(self, version):
-        self._version = version
-        if version:
-            self.session.headers['version'] = version
-        else:
-            try:
-                del self.session.headers['version']
-            except KeyError:
-                pass
-
     def _build_url(self, path):
-        base_url = 'http://{}:{}/'.format(self.host, self.port)
-        return os.path.join(base_url, path)
+        return os.path.join(self.hostname, path)
 
     def _handle_response(self, response):
         response.raise_for_status()
@@ -97,15 +62,3 @@ class Connection(object):
         url = self._build_url(path)
         response = self.session.delete(url, params=params)
         return self._handle_response(response)
-
-    def autoconfigure(self):
-        if self.client.api_version == 'v1':
-            loader_response = self.client.loader.autoconfigure()
-            self.nethash = loader_response['network']['nethash']
-
-            peer_response = self.client.peers.version()
-            self.version = peer_response['version']
-        else:
-            config_response = self.client.node.configuration()
-            self.nethash = config_response['data']['nethash']
-            self.version = config_response['data']['version']

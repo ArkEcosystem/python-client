@@ -1,4 +1,4 @@
-from ark.api.resource import Resource
+from ark.resource import Resource
 
 
 class Vote(Resource):

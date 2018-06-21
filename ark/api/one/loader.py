@@ -1,12 +1,12 @@
-from ark.api.resource import Resource
+from ark.resource import Resource
 
 
 class Loader(Resource):
     def status(self):
-        return self.request_get('api/loader/status')
+        return self.request_get('loader/status')
 
     def sync(self):
-        return self.request_get('api/loader/status/sync')
+        return self.request_get('loader/status/sync')
 
     def autoconfigure(self):
-        return self.request_get('api/loader/autoconfigure')
+        return self.request_get('loader/autoconfigure')

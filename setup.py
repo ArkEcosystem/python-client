@@ -13,6 +13,8 @@ tests_require = [
     'flake8-print>=3.1.0',
     'flake8-quotes>=1.0.0',
     'pytest>=3.6.1',
+    'pytest-responses>=0.3.0',
+    'pytest-mock>=1.10.0',
 ]
 
 extras_require = {
