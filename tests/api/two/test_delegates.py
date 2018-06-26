@@ -75,7 +75,7 @@ def test_search_calls_correct_url_with_passed_in_params():
     )
 
     client = ArkClient('http://127.0.0.1:4002', api_version='v2')
-    client.delegates.search({'username': 'deadlock'}, page=5, limit=69)
+    client.delegates.search('deadlock', page=5, limit=69)
     assert len(responses.calls) == 1
     assert responses.calls[0].request.url.startswith('http://127.0.0.1:4002/delegates/search?')
     assert 'page=5' in responses.calls[0].request.url

@@ -134,7 +134,7 @@ def test_search_calls_correct_url_with_passed_in_params():
 
 def test_transaction_types():
     responses.add(
-        responses.POST,
+        responses.GET,
         'http://127.0.0.1:4002/transactions/types',
         json={
             'data': {
@@ -160,7 +160,7 @@ def test_transaction_types():
 
 def test_transaction_fees():
     responses.add(
-        responses.POST,
+        responses.GET,
         'http://127.0.0.1:4002/transactions/fees',
         json={
             'data': {
