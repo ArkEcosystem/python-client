@@ -131,6 +131,7 @@ def test_search_calls_correct_url_with_passed_in_params():
     assert 'limit=69' in responses.calls[0].request.url
     assert json.loads(responses.calls[0].request.body.decode()) == {'blockId': '1337'}
 
+
 def test_transaction_types():
     responses.add(
         responses.POST,
