@@ -33,4 +33,10 @@ class Transactions(Resource):
             'page': page,
             'limit': limit,
         }
-        return self.request_post('transactions/search'.format(), data=criteria, params=params)
+        return self.request_post('transactions/search', data=criteria, params=params)
+
+    def types(self):
+        return self.request_get('transactions/types')
+
+    def fees(self):
+        return self.request_get('transactions/fees')

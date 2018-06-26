@@ -130,3 +130,56 @@ def test_search_calls_correct_url_with_passed_in_params():
     assert 'page=5' in responses.calls[0].request.url
     assert 'limit=69' in responses.calls[0].request.url
     assert json.loads(responses.calls[0].request.body.decode()) == {'blockId': '1337'}
+
+
+def test_transaction_types():
+    responses.add(
+        responses.GET,
+        'http://127.0.0.1:4002/transactions/types',
+        json={
+            'data': {
+                'TRANSFER': 0,
+                'SECOND_SIGNATURE': 1,
+                'DELEGATE_REGISTRATION': 2,
+                'VOTE': 3,
+                'MULTI_SIGNATURE': 4,
+                'IPFS': 5,
+                'TIMELOCK_TRANSFER': 6,
+                'MULTI_PAYMENT': 7,
+                'DELEGATE_RESIGNATION': 8
+            }
+        },
+        status=200
+    )
+
+    client = ArkClient('http://127.0.0.1:4002', api_version='v2')
+    client.transactions.types()
+    assert len(responses.calls) == 1
+    assert responses.calls[0].request.url.startswith('http://127.0.0.1:4002/transactions/types')
+
+
+def test_transaction_fees():
+    responses.add(
+        responses.GET,
+        'http://127.0.0.1:4002/transactions/fees',
+        json={
+            'data': {
+                'dynamic': False,
+                'transfer': 10000000,
+                'secondSignature': 500000000,
+                'delegateRegistration': 2500000000,
+                'vote': 100000000,
+                'multiSignature': 500000000,
+                'ipfs': 0,
+                'timelockTransfer': 0,
+                'multiPayment': 0,
+                'delegateResignation': 0
+            }
+        },
+        status=200
+    )
+
+    client = ArkClient('http://127.0.0.1:4002', api_version='v2')
+    client.transactions.fees()
+    assert len(responses.calls) == 1
+    assert responses.calls[0].request.url.startswith('http://127.0.0.1:4002/transactions/fees')

@@ -27,7 +27,7 @@ class Connection(object):
             raise ArkHTTPException('No content in response', response=response)
 
         body = response.json()
-        if body['success'] is False:
+        if not response.ok:
             raise ArkHTTPException(
                 '{} {} {} - {}'.format(
                     response.request.method,

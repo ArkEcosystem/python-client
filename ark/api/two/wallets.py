@@ -46,4 +46,4 @@ class Wallets(Resource):
             'page': page,
             'limit': limit,
         }
-        return self.request_post('wallets/search'.format(), data=criteria, params=params)
+        return self.request_post('wallets/search', data=criteria, params=params)

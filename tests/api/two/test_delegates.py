@@ -60,7 +60,7 @@ def test_search_calls_correct_url_with_default_params():
     )
 
     client = ArkClient('http://127.0.0.1:4002', api_version='v2')
-    client.delegates.search({'username': 'deadlock'})
+    client.delegates.search('deadlock')
     assert len(responses.calls) == 1
     assert responses.calls[0].request.url == 'http://127.0.0.1:4002/delegates/search?limit=20'
     assert json.loads(responses.calls[0].request.body.decode()) == {'username': 'deadlock'}
@@ -75,7 +75,7 @@ def test_search_calls_correct_url_with_passed_in_params():
     )
 
     client = ArkClient('http://127.0.0.1:4002', api_version='v2')
-    client.delegates.search({'username': 'deadlock'}, page=5, limit=69)
+    client.delegates.search('deadlock', page=5, limit=69)
     assert len(responses.calls) == 1
     assert responses.calls[0].request.url.startswith('http://127.0.0.1:4002/delegates/search?')
     assert 'page=5' in responses.calls[0].request.url
@@ -159,7 +159,7 @@ def test_voter_balances_calls_correct_url_with_default_params():
     delegate_id = '12345'
     responses.add(
         responses.GET,
-        'http://127.0.0.1:4002/delegates/{}/voterBalances'.format(delegate_id),
+        'http://127.0.0.1:4002/delegates/{}/voters/balances'.format(delegate_id),
         json={'success': True},
         status=200
     )
@@ -167,4 +167,4 @@ def test_voter_balances_calls_correct_url_with_default_params():
     client = ArkClient('http://127.0.0.1:4002', api_version='v2')
     client.delegates.voter_balances(delegate_id)
     assert len(responses.calls) == 1
-    assert responses.calls[0].request.url == 'http://127.0.0.1:4002/delegates/12345/voterBalances'
+    assert responses.calls[0].request.url == 'http://127.0.0.1:4002/delegates/12345/voters/balances'
