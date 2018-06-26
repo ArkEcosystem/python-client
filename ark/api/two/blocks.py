@@ -25,4 +25,4 @@ class Blocks(Resource):
             'page': page,
             'limit': limit,
         }
-        return self.request_post('blocks/search'.format(), data=criteria, params=params)
+        return self.request_post('blocks/search', data=criteria, params=params)

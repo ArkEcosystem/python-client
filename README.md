@@ -16,7 +16,7 @@ We will not be accepting new PRs until we are happy with the base of the client 
 
 ## Installation
 
-For current develop branch instalation please use the following
+For current develop branch installation please use the following:
 
 ```bash
 pip install -e git://github.com/ArkEcosystem/python-client.git@develop#egg=ark-client
@@ -40,14 +40,19 @@ If you have any questions, requests or ideas open an issue or ask us in #python 
 ```py
 from ark import ArkClient
 
-ark = ArkClient(
-    '127.0.0.1',
-    4003,
-    '578e820911f24e039733b45e4882b73e301f813a0d2c31330dafda84534ffa23',
-    '2.0.0'
-)
+client = ArkClient('http://127.0.0.1:4003/api/')
 
-delegates = ark.delegates().delegates()
+delegates = client.delegates.all()
+```
+
+or for V1:
+
+```py
+from ark import ArkClient
+
+client = ArkClient('http://127.0.0.1:4002/api/', api_version='v1')
+
+delegates = client.delegates.all()
 ```
 
 ## Security

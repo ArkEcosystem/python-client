@@ -13,12 +13,12 @@ class Delegates(Resource):
     def get(self, delegate_id):
         return self.request_get('delegates/{}'.format(delegate_id))
 
-    def search(self, criteria, page=None, limit=20):
+    def search(self, username, page=None, limit=20):
         params = {
             'page': page,
             'limit': limit,
         }
-        return self.request_post('delegates/search'.format(), data=criteria, params=params)
+        return self.request_post('delegates/search', data={'username': username}, params=params)
 
     def blocks(self, delegate_id, page=None, limit=20):
         params = {
@@ -35,4 +35,4 @@ class Delegates(Resource):
         return self.request_get('delegates/{}/voters'.format(delegate_id), params)
 
     def voter_balances(self, delegate_id):
-        return self.request_get('delegates/{}/voterBalances'.format(delegate_id))
+        return self.request_get('delegates/{}/voters/balances'.format(delegate_id))
