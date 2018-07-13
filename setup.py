@@ -36,4 +36,13 @@ setuptools.setup(
     extras_require=extras_require,
     tests_require=tests_require,
     setup_requires=setup_requires,
+    classifiers=[
+        'Intended Audience :: Developers',
+        'License :: OSI Approved :: MIT License',
+        'Programming Language :: Python :: 3.4',
+        'Programming Language :: Python :: 3.5',
+        'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: 3.7',
+        'Topic :: Software Development :: Libraries :: Python Modules',
+    ]
 )
