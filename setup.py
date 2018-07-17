@@ -15,6 +15,7 @@ tests_require = [
     'pytest>=3.6.1',
     'pytest-responses>=0.3.0',
     'pytest-mock>=1.10.0',
+    'pytest-cov>=2.5.1'
 ]
 
 extras_require = {
