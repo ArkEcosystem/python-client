@@ -55,6 +55,10 @@ client = ArkClient('http://127.0.0.1:4002/api/', api_version='v1')
 delegates = client.delegates.all()
 ```
 
+## Documentation
+
+You can find installation instructions and detailed instructions on how to use this package at the [dedicated documentation site](https://docs.ark.io/v1.0/docs/clients-python).
+
 ## Security
 
 If you discover a security vulnerability within this package, please send an e-mail to security@ark.io. All security vulnerabilities will be promptly addressed.
@@ -63,7 +67,6 @@ If you discover a security vulnerability within this package, please send an e-m
 ## Development environment
 
 To install all development requiremenets, simply run `pip install .[dev]`.
-
 
 ## Credits
 
