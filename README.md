@@ -7,6 +7,7 @@
 > A simple Python API client for the ARK Blockchain.
 
 [![Build Status](https://img.shields.io/travis/ArkEcosystem/python-client/master.svg?style=flat-square)](https://travis-ci.org/ArkEcosystem/python-client)
+[![Codecov](https://img.shields.io/codecov/c/github/arkecosystem/python-client.svg)](https://codecov.io/gh/arkecosystem/python-client)
 [![Latest Version](https://img.shields.io/github/release/ArkEcosystem/python-client.svg?style=flat-square)](https://github.com/ArkEcosystem/python-client/releases)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
