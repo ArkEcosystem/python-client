@@ -7,6 +7,7 @@
 > A simple Python API client for the ARK Blockchain.
 
 [![Build Status](https://img.shields.io/travis/ArkEcosystem/python-client/master.svg?style=flat-square)](https://travis-ci.org/ArkEcosystem/python-client)
+[![Codecov](https://img.shields.io/codecov/c/github/arkecosystem/python-client.svg)](https://codecov.io/gh/arkecosystem/python-client)
 [![Latest Version](https://img.shields.io/github/release/ArkEcosystem/python-client.svg?style=flat-square)](https://github.com/ArkEcosystem/python-client/releases)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
@@ -55,6 +56,10 @@ client = ArkClient('http://127.0.0.1:4002/api/', api_version='v1')
 delegates = client.delegates.all()
 ```
 
+## Documentation
+
+You can find installation instructions and detailed instructions on how to use this package at the [dedicated documentation site](https://docs.ark.io/v1.0/docs/clients-python).
+
 ## Security
 
 If you discover a security vulnerability within this package, please send an e-mail to security@ark.io. All security vulnerabilities will be promptly addressed.
@@ -63,7 +68,6 @@ If you discover a security vulnerability within this package, please send an e-m
 ## Development environment
 
 To install all development requiremenets, simply run `pip install .[dev]`.
-
 
 ## Credits
 
