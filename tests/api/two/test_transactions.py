@@ -47,7 +47,9 @@ def test_create_calls_correct_url_with_data():
     client.transactions.create([{'random': 'data'}])
     assert len(responses.calls) == 1
     assert responses.calls[0].request.url == 'http://127.0.0.1:4002/transactions'
-    assert json.loads(responses.calls[0].request.body.decode()) == [{'random': 'data'}]
+    assert json.loads(responses.calls[0].request.body.decode()) == {
+        'transactions': [{'random': 'data'}]
+    }
 
 
 def test_get_calls_correct_url():
