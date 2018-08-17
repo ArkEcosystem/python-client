@@ -11,9 +11,7 @@ class Transactions(Resource):
         return self.request_get('transactions', params)
 
     def create(self, transactions):
-        # TODO: transactions should probably be a list of some objects that we still
-        # need to create, to be able to easier create transactions
-        return self.request_post('transactions', data=transactions)
+        return self.request_post('transactions', data={'transactions': transactions})
 
     def get(self, transaction_id):
         return self.request_get('transactions/{}'.format(transaction_id))
