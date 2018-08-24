@@ -6,10 +6,10 @@
 
 > A simple Python API client for the ARK Blockchain.
 
-[![Build Status](https://img.shields.io/travis/ArkEcosystem/python-client/master.svg?style=flat-square)](https://travis-ci.org/ArkEcosystem/python-client)
-[![Codecov](https://img.shields.io/codecov/c/github/arkecosystem/python-client.svg)](https://codecov.io/gh/arkecosystem/python-client)
-[![Latest Version](https://img.shields.io/github/release/ArkEcosystem/python-client.svg?style=flat-square)](https://github.com/ArkEcosystem/python-client/releases)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Build Status](https://badgen.now.sh/travis/ArkEcosystem/python-client/master)](https://travis-ci.org/ArkEcosystem/python-client)
+[![Codecov](https://badgen.now.sh/codecov/c/github/arkecosystem/python-client)](https://codecov.io/gh/arkecosystem/python-client)
+[![Latest Version](https://badgen.now.sh/github/release/ArkEcosystem/python-client)](https://github.com/ArkEcosystem/python-client/releases/latest)
+[![License: MIT](https://badgen.now.sh/badge/license/MIT/green)](https://opensource.org/licenses/MIT)
 
 # Contributions are closed
 
@@ -74,7 +74,7 @@ To install all development requiremenets, simply run `pip install .[dev]`.
 - [Rok Halužan](https://github.com/roks0n)
 - [Tomaž Šifrer](https://github.com/tsifrer)
 - [Brian Faust](https://github.com/faustbrian)
-- [All Contributors](../../../../contributors)
+- [All Contributors](../../contributors)
 
 ## License
 
