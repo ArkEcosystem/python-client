@@ -11,18 +11,6 @@
 [![Latest Version](https://badgen.now.sh/github/release/ArkEcosystem/python-client)](https://github.com/ArkEcosystem/python-client/releases/latest)
 [![License: MIT](https://badgen.now.sh/badge/license/MIT/green)](https://opensource.org/licenses/MIT)
 
-# Contributions are closed
-
-We will not be accepting new PRs until we are happy with the base of the client and until it has good test coverage. We'll let you know on our #python Slack channel once we'll accept PRs again.
-
-## Installation
-
-For current develop branch installation please use the following:
-
-```bash
-pip install -e git://github.com/ArkEcosystem/python-client.git@develop#egg=ark-client
-```
-
 ## Guide for contributing
 
 Before you start contributing please take some time and check our official [Python Development Guidelines](https://github.com/ArkEcosystem/development-guidelines/blob/master/Python/README.md) which follow the widely accepted PEP8 Python Style Guide. 🖋
