@@ -36,26 +36,6 @@ Before you start contributing please take some time and check our official [Pyth
 
 If you have any questions, requests or ideas open an issue or ask us in #python on [ARK's Slack](https://ark.io/slack).
 
-## Usage
-
-```py
-from ark import ArkClient
-
-client = ArkClient('http://127.0.0.1:4003/api/')
-
-delegates = client.delegates.all()
-```
-
-or for V1:
-
-```py
-from ark import ArkClient
-
-client = ArkClient('http://127.0.0.1:4002/api/', api_version='v1')
-
-delegates = client.delegates.all()
-```
-
 ## Documentation
 
 You can find installation instructions and detailed instructions on how to use this package at the [dedicated documentation site](https://docs.ark.io/developers/sdk/clients/python.html).
@@ -63,11 +43,6 @@ You can find installation instructions and detailed instructions on how to use t
 ## Security
 
 If you discover a security vulnerability within this package, please send an e-mail to security@ark.io. All security vulnerabilities will be promptly addressed.
-
-
-## Development environment
-
-To install all development requiremenets, simply run `pip install .[dev]`.
 
 ## Credits
 
