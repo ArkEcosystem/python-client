@@ -8,3 +8,5 @@ __pycache__/
 *.pytest_cache/
 coverage.xml
 .coverage
+.vs
+.vscode
