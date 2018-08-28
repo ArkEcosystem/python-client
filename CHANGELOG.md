@@ -7,5 +7,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## Unreleased
 
+## 0.1.1 - 2018-08-28
+### Fixed
+- Added `__init__.py` to the api directory in order to include the api into the package
+
 ## 0.1.0 - 2018-08-27
 - Initial Release
