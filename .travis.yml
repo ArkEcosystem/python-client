@@ -9,7 +9,7 @@ install:
 before_script:
   - flake8 .
 script:
-  - py.test -v -s --cov=ark --cov-config=.coveragerc --cov-report xml
+  - pytest -v -s --cov=ark --cov-config=.coveragerc --cov-report xml
 after_success:
   - bash <(curl -s https://codecov.io/bash)
 branches:

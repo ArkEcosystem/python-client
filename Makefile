@@ -1,5 +1,5 @@
 test:
-	py.test -v -s $(ARGS)
+	pytest -v -s $(ARGS)
 
 lint:
 	flake8 .
