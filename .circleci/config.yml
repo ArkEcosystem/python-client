@@ -1,0 +1,22 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/python:3.6.1
+    working_directory: ~/arkecosystem/client
+    steps:
+      - checkout
+      - run:
+          name: install dependencies
+          command: |
+            python3 -m venv venv
+            . venv/bin/activate
+            pip install .[test]
+      - run:
+          name: run tests
+          command: |
+            . venv/bin/activate
+            pytest -v -s --cov=ark --cov-config=.coveragerc --cov-report xml
+      - store_artifacts:
+          path: test-reports
+          destination: test-reports
