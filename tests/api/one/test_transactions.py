@@ -1,6 +1,6 @@
 import responses
 
-from ark import ArkClient
+from client import ArkClient
 
 
 def test_get_calls_correct_url_with_passed_in_param():
