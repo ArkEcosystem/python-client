@@ -17,6 +17,10 @@ jobs:
           command: |
             . venv/bin/activate
             pytest -v -s --cov=ark --cov-config=.coveragerc --cov-report xml
+      - run:
+          name: Codecov
+          when: on_success
+          command: bash <(curl -s https://codecov.io/bash)
       - store_artifacts:
           path: test-reports
           destination: test-reports
