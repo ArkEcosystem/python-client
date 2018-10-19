@@ -2,7 +2,7 @@ import json
 
 import responses
 
-from ark import ArkClient
+from client import ArkClient
 
 
 def test_all_calls_correct_url_with_default_params():
