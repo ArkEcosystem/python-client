@@ -1,7 +1,7 @@
 import pytest
 
-from ark.client import ArkClient
-from ark.connection import Connection
+from client.client import ArkClient
+from client.connection import Connection
 
 
 def test_client_creation_calls_import_api(mocker):

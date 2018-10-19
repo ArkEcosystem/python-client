@@ -2,7 +2,7 @@ import os.path
 
 import requests
 
-from ark.exceptions import ArkHTTPException, ArkParameterException
+from client.exceptions import ArkHTTPException, ArkParameterException
 
 
 class Connection(object):

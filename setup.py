@@ -30,7 +30,7 @@ setuptools.setup(
     description='A simple Python API client for the ARK Blockchain.',
     version='0.1.1',
     author='Ark Ecosystem',
-    author_email='info@ark.io',
+    author_email='info@client.io',
     url='https://github.com/ArkEcosystem/python-client',
     packages=setuptools.find_packages(exclude=['tests', 'tests.*']),
     install_requires=requires,

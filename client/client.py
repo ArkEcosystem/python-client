@@ -3,9 +3,9 @@ import pkgutil
 from importlib import import_module
 from pathlib import Path
 
-from ark.connection import Connection
-from ark.exceptions import ArkParameterException
-from ark.resource import Resource
+from client.connection import Connection
+from client.exceptions import ArkParameterException
+from client.resource import Resource
 
 
 VERSION_TO_STRING_MAPPING = {
@@ -42,7 +42,7 @@ class ArkClient(object):
 
         modules = pkgutil.iter_modules([str(Path(__file__).parent / 'api' / version)])
         for _, name, _ in modules:
-            module = import_module('ark.api.{}.{}'.format(version, name))
+            module = import_module('client.api.{}.{}'.format(version, name))
             for attr in dir(module):
                 # If attr name is `Resource`, skip it as it's a class and also has a
                 # subclass of Resource
