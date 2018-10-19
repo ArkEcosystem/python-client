@@ -1,5 +1,5 @@
-from ark.connection import Connection
-from ark.resource import Resource
+from client.connection import Connection
+from client.resource import Resource
 
 
 def test_request_get_calls_connection_get_with_correct_params(mocker):

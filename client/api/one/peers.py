@@ -1,5 +1,5 @@
-from ark.exceptions import ArkParameterException
-from ark.resource import Resource
+from client.exceptions import ArkParameterException
+from client.resource import Resource
 
 
 class Peers(Resource):

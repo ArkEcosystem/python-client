@@ -4,8 +4,8 @@ import requests
 
 import responses
 
-from ark.connection import Connection
-from ark.exceptions import ArkHTTPException
+from client.connection import Connection
+from client.exceptions import ArkHTTPException
 
 
 def test_connection_creation_sets_default_session_headers_and_variables():

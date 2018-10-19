@@ -1,4 +1,4 @@
-from ark.resource import Resource
+from client.resource import Resource
 
 
 class Blocks(Resource):
