@@ -26,12 +26,6 @@ def test_connection_creation_raises_with_wrong_api_version_number(version_number
     assert 'Only versions "1" and "2" are supported' in str(error.value)
 
 
-def test_build_url_correctly_builds_url():
-    connection = Connection('http://127.0.0.1:4003', '2')
-    url = connection._build_url('spongebob')
-    assert url == 'http://127.0.0.1:4003/spongebob'
-
-
 def test_handle_response_raises_for_no_content_in_response():
     responses.add(
         responses.GET,
