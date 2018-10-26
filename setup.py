@@ -5,6 +5,7 @@ import setuptools
 
 requires = [
     'requests>=2.19.1',
+    'backoff>=1.6.0',
 ]
 
 tests_require = [
