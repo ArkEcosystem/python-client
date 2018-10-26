@@ -1,4 +1,4 @@
-import os.path
+import urllib.parse
 
 import requests
 
@@ -20,7 +20,7 @@ class Connection(object):
         })
 
     def _build_url(self, path):
-        return os.path.join(self.hostname, path)
+        return urllib.parse.urljoin(self.hostname, path)
 
     def _handle_response(self, response):
         if not response.content:
