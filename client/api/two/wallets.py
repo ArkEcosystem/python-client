@@ -10,6 +10,13 @@ class Wallets(Resource):
         }
         return self.request_get('wallets', params)
 
+    def top(self, page=None, limit=20):
+        params = {
+            'page': page,
+            'limit': limit
+        }
+        return self.request_get('wallets/top', params)
+
     def get(self, wallet_id):
         return self.request_get('wallets/{}'.format(wallet_id))
 
