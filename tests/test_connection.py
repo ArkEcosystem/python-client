@@ -26,6 +26,44 @@ def test_connection_creation_raises_with_wrong_api_version_number(version_number
     assert 'Only versions "1" and "2" are supported' in str(error.value)
 
 
+def test_connection_request_retry_successful():
+    responses.add(
+        responses.GET,
+        'http://127.0.0.1:4003/spongebob',
+        body=requests.exceptions.RequestException())
+    responses.add(
+        responses.GET,
+        'http://127.0.0.1:4003/spongebob',
+        body=requests.exceptions.RequestException())
+    responses.add(
+        responses.GET,
+        'http://127.0.0.1:4003/spongebob',
+        json={'success': True},
+        status=200
+    )
+
+    connection = Connection('http://127.0.0.1:4003', '2')
+
+    data = connection.get('spongebob')
+    assert data == {'success': True}
+    assert len(responses.calls) == 3
+    assert responses.calls[0].request.url == 'http://127.0.0.1:4003/spongebob'
+
+
+def test_connection_raises_for_request_retry_failure():
+    responses.add(
+        responses.GET,
+        'http://127.0.0.1:4003/spongebob',
+        body=requests.exceptions.RequestException())
+
+    connection = Connection('http://127.0.0.1:4003', '2')
+
+    with pytest.raises(ArkHTTPException) as exception:
+        connection.get('spongebob')
+
+    assert len(responses.calls) == 3
+
+
 def test_handle_response_raises_for_no_content_in_response():
     responses.add(
         responses.GET,
