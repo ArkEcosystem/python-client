@@ -7,14 +7,22 @@ class Blocks(Resource):
     def get(self, block_id):
         return self.request_get('blocks/get', {'id': block_id})
 
-    def all(self, limit=20, offset=None, **kwargs):
+    def all(self, limit=20, offset=None, order_by=None, height=None, previous_block=None, number_of_transactions=None,
+            total_amount=None, total_fee=None, reward=None, payload_hash=None, generator_public_key=None):
         if limit > 100:
             raise ArkParameterException('Maximum number of objects to return is 100')
-        extra_params = {name: kwargs[name] for name in kwargs if kwargs[name] is not None}
         params = {
             'limit': limit,
             'offset': offset,
-            **extra_params
+            'orderBy': order_by,
+            'height': height,
+            'previousBlock': previous_block,
+            'numberOfTransactions': number_of_transactions,
+            'totalAmount': total_amount,
+            'totalFee': total_fee,
+            'reward': reward,
+            'payloadHash': payload_hash,
+            'generatorPublicKey': generator_public_key,
         }
         return self.request_get('blocks', params)
 

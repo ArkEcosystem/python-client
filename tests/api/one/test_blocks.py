@@ -59,7 +59,7 @@ def test_all_calls_correct_url_with_additional_params():
     )
 
     client = ArkClient('http://127.0.0.1:4002', api_version='v1')
-    client.blocks.all(limit=20, orderBy="timestamp", numberOfTransactions=5)
+    client.blocks.all(limit=20, order_by="timestamp", number_of_transactions=5)
     assert len(responses.calls) == 1
     assert responses.calls[0].request.url.startswith(
       'http://127.0.0.1:4002/blocks?'
