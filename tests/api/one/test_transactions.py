@@ -61,7 +61,7 @@ def test_all_calls_correct_url_with_additional_params():
     )
 
     client = ArkClient('http://127.0.0.1:4002', api_version='v1')
-    client.transactions.all(limit=20, orderBy="timestamp", type=1, fee=10000000)
+    client.transactions.all(limit=20, order_by="timestamp", type=1, fee=10000000)
     assert len(responses.calls) == 1
     assert responses.calls[0].request.url.startswith(
       'http://127.0.0.1:4002/transactions?'
