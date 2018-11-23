@@ -48,6 +48,7 @@ class Connection(object):
 
         self.session.headers.update({
             'port': '1',
+            'Content-Type': 'application/json',
             'API-Version': api_version_number
         })
 
