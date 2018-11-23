@@ -50,6 +50,25 @@ def test_all_calls_correct_url_with_passed_in_params():
     assert 'offset=123' in responses.calls[0].request.url
 
 
+def test_all_calls_correct_url_with_additional_params():
+    responses.add(
+      responses.GET,
+      'http://127.0.0.1:4002/blocks',
+      json={'success': True},
+      status=200
+    )
+
+    client = ArkClient('http://127.0.0.1:4002', api_version='v1')
+    client.blocks.all(limit=20, order_by="timestamp", number_of_transactions=5)
+    assert len(responses.calls) == 1
+    assert responses.calls[0].request.url.startswith(
+      'http://127.0.0.1:4002/blocks?'
+    )
+    assert 'limit=20' in responses.calls[0].request.url
+    assert 'orderBy=timestamp' in responses.calls[0].request.url
+    assert 'numberOfTransactions=5' in responses.calls[0].request.url
+
+
 def test_epoch_calls_correct_url():
     responses.add(
         responses.GET,
