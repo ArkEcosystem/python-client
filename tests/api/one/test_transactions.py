@@ -52,6 +52,26 @@ def test_all_calls_correct_url_with_passed_in_params():
     assert 'offset=123' in responses.calls[0].request.url
 
 
+def test_all_calls_correct_url_with_additional_params():
+    responses.add(
+      responses.GET,
+      'http://127.0.0.1:4002/transactions',
+      json={'success': True},
+      status=200
+    )
+
+    client = ArkClient('http://127.0.0.1:4002', api_version='v1')
+    client.transactions.all(limit=20, order_by="timestamp", type=1, fee=10000000)
+    assert len(responses.calls) == 1
+    assert responses.calls[0].request.url.startswith(
+      'http://127.0.0.1:4002/transactions?'
+    )
+    assert 'limit=20' in responses.calls[0].request.url
+    assert 'orderBy=timestamp' in responses.calls[0].request.url
+    assert 'type=1' in responses.calls[0].request.url
+    assert 'fee=10000000' in responses.calls[0].request.url
+
+
 def test_get_unconfirmed_calls_correct_url_with_passed_in_param():
     responses.add(
         responses.GET,
