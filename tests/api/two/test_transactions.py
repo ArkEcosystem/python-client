@@ -16,7 +16,7 @@ def test_all_calls_correct_url_with_default_params():
     client = ArkClient('http://127.0.0.1:4002', api_version='v2')
     client.transactions.all()
     assert len(responses.calls) == 1
-    assert responses.calls[0].request.url == 'http://127.0.0.1:4002/transactions?limit=20'
+    assert responses.calls[0].request.url == 'http://127.0.0.1:4002/transactions?limit=100'
 
 
 def test_all_calls_correct_url_with_passed_in_params():
@@ -80,7 +80,7 @@ def test_all_unconfirmed_calls_correct_url_with_default_params():
     client.transactions.all_unconfirmed()
     assert len(responses.calls) == 1
     assert responses.calls[0].request.url == (
-        'http://127.0.0.1:4002/transactions/unconfirmed?limit=20'
+        'http://127.0.0.1:4002/transactions/unconfirmed?limit=100'
     )
 
 
@@ -113,7 +113,7 @@ def test_search_calls_correct_url_with_default_params():
     client = ArkClient('http://127.0.0.1:4002', api_version='v2')
     client.transactions.search({'blockId': '1337'})
     assert len(responses.calls) == 1
-    assert responses.calls[0].request.url == 'http://127.0.0.1:4002/transactions/search?limit=20'
+    assert responses.calls[0].request.url == 'http://127.0.0.1:4002/transactions/search?limit=100'
     assert json.loads(responses.calls[0].request.body.decode()) == {'blockId': '1337'}
 
 

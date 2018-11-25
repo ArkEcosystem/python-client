@@ -4,7 +4,7 @@ from client.resource import Resource
 class Peers(Resource):
 
     def all(self, os=None, status=None, port=None, version=None, order_by=None,
-            page=None, limit=20):
+            page=None, limit=100):
 
         params = {
             'os': os,

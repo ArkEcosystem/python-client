@@ -3,7 +3,7 @@ from client.resource import Resource
 
 class Transactions(Resource):
 
-    def all(self, page=None, limit=20):
+    def all(self, page=None, limit=100):
         params = {
             'page': page,
             'limit': limit,
@@ -16,7 +16,7 @@ class Transactions(Resource):
     def get(self, transaction_id):
         return self.request_get('transactions/{}'.format(transaction_id))
 
-    def all_unconfirmed(self, limit=20, offset=None):
+    def all_unconfirmed(self, limit=100, offset=None):
         params = {
             'limit': limit,
             'offset': offset,
@@ -26,7 +26,7 @@ class Transactions(Resource):
     def get_unconfirmed(self, transaction_id):
         return self.request_get('transactions/unconfirmed/{}'.format(transaction_id))
 
-    def search(self, criteria, page=None, limit=20):
+    def search(self, criteria, page=None, limit=100):
         params = {
             'page': page,
             'limit': limit,
