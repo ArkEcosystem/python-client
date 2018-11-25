@@ -7,7 +7,7 @@ class Blocks(Resource):
     def get(self, block_id):
         return self.request_get('blocks/get', {'id': block_id})
 
-    def all(self, limit=20, offset=None, order_by=None, height=None, previous_block=None, number_of_transactions=None,
+    def all(self, limit=100, offset=None, order_by=None, height=None, previous_block=None, number_of_transactions=None,
             total_amount=None, total_fee=None, reward=None, payload_hash=None, generator_public_key=None):
         if limit > 100:
             raise ArkParameterException('Maximum number of objects to return is 100')

@@ -11,7 +11,7 @@ class Peers(Resource):
         }
         return self.request_get('peers/get', params)
 
-    def all(self, limit=20, offset=None):
+    def all(self, limit=100, offset=None):
         if limit > 100:
             raise ArkParameterException('Maximum number of objects to return is 100')
         params = {

@@ -31,7 +31,7 @@ def test_search_calls_correct_url_with_default_params():
     assert len(responses.calls) == 1
     assert responses.calls[0].request.url.startswith('http://127.0.0.1:4002/delegates/search?')
     assert 'q=my-query' in responses.calls[0].request.url
-    assert 'limit=20' in responses.calls[0].request.url
+    assert 'limit=100' in responses.calls[0].request.url
 
 
 def test_search_calls_correct_url_with_passed_in_params():
@@ -94,7 +94,7 @@ def test_all_calls_correct_url_with_default_params():
     client = ArkClient('http://127.0.0.1:4002', api_version='v1')
     client.delegates.all()
     assert len(responses.calls) == 1
-    assert responses.calls[0].request.url == 'http://127.0.0.1:4002/delegates?limit=20'
+    assert responses.calls[0].request.url == 'http://127.0.0.1:4002/delegates?limit=51'
 
 
 def test_all_calls_correct_url_with_passed_in_params():
