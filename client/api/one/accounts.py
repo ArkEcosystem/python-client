@@ -19,7 +19,7 @@ class Accounts(Resource):
     def get(self, address):
         return self.request_get('accounts', {'address': address})
 
-    def all(self, limit=20, offset=None):
+    def all(self, limit=100, offset=None):
         if limit > 100:
             raise ArkParameterException('Maximum number of objects to return is 100')
         params = {
@@ -28,7 +28,7 @@ class Accounts(Resource):
         }
         return self.request_get('accounts/getAllAccounts', params)
 
-    def top(self, limit=20, offset=None):
+    def top(self, limit=100, offset=None):
         if limit > 100:
             raise ArkParameterException('Maximum number of objects to return is 100')
         params = {

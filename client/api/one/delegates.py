@@ -7,7 +7,7 @@ class Delegate(Resource):
     def count(self):
         return self.request_get('delegates/count')
 
-    def search(self, query, limit=20, offset=None):
+    def search(self, query, limit=100, offset=None):
         if limit > 100:
             raise ArkParameterException('Maximum number of objects to return is 100')
         params = {
@@ -30,9 +30,9 @@ class Delegate(Resource):
         }
         return self.request_get('delegates/get', params)
 
-    def all(self, limit=20, offset=None, order_by=None):
+    def all(self, limit=51, offset=None, order_by=None):
         if limit > 100:
-            raise ArkParameterException('Maximum number of objects to return is 100')
+            raise ArkParameterException('Maximum number of objects to return is 51')
 
         params = {
             'limit': limit,

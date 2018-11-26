@@ -92,7 +92,7 @@ def test_all_calls_correct_url_with_default_params():
     client.accounts.all()
     assert len(responses.calls) == 1
     assert responses.calls[0].request.url == (
-        'http://127.0.0.1:4002/accounts/getAllAccounts?limit=20'
+        'http://127.0.0.1:4002/accounts/getAllAccounts?limit=100'
     )
 
 
@@ -125,7 +125,7 @@ def test_top_calls_correct_url_with_default_params():
     client = ArkClient('http://127.0.0.1:4002', api_version='v1')
     client.accounts.top()
     assert len(responses.calls) == 1
-    assert responses.calls[0].request.url == 'http://127.0.0.1:4002/accounts/top?limit=20'
+    assert responses.calls[0].request.url == 'http://127.0.0.1:4002/accounts/top?limit=100'
 
 
 def test_top_calls_correct_url_with_passed_in_params():
