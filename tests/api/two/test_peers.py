@@ -14,7 +14,7 @@ def test_all_calls_correct_url_with_default_params():
     client = ArkClient('http://127.0.0.1:4002', api_version='v2')
     client.peers.all()
     assert len(responses.calls) == 1
-    assert responses.calls[0].request.url == 'http://127.0.0.1:4002/peers?limit=20'
+    assert responses.calls[0].request.url == 'http://127.0.0.1:4002/peers?limit=100'
 
 
 def test_all_calls_correct_url_with_passed_in_params():

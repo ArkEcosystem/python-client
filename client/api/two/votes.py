@@ -3,7 +3,7 @@ from client.resource import Resource
 
 class Votes(Resource):
 
-    def all(self, page=None, limit=20):
+    def all(self, page=None, limit=100):
         params = {
             'page': page,
             'limit': limit,
