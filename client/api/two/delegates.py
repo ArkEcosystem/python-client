@@ -1,9 +1,12 @@
 from client.resource import Resource
+from client.exceptions import ArkParameterException
 
 
 class Delegates(Resource):
 
     def all(self, page=None, limit=100):
+        if(limit > 100):
+            raise ArkParameterException('Maximum number of objects to return is 100')
         params = {
             'page': page,
             'limit': limit,
@@ -14,6 +17,8 @@ class Delegates(Resource):
         return self.request_get('delegates/{}'.format(delegate_id))
 
     def search(self, username, page=None, limit=100):
+        if(limit > 100):
+            raise ArkParameterException('Maximum number of objects to return is 100')
         params = {
             'page': page,
             'limit': limit,
@@ -21,6 +26,8 @@ class Delegates(Resource):
         return self.request_post('delegates/search', data={'username': username}, params=params)
 
     def blocks(self, delegate_id, page=None, limit=100):
+        if(limit > 100):
+            raise ArkParameterException('Maximum number of objects to return is 100')
         params = {
             'page': page,
             'limit': limit,
@@ -28,6 +35,8 @@ class Delegates(Resource):
         return self.request_get('delegates/{}/blocks'.format(delegate_id), params)
 
     def voters(self, delegate_id, page=None, limit=100):
+        if(limit > 100):
+            raise ArkParameterException('Maximum number of objects to return is 100')
         params = {
             'page': page,
             'limit': limit,

@@ -1,9 +1,11 @@
 from client.resource import Resource
-
+from client.exceptions import ArkParameterException
 
 class Transactions(Resource):
 
     def all(self, page=None, limit=100):
+        if(limit > 100):
+            raise ArkParameterException('Maximum number of objects to return is 100')
         params = {
             'page': page,
             'limit': limit,
@@ -17,6 +19,8 @@ class Transactions(Resource):
         return self.request_get('transactions/{}'.format(transaction_id))
 
     def all_unconfirmed(self, limit=100, offset=None):
+        if(limit > 100):
+            raise ArkParameterException('Maximum number of objects to return is 100')
         params = {
             'limit': limit,
             'offset': offset,
@@ -27,6 +31,8 @@ class Transactions(Resource):
         return self.request_get('transactions/unconfirmed/{}'.format(transaction_id))
 
     def search(self, criteria, page=None, limit=100):
+        if(limit > 100):
+            raise ArkParameterException('Maximum number of objects to return is 100')
         params = {
             'page': page,
             'limit': limit,
