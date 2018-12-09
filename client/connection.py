@@ -40,8 +40,8 @@ class Session(requests.Session):
 class Connection(object):
 
     def __init__(self, hostname, api_version_number):
-        if not isinstance(api_version_number, str) or api_version_number not in ['1', '2']:
-            raise ArkParameterException('Only versions "1" and "2" are supported')
+        if not isinstance(api_version_number, str) or api_version_number not in ['2']:
+            raise ArkParameterException('Only version "v2" is supported')
 
         self.hostname = hostname
         self.session = Session(hostname=self.hostname)
