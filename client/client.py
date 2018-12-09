@@ -37,9 +37,9 @@ class ArkClient(object):
         version = VERSION_TO_STRING_MAPPING[self.api_version]
         # Get all modules under the wanted version folder
 
-        modules = pkgutil.iter_modules([str(Path(__file__).parent / 'api' / version)])
+        modules = pkgutil.iter_modules([str(Path(__file__).parent / 'api')])
         for _, name, _ in modules:
-            module = import_module('client.api.{}.{}'.format(version, name))
+            module = import_module('client.api.{}'.format(name))
             for attr in dir(module):
                 # If attr name is `Resource`, skip it as it's a class and also has a
                 # subclass of Resource
