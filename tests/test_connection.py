@@ -24,7 +24,7 @@ def test_connection_creation_sets_default_session_headers_and_variables():
 def test_connection_creation_raises_with_wrong_api_version_number(version_number):
     with pytest.raises(Exception) as error:
         Connection('http://127.0.0.1:4003', version_number)
-    assert 'Only versions "1" and "2" are supported' in str(error.value)
+    assert 'Only version "v2" is supported' in str(error.value)
 
 
 def test_connection_request_retry_successful():

@@ -17,4 +17,4 @@ def test_client_creation_calls_import_api(mocker):
 def test_client_creation_raises_with_wrong_api_version():
     with pytest.raises(Exception) as error:
         ArkClient('http://127.0.0.1:4002', api_version='foo')
-    assert 'Only versions "v1" and "v2" are supported' in str(error.value)
+    assert 'Only version "v2" is supported' in str(error.value)
