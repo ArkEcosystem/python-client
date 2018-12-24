@@ -11,7 +11,7 @@ def test_all_calls_correct_url_with_default_params():
         status=200
     )
 
-    client = ArkClient('http://127.0.0.1:4002', api_version='v2')
+    client = ArkClient('http://127.0.0.1:4002')
     client.peers.all()
     assert len(responses.calls) == 1
     assert responses.calls[0].request.url == 'http://127.0.0.1:4002/peers?limit=100'
@@ -25,7 +25,7 @@ def test_all_calls_correct_url_with_passed_in_params():
         status=200
     )
 
-    client = ArkClient('http://127.0.0.1:4002', api_version='v2')
+    client = ArkClient('http://127.0.0.1:4002')
     client.peers.all(
         os='a', status='live', port=1337, version='2.0.0', order_by='ip', page=5, limit=69
     )
@@ -49,7 +49,7 @@ def test_get_calls_correct_url_with_ip():
         status=200
     )
 
-    client = ArkClient('http://127.0.0.1:4002', api_version='v2')
+    client = ArkClient('http://127.0.0.1:4002')
     client.peers.get(ip)
     assert len(responses.calls) == 1
     assert responses.calls[0].request.url == 'http://127.0.0.1:4002/peers/123.4.5.67'
