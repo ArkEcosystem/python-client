@@ -38,17 +38,13 @@ class Session(requests.Session):
 
 class Connection(object):
 
-    def __init__(self, hostname, api_version_number):
-        if not isinstance(api_version_number, str) or api_version_number not in ['2']:
-            raise ArkParameterException('Only version "v2" is supported')
-
+    def __init__(self, hostname):
         self.hostname = hostname
         self.session = Session(hostname=self.hostname)
 
         self.session.headers.update({
-            'port': '1',
             'Content-Type': 'application/json',
-            'API-Version': api_version_number
+            'API-Version': '2'
         })
 
     def _handle_response(self, response):
