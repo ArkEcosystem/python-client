@@ -3,10 +3,12 @@ from client.resource import Resource
 
 class Blocks(Resource):
 
-    def all(self, page=None, limit=100):
+    def all(self, page=None, limit=100, **kwargs):
+        extra_params = {name: kwargs[name] for name in kwargs if kwargs[name] is not None}
         params = {
             'page': page,
             'limit': limit,
+            **extra_params
         }
         return self.request_get('blocks', params)
 
