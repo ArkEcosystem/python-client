@@ -7,7 +7,6 @@ from pathlib import Path
 class Webhooks(Resource):
 
     def swap_ports(self):
-        global self.connection.hostname
         env = str(Path.home()) + '/.ark/.env'
         if os.path.exists(env) is True:
             load_dotenv(env)
@@ -17,7 +16,7 @@ class Webhooks(Resource):
             api = "4003"
             webhook = "4004"
 
-        self.connection.hostname = self.connection.hostname.replace(api,webhook)
+        self.connection.hostname.replace(api,webhook)
         return self.connection.hostname
         
     def get(self, page=None, limit=100):
