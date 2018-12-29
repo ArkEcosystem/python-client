@@ -11,8 +11,8 @@ class Webhooks(Resource):
         load_dotenv(env)
         # api = os.getenv("ARK_API_PORT") 
         # webhook = os.getenv"ARK_WEBHOOKS_PORT")
-        api = 4003
-        webhook = 4004
+        api = "4003"
+        webhook = "4004"
         
         
         print("old connection")
