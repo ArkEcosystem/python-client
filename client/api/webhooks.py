@@ -1,4 +1,4 @@
-#from client.connection import Connection
+from client.connection import Connection
 from client.resource import Resource
 from dotenv import load_dotenv
 import os
