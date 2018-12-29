@@ -16,7 +16,8 @@ class Webhooks(Resource):
             api = "4003"
             webhook = "4004"
 
-        Resource.connection.hostname = Resource.connection.hostname.replace(api,webhook)
+        self.connection.hostname = self.connection.hostname.replace(api,webhook)
+        print(self.connection.hostname)
         
     def get(self, page=None, limit=100):
         self.swap_ports()
