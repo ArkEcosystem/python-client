@@ -10,7 +10,7 @@ class Webhooks(Resource):
     '''
     
     def test(self):
-        print(self)
+        print(Resource)
 
     def get(self, page=None, limit=100):
         params = {
