@@ -14,7 +14,6 @@ class Webhooks(Resource):
         return self.request_get('webhooks/{}'.format(webhook_id))
 
     def create(self, event, target, conditions, enabled=None):
-        self.swap_ports()
         return self.request_post('webhooks', data={'event': event,
                                                    'target': target,
                                                    'conditions': conditions,
