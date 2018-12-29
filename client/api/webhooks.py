@@ -1,6 +1,7 @@
 from client.resource import Resource
 from dotenv import load_dotenv
 import os
+import os.path
 from pathlib import Path
 
 
@@ -8,6 +9,9 @@ class Webhooks(Resource):
 
     def swap_ports(self):
         env = str(Path.home()) + '/.ark/.env'
+        if os.path.exists(env) is True:
+            print("not on active node")
+        quit()
         load_dotenv(env)
         # api = os.getenv("ARK_API_PORT") 
         # webhook = os.getenv"ARK_WEBHOOKS_PORT")
