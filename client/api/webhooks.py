@@ -5,7 +5,7 @@ import os
 from pathlib import Path
 
 
-class Webhooks(ArkCLient,Resource):
+class Webhooks(ArkClient,Resource):
 
     def swap_ports(self):
         env = str(Path.home()) + '/.ark/.env'
