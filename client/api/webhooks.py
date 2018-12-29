@@ -6,7 +6,7 @@ class Webhooks(Resource):
     def __init__(self):
         self.events = []
         self.conditions = []
-        #pass - need to swap ports for call to work
+        # pass - need to swap ports for call to work
 
     def test(self):
         print(self)
