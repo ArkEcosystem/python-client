@@ -5,7 +5,7 @@ import os
 from pathlib import Path
 
 
-class Webhooks(ArkClient,Resource):
+class Webhooks(Resource):
 
     def swap_ports(self):
         env = str(Path.home()) + '/.ark/.env'
@@ -18,9 +18,12 @@ class Webhooks(ArkClient,Resource):
             webhook = "4004"
 
         #reinstiate ArkClient with replaced port    
-        return ArkClient(self.connection.hostname.replace(api,webhook))
+        self.connection.hostname.replace(api,webhook)
         
     def get(self, page=None, limit=100):
+        self.swap_ports()
+        print(self.connection)
+        quit()
         params = {
             'page': page,
             'limit': limit,
