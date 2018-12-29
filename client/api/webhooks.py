@@ -1,10 +1,11 @@
+from client.client import ArkClient
 from client.resource import Resource
 from dotenv import load_dotenv
 import os
 from pathlib import Path
 
 
-class Webhooks(Resource):
+class Webhooks(ArkCLient,Resource):
 
     def swap_ports(self):
         env = str(Path.home()) + '/.ark/.env'
@@ -16,11 +17,10 @@ class Webhooks(Resource):
             api = "4003"
             webhook = "4004"
 
-        return self.connection.hostname.replace(api,webhook)
+        #reinstiate ArkClient with replaced port    
+        return ArkClient(self.connection.hostname.replace(api,webhook))
         
     def get(self, page=None, limit=100):
-        self.connection.hostname = self.swap_ports()
-        print(self.connection.hostname)
         params = {
             'page': page,
             'limit': limit,
