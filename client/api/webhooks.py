@@ -16,11 +16,10 @@ class Webhooks(Resource):
             api = "4003"
             webhook = "4004"
 
-        self.connection.hostname.replace(api,webhook)
-        return self.connection.hostname
+        return self.connection.hostname.replace(api,webhook)
         
     def get(self, page=None, limit=100):
-        self.swap_ports()
+        self.connection.hostname = self.swap_ports()
         print(self.connection.hostname)
         params = {
             'page': page,
