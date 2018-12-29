@@ -13,15 +13,10 @@ class Webhooks(Resource):
         # webhook = os.getenv"ARK_WEBHOOKS_PORT")
         api = "4003"
         webhook = "4004"
-        
-        
-        print("old connection")
-        print(self.connection.hostname)
-        print("new connection")
         self.connection.hostname = self.connection.hostname.replace(api,webhook)
-        print(self.connection.hostname)
         
     def get(self, page=None, limit=100):
+        self.swap_ports()
         params = {
             'page': page,
             'limit': limit,
@@ -29,15 +24,18 @@ class Webhooks(Resource):
         return self.request_get('webhooks', params)
 
     def retrieve(self, webhook_id):
+        self.swap_ports()
         return self.request_get('webhooks/{}'.format(webhook_id))
 
     def create(self, event, target, conditions, enabled=None):
+        self.swap_ports()
         return self.request_post('webhooks', data={'event': event,
                                                    'target': target,
                                                    'conditions': conditions,
                                                    'enabled': enabled})
 
     def update(self, webhook_id, event=None, target=None, conditions=None, enabled=None):
+        self.swap_ports()
         return self.request_put('webhooks/{}'.format(webhook_id),
                                 data={'event': event,
                                       'target': target,
@@ -45,4 +43,5 @@ class Webhooks(Resource):
                                       'enabled': enabled})
 
     def delete(self, webhook_id):
+        self.swap_ports()
         return self.request_delete('webhooks/{}'.format(webhook_id))
