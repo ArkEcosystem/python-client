@@ -18,7 +18,7 @@ class Webhooks(Resource):
         print("old connection")
         print(self.connection.hostname)
         print("new connection")
-        print(type(self.connection.hostname)
+        print(type(self.connection.hostname))
         
         
         self.connection.hostname="random"
