@@ -18,7 +18,7 @@ class Webhooks(Resource):
         print("old connection")
         print(self.connection.hostname)
         print("new connection")
-        self.connection.hostname.replace(api,webhook)
+        self.connection.hostname = self.connection.hostname.replace(api,webhook)
         print(self.connection.hostname)
         
     def get(self, page=None, limit=100):
