@@ -27,4 +27,4 @@ class Webhooks(Resource):
                                       'enabled': enabled})
 
     def delete(self, webhook_id):
-        return self.request_delete('webhooks/{}'.format(webhook_id))
+        self.request_delete('webhooks/{}'.format(webhook_id))
