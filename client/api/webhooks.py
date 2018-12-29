@@ -5,7 +5,7 @@ import os
 from pathlib import Path
 
 
-class Webhooks(Connection, Resource):
+class Webhooks(Resource):
 
     def swap_ports(self):
         env = str(Path.home()) + '/.ark/.env'
@@ -19,7 +19,7 @@ class Webhooks(Connection, Resource):
 
         #reinstiate Connection with replaced port
         print(self.connection.hostname)
-        self.Connection()
+        Connection()
         quit()
         newhost = self.connection.hostname.replace(api,webhook)
         print(newhost)
