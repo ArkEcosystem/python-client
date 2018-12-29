@@ -6,7 +6,7 @@ from pathlib import Path
 class Webhooks(Resource):
 
     def swap_ports(self):
-        home = str(Path.home())
+        home = str(Path.home()+'/.ark/.env')
         print(home)
         print("old connection")
         print(self.connection.hostname)
