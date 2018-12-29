@@ -1,7 +1,7 @@
 from client.resource import Resource
 from dotenv import load_dotenv
 import os
-import os.path
+#import os.path
 from pathlib import Path
 
 
@@ -12,7 +12,7 @@ class Webhooks(Resource):
         if os.path.exists(env) is True:
             load_dotenv(env)
             api = os.getenv("ARK_API_PORT") 
-            webhook = os.getenv"ARK_WEBHOOKS_PORT")
+            webhook = os.getenv("ARK_WEBHOOKS_PORT")
         else:
             api = "4003"
             webhook = "4004"
