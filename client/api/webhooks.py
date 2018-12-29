@@ -6,9 +6,10 @@ class Webhooks(Resource):
     def test(self):
         print("old connection")
         print(self.connection.hostname)
-        
+       
         print("new connection")
-        print("random")
+        self.connection.hostname="random"
+        print(self.connection.hostname)
         
     def get(self, page=None, limit=100):
         params = {
