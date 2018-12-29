@@ -4,8 +4,12 @@ from client.resource import Resource
 class Webhooks(Resource):
 
     def test(self):
+        print("old connection")
         print(self.connection.hostname)
-
+        
+        print("new connection")
+        print("random")
+        
     def get(self, page=None, limit=100):
         params = {
             'page': page,
