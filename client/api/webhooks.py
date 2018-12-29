@@ -23,9 +23,6 @@ class Webhooks(Resource):
         print(newhost)
         Connection(newhost)
         
-        quit()
-        Connection(self.connection.hostname.replace(api,webhook))
-        
     def get(self, page=None, limit=100):
         self.swap_ports()
         print(self.connection.hostname)
