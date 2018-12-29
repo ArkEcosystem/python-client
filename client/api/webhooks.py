@@ -4,7 +4,7 @@ from client.resource import Resource
 class Webhooks(Resource):
 
     def test(self):
-        print(self.hostname)
+        print(self.connection.hostname)
 
     def get(self, page=None, limit=100):
         params = {
