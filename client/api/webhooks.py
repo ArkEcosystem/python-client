@@ -18,7 +18,7 @@ class Webhooks(Connection,Resource):
             webhook = "4004"
 
         #reinstiate Connection with replaced port
-        print(Connection.connection.hostname)
+        print(Connection.hostname)
         quit()
         newhost = self.connection.hostname.replace(api,webhook)
         print(newhost)
