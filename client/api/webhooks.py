@@ -1,11 +1,11 @@
-from client.connection import Connection
+#from client.connection import Connection
 from client.resource import Resource
 from dotenv import load_dotenv
 import os
 from pathlib import Path
 
 
-class Webhooks(Connection,Resource):
+class Webhooks(Resource):
 
     def swap_ports(self):
         env = str(Path.home()) + '/.ark/.env'
