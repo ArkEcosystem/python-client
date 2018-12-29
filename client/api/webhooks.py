@@ -10,6 +10,8 @@ class Webhooks(Resource):
     def swap_ports(self):
         env = str(Path.home()) + '/.ark/.env'
         if os.path.exists(env) is True:
+            pass
+        else:
             print("not on active node")
         quit()
         load_dotenv(env)
