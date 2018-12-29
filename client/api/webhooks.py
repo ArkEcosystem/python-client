@@ -1,5 +1,6 @@
 from client.resource import Resource
 from dotenv import load_dotenv
+import os
 from pathlib import Path
 
 
@@ -7,11 +8,19 @@ class Webhooks(Resource):
 
     def swap_ports(self):
         env = str(Path.home()) + '/.ark/.env'
-        print(env)
+        load_dotenv(env)
+        # api = os.getenv("ARK_API_PORT") 
+        # webhook = os.getenv"ARK_WEBHOOKS_PORT")
+        api = 4003
+        webhook = 4004
+        
+        
         print("old connection")
         print(self.connection.hostname)
-       
         print("new connection")
+        print(type(self.connection.hostname)
+        
+        
         self.connection.hostname="random"
         print(self.connection.hostname)
         
