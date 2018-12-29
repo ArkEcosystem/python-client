@@ -22,8 +22,6 @@ class Webhooks(Resource):
         
     def get(self, page=None, limit=100):
         self.swap_ports()
-        print(self.connection)
-        quit()
         params = {
             'page': page,
             'limit': limit,
