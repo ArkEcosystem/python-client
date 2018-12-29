@@ -1,9 +1,13 @@
 from client.resource import Resource
+from dotenv import load_dotenv
+from pathlib import Path
 
 
 class Webhooks(Resource):
 
-    def test(self):
+    def swap_ports(self):
+        home = str(Path.home())
+        print(home)
         print("old connection")
         print(self.connection.hostname)
        
