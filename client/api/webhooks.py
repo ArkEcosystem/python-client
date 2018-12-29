@@ -17,8 +17,8 @@ class Webhooks(Connection,Resource):
             api = "4003"
             webhook = "4004"
 
-        #reinstiate ArkClient with replaced port    
-        self.connection = Connection(self.connection.hostname.replace(api,webhook))
+        #reinstiate Connection with replaced port    
+        Connection(self.connection.hostname.replace(api,webhook))
         
     def get(self, page=None, limit=100):
         self.swap_ports()
