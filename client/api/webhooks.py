@@ -1,7 +1,6 @@
 from client.resource import Resource
 from dotenv import load_dotenv
 import os
-#import os.path
 from pathlib import Path
 
 
