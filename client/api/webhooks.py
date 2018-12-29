@@ -10,16 +10,15 @@ class Webhooks(Resource):
     def swap_ports(self):
         env = str(Path.home()) + '/.ark/.env'
         if os.path.exists(env) is True:
-            pass
+            load_dotenv(env)
+            api = os.getenv("ARK_API_PORT") 
+            webhook = os.getenv"ARK_WEBHOOKS_PORT")
         else:
-            print("not on active node")
-        quit()
-        load_dotenv(env)
-        # api = os.getenv("ARK_API_PORT") 
-        # webhook = os.getenv"ARK_WEBHOOKS_PORT")
-        api = "4003"
-        webhook = "4004"
+            api = "4003"
+            webhook = "4004"
+
         self.connection.hostname = self.connection.hostname.replace(api,webhook)
+        print(self.connection.hostname)
         
     def get(self, page=None, limit=100):
         self.swap_ports()
