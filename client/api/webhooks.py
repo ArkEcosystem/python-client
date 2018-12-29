@@ -19,7 +19,7 @@ class Webhooks(Resource):
 
         #reinstiate Connection with replaced port
         print(self.connection.hostname)
-        print(dir())
+        print(self.connection)
         quit()
         newhost = self.connection.hostname.replace(api,webhook)
         print(newhost)
