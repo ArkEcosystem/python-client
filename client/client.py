@@ -27,6 +27,7 @@ class ArkClient(object):
         for _, name, _ in modules:
             module = import_module('client.api.{}'.format(name))
             for attr in dir(module):
+                print(attr)
                 # If attr name is `Resource`, skip it as it's a class and also has a
                 # subclass of Resource
                 if attr == 'Resource':
