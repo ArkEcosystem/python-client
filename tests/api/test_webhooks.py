@@ -81,7 +81,6 @@ def test_update_calls_correct_url_with_data():
     client.webhooks.update(webhook_id = webhook_id, enabled = 'false')
     assert len(responses.calls) == 1
     assert responses.calls[0].request.url == 'http://127.0.0.1:4004/webhooks/1'
-    assert 'enabled=false' in responses.calls[0].request.url
     assert json.loads(responses.calls[0].request.body.decode()) == {'event' : 'block.forged',
         'target' : '127.0.0.1:5000', 'conditions' : [{'random' : 'data'}], 'enabled' : 'false'}
 
