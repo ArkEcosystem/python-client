@@ -49,7 +49,7 @@ class Connection(object):
 
     def _handle_response(self, response):
         if not response.content:
-            print(response)
+            print(response.status_code)
             raise ArkHTTPException('No content in response', response=response)
 
         body = response.json()
