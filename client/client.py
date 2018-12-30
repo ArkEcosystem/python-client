@@ -39,7 +39,7 @@ class ArkClient(object):
                     # Set module class as a property on the client
                     if name == "webhooks":
                         print("True")
-                        new_connection = _swap_port()
+                        new_connection = self._swap_port()
                         setattr(self, name, attribute(new_connection))  
                     else:
                         print("False")
