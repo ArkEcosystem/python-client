@@ -60,7 +60,7 @@ class ArkClient(object):
             api = "4003"
             webhook = "4004"
 
-        newhost = self.connection.hostname.replace(api,webhook)
-        print(newhost)
-        quit()
-        Connection(self.connection.hostname.replace(api,webhook))
+        return Connection(self.connection.hostname.replace(api,webhook))
+        #newhost = self.connection.hostname.replace(api,webhook)
+
+        #Connection(self.connection.hostname.replace(api,webhook))
