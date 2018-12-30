@@ -2,7 +2,7 @@ from client.resource import Resource
 
 
 class Webhooks(Resource):
-        
+
     def get(self, page=None, limit=100):
         params = {
             'page': page,
@@ -13,7 +13,7 @@ class Webhooks(Resource):
     def retrieve(self, webhook_id):
         return self.request_get('webhooks/{}'.format(webhook_id))
 
-    def create(self, event, target, conditions, enabled="true"):
+    def create(self, event, target, conditions, enabled='true'):
         return self.request_post('webhooks', data={'event': event,
                                                    'target': target,
                                                    'conditions': conditions,
