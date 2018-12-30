@@ -23,6 +23,7 @@ class ArkClient(object):
         Dynamically imports API endpoints.
         """
         modules = pkgutil.iter_modules([str(Path(__file__).parent / 'api')])
+        print(modules)
         for _, name, _ in modules:
             module = import_module('client.api.{}'.format(name))
             for attr in dir(module):
