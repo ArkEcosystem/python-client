@@ -50,7 +50,25 @@ def test_retrieve_calls_correct_url():
     assert len(responses.calls) == 1
     assert responses.calls[0].request.url == 'http://127.0.0.1:4004/webhooks/1'
 
-##### ADD CREATE TESTS
+    
+def test_create_calls_correct_url_with_passed_in_params():
+    responses.add(
+        responses.POST,
+        'http://127.0.0.1:4004/webhooks/',
+        json={'success': True},
+        status=200
+    )
+
+    client = ArkClient('http://127.0.0.1:4004')
+    client.webhooks.create(event='block.forged', target='127.0.0.1:5000/post', 
+                           conditions=[{'random':'data'}], enabled='true')
+    assert len(responses.calls) == 1
+    assert responses.calls[0].request.url.startswith('http://127.0.0.1:4004/api/webhooks?')
+    assert json.loads(responses.calls[0].request.body.decode()) == {
+        'event' : 'block.forged', 'target : '127.0.0.1:5000/post', 
+        'conditions' : [{'random':'data'}], 'enabled':'true'
+
+
 ##### UPDATE PUT REQUESTS
 def test_update_calls_correct_url_with_default_params():
     delegate_id = '12345'
