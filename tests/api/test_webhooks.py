@@ -45,7 +45,7 @@ def test_retrieve_calls_correct_url():
     )
 
     client = ArkClient('http://127.0.0.1:4004')
-    client.webhook.retrieve(webhook_id)
+    client.webhooks.retrieve(webhook_id)
 
     assert len(responses.calls) == 1
     assert responses.calls[0].request.url == 'http://127.0.0.1:4004/webhooks/1'
