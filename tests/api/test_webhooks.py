@@ -87,7 +87,7 @@ def test_update_calls_correct_url_with_data():
 def test_delete_calls_correct_url():
     webhook_id = 1
     responses.add(
-        responses.GET,
+        responses.DELETE,
         'http://127.0.0.1:4004/webhooks/{}'.format(webhook_id),
         json={'success': True},
         status=200
