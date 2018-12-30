@@ -37,3 +37,6 @@ class ArkClient(object):
                     # Set module class as a property on the client
                     setattr(self, name, attribute(self.connection))
                     print(name, self.connection.hostname)
+     
+    def _swap_port(self):
+      
