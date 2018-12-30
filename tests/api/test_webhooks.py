@@ -68,7 +68,7 @@ def test_create_calls_correct_url_with_data():
         'conditions' : [{'random':'data'}], 'enabled':'true'}
 
 
-def test_update_calls_correct_url_with_passed_in_params():
+def test_update_calls_correct_url_with_data():
     webhook_id = 1
     responses.add(
         responses.PUT,
@@ -78,12 +78,10 @@ def test_update_calls_correct_url_with_passed_in_params():
     )
 
     client = ArkClient('http://127.0.0.1:4004')
-    client.webhooks.update(webhook_id, 'block.forged', '127.0.0.1:5000', [{'random':'data'}], 'false')
+    client.webhooks.update(webhook_id, {'random':'data'})
     assert len(responses.calls) == 1
     assert responses.calls[0].request.url == 'http://127.0.0.1:4004/webhooks/1'
-    assert json.loads(responses.calls[0].request.body.decode()) == {
-        'event' : 'block.forged', 'target' : '127.0.0.1:5000', 
-        'conditions' : [{'random':'data'}], 'enabled':'false'}
+    assert json.loads(responses.calls[0].request.body.decode()) == {'random':'data'}
 
 
 def test_delete_calls_correct_url():
