@@ -5,11 +5,11 @@ import pkgutil
 from importlib import import_module
 from pathlib import Path
 
+from dotenv import load_dotenv
+
 from client.connection import Connection
 from client.exceptions import ArkParameterException
 from client.resource import Resource
-
-from dotenv import load_dotenv
 
 
 class ArkClient(object):
