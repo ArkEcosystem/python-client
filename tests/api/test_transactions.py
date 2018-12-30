@@ -35,6 +35,23 @@ def test_all_calls_correct_url_with_passed_in_params():
     assert 'limit=69' in responses.calls[0].request.url
 
 
+def test_all_calls_correct_url_with_additional_params():
+    responses.add(
+      responses.GET,
+      'http://127.0.0.1:4002/transactions',
+      json={'success': True},
+      status=200
+    )
+
+    client = ArkClient('http://127.0.0.1:4002')
+    client.transactions.all(page=5, limit=69, orderBy="timestamp.epoch")
+    assert len(responses.calls) == 1
+    assert responses.calls[0].request.url.startswith('http://127.0.0.1:4002/transactions?')
+    assert 'page=5' in responses.calls[0].request.url
+    assert 'limit=69' in responses.calls[0].request.url
+    assert 'orderBy=timestamp.epoch' in responses.calls[0].request.url
+
+
 def test_create_calls_correct_url_with_data():
     responses.add(
         responses.POST,
@@ -100,6 +117,23 @@ def test_all_unconfirmed_calls_correct_url_with_passed_in_params():
     )
     assert 'offset=5' in responses.calls[0].request.url
     assert 'limit=69' in responses.calls[0].request.url
+
+
+def test_all_unconfirmed_calls_correct_url_with_additional_params():
+    responses.add(
+      responses.GET,
+      'http://127.0.0.1:4002/transactions/unconfirmed',
+      json={'success': True},
+      status=200
+    )
+
+    client = ArkClient('http://127.0.0.1:4002')
+    client.transactions.all_unconfirmed(page=5, limit=69, orderBy="timestamp.epoch")
+    assert len(responses.calls) == 1
+    assert responses.calls[0].request.url.startswith('http://127.0.0.1:4002/transactions/unconfirmed?')
+    assert 'page=5' in responses.calls[0].request.url
+    assert 'limit=69' in responses.calls[0].request.url
+    assert 'orderBy=timestamp.epoch' in responses.calls[0].request.url
 
 
 def test_search_calls_correct_url_with_default_params():
