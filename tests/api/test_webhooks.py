@@ -54,7 +54,7 @@ def test_retrieve_calls_correct_url():
 def test_create_calls_correct_url_with_passed_in_params():
     responses.add(
         responses.POST,
-        'http://127.0.0.1:4004/webhooks/',
+        'http://127.0.0.1:4004/webhooks',
         json={'success': True},
         status=200
     )
