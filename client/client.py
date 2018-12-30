@@ -36,5 +36,5 @@ class ArkClient(object):
                 attribute = getattr(module, attr)
                 if inspect.isclass(attribute) and issubclass(attribute, Resource):
                     # Set module class as a property on the client
-                    setattr(self, name, attribute(self.connection))
+                    setattr(self, name, attribute(self.connection.hostmane))
                     print(name, self.connection)
