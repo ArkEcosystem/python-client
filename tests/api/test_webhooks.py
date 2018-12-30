@@ -66,48 +66,30 @@ def test_create_calls_correct_url_with_passed_in_params():
     assert responses.calls[0].request.url.startswith('http://127.0.0.1:4004/api/webhooks?')
     assert json.loads(responses.calls[0].request.body.decode()) == {
         'event' : 'block.forged', 'target : '127.0.0.1:5000', 
-        'conditions' : [{'random':'data'}], 'enabled':'true'
-
-
-##### UPDATE PUT REQUESTS
-def test_update_calls_correct_url_with_default_params():
-    delegate_id = '12345'
-    responses.add(
-        responses.GET,
-        'http://127.0.0.1:4002/delegates/{}/blocks'.format(delegate_id),
-        json={'success': True},
-        status=200
-    )
-
-    client = ArkClient('http://127.0.0.1:4002')
-    client.delegates.blocks(delegate_id)
-    assert len(responses.calls) == 1
-    assert responses.calls[0].request.url == (
-        'http://127.0.0.1:4002/delegates/12345/blocks?limit=100'
-    )
+        'conditions' : [{'random':'data'}], 'enabled':'true'}
 
 
 def test_update_calls_correct_url_with_passed_in_params():
-    delegate_id = '12345'
+    webhook_id = 1
     responses.add(
-        responses.GET,
-        'http://127.0.0.1:4002/delegates/{}/blocks'.format(delegate_id),
+        responses.PUT,
+        'http://127.0.0.1:4004/webhooks/{}'.format(webhook_id),
         json={'success': True},
         status=200
     )
 
-    client = ArkClient('http://127.0.0.1:4002')
-    client.delegates.blocks(delegate_id, page=5, limit=69)
+    client = ArkClient('http://127.0.0.1:4004')
+    client.webhooks.update(event='block.forged', target='127.0.0.1:5000', 
+                           conditions=[{'random':'data'}], enabled='false')
     assert len(responses.calls) == 1
-    assert responses.calls[0].request.url.startswith(
-        'http://127.0.0.1:4002/delegates/12345/blocks?'
-    )
-    assert 'page=5' in responses.calls[0].request.url
-    assert 'limit=69' in responses.calls[0].request.url
+    assert responses.calls[0].request.url.startswith('http://127.0.0.1:4004/api/webhooks/1?')
+    assert json.loads(responses.calls[0].request.body.decode()) == {
+        'event' : 'block.forged', 'target : '127.0.0.1:5000', 
+        'conditions' : [{'random':'data'}], 'enabled':'false'}
 
 
 def test_delete_calls_correct_url():
-    webhook_id = '1'
+    webhook_id = 1
     responses.add(
         responses.GET,
         'http://127.0.0.1:4004/webhooks/{}'.format(webhook_id),
