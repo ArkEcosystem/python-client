@@ -22,6 +22,6 @@ class Webhooks(Resource):
     def update(self, webhook_id, **kwargs):
         extra_params = {name: kwargs[name] for name in kwargs if kwargs[name] is not None}
         return self.request_put('webhooks/{}'.format(webhook_id), data={**extra_params})
-       
+
     def delete(self, webhook_id):
         return self.request_delete('webhooks/{}'.format(webhook_id))
