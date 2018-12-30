@@ -9,6 +9,7 @@ from client.connection import Connection
 from client.exceptions import ArkParameterException
 from client.resource import Resource
 
+
 class ArkClient(object):
 
     def __init__(self, hostname):
@@ -25,7 +26,6 @@ class ArkClient(object):
         Dynamically imports API endpoints.
         """
         modules = pkgutil.iter_modules([str(Path(__file__).parent / 'api')])
-        print(modules)
         for _, name, _ in modules:
             module = import_module('client.api.{}'.format(name))
             for attr in dir(module):
@@ -37,8 +37,7 @@ class ArkClient(object):
                 attribute = getattr(module, attr)
                 if inspect.isclass(attribute) and issubclass(attribute, Resource):
                     # Set module class as a property on the client
-                    if name == "webhooks":
-                        #new_connection = self._swap_port()
+                    if name == 'webhooks':
                         setattr(self, name, attribute(self._swap_port()))  
                     else:
                         setattr(self, name, attribute(self.connection))
