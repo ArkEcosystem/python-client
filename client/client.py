@@ -13,7 +13,7 @@ class ArkClient(object):
 
     def __init__(self, hostname):
         """
-        :param string hostname: Node hostname. Examples: `http://127.0.0.1:4002` or
+        :param string hostname: Node hostname. Examples: `http://127.0.0.1:4003` or
             `http://my.domain.io/api/`. This is to allow people to server the api
             on whatever url they want.
         """
@@ -50,10 +50,10 @@ class ArkClient(object):
         env = str(Path.home()) + '/.ark/.env'
         if os.path.exists(env) is True:
             load_dotenv(env)
-            api = os.getenv("ARK_API_PORT") 
-            webhook = os.getenv("ARK_WEBHOOKS_PORT")
+            api = os.getenv('ARK_API_PORT) 
+            webhook = os.getenv('ARK_WEBHOOKS_PORT')
         else:
-            api = "4003"
-            webhook = "4004"
+            api = '4003'
+            webhook = '4004'
 
         return Connection(self.connection.hostname.replace(api,webhook))
