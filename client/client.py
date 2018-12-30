@@ -1,6 +1,8 @@
+from dotenv import load_dotenv
 import inspect
 import pkgutil
 from importlib import import_module
+import os
 from pathlib import Path
 
 from client.connection import Connection
@@ -35,8 +37,27 @@ class ArkClient(object):
                 attribute = getattr(module, attr)
                 if inspect.isclass(attribute) and issubclass(attribute, Resource):
                     # Set module class as a property on the client
-                    setattr(self, name, attribute(self.connection))
-                    print(name, self.connection.hostname)
+                    if name is "webhooks":
+                        new_connection = _swap_port()
+                        setattr(self, name, attribute(new_connection))  
+                    else:
+                        setattr(self, name, attribute(self.connection))
+                        print(name, self.connection.hostname)
      
     def _swap_port(self):
-      
+        """
+        Dynamically swaps Webhooks port
+        """
+        env = str(Path.home()) + '/.ark/.env'
+        if os.path.exists(env) is True:
+            load_dotenv(env)
+            api = os.getenv("ARK_API_PORT") 
+            webhook = os.getenv("ARK_WEBHOOKS_PORT")
+        else:
+            api = "4003"
+            webhook = "4004"
+
+        newhost = self.connection.hostname.replace(api,webhook)
+        print(newhost)
+        quit()
+        Connection(self.connection.hostname.replace(api,webhook))
