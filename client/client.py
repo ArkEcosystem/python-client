@@ -1,13 +1,14 @@
-from dotenv import load_dotenv
+
 import inspect
+import os
 import pkgutil
 from importlib import import_module
-import os
 from pathlib import Path
 
 from client.connection import Connection
 from client.exceptions import ArkParameterException
 from client.resource import Resource
+from dotenv import load_dotenv
 
 
 class ArkClient(object):
