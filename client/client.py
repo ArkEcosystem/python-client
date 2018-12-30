@@ -49,7 +49,7 @@ class ArkClient(object):
      
     def _swap_port(self):
         """
-        Dynamically swaps Webhooks port
+        Dynamically swaps Webhooks port during module import
         """
         env = str(Path.home()) + '/.ark/.env'
         if os.path.exists(env) is True:
@@ -61,6 +61,3 @@ class ArkClient(object):
             webhook = "4004"
 
         return Connection(self.connection.hostname.replace(api,webhook))
-        #newhost = self.connection.hostname.replace(api,webhook)
-
-        #Connection(self.connection.hostname.replace(api,webhook))
