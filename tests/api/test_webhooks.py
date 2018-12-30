@@ -51,7 +51,7 @@ def test_retrieve_calls_correct_url():
     assert responses.calls[0].request.url == 'http://127.0.0.1:4004/webhooks/1'
 
     
-def test_create_calls_correct_url_with_passed_in_params():
+def test_create_calls_correct_url_with_data():
     responses.add(
         responses.POST,
         'http://127.0.0.1:4004/webhooks',
