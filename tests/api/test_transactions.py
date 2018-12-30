@@ -8,15 +8,15 @@ from client import ArkClient
 def test_all_calls_correct_url_with_default_params():
     responses.add(
         responses.GET,
-        'http://127.0.0.1:4002/transactions',
+        'http://127.0.0.1:4003/transactions',
         json={'success': True},
         status=200
     )
 
-    client = ArkClient('http://127.0.0.1:4002')
+    client = ArkClient('http://127.0.0.1:4003')
     client.transactions.all()
     assert len(responses.calls) == 1
-    assert responses.calls[0].request.url == 'http://127.0.0.1:4002/transactions?limit=100'
+    assert responses.calls[0].request.url == 'http://127.0.0.1:4003/transactions?limit=100'
 
 
 def test_all_calls_correct_url_with_passed_in_params():
