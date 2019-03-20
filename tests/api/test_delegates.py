@@ -153,7 +153,7 @@ def test_voters_calls_correct_url_with_default_params():
     )
 
 
-def test_bvoters_calls_correct_url_with_passed_in_params():
+def test_voters_calls_correct_url_with_passed_in_params():
     delegate_id = '12345'
     responses.add(
         responses.GET,
@@ -170,18 +170,3 @@ def test_bvoters_calls_correct_url_with_passed_in_params():
     )
     assert 'page=5' in responses.calls[0].request.url
     assert 'limit=69' in responses.calls[0].request.url
-
-
-def test_voter_balances_calls_correct_url_with_default_params():
-    delegate_id = '12345'
-    responses.add(
-        responses.GET,
-        'http://127.0.0.1:4002/delegates/{}/voters/balances'.format(delegate_id),
-        json={'success': True},
-        status=200
-    )
-
-    client = ArkClient('http://127.0.0.1:4002')
-    client.delegates.voter_balances(delegate_id)
-    assert len(responses.calls) == 1
-    assert responses.calls[0].request.url == 'http://127.0.0.1:4002/delegates/12345/voters/balances'
