@@ -35,6 +35,3 @@ class Delegates(Resource):
             'limit': limit,
         }
         return self.request_get('delegates/{}/voters'.format(delegate_id), params)
-
-    def voter_balances(self, delegate_id):
-        return self.request_get('delegates/{}/voters/balances'.format(delegate_id))
