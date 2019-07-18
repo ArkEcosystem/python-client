@@ -44,7 +44,6 @@ class Connection(object):
 
         self.session.headers.update({
             'Content-Type': 'application/json',
-            'API-Version': '2'
         })
 
     def _handle_response(self, response):

@@ -13,7 +13,6 @@ def test_connection_creation_sets_default_session_headers_and_variables():
     assert connection.hostname == 'http://127.0.0.1:4003'
     assert isinstance(connection.session, requests.Session)
     assert connection.session.headers['Content-Type'] == 'application/json'
-    assert connection.session.headers['API-Version'] == '2'
 
 def test_connection_request_retry_successful():
     responses.add(
