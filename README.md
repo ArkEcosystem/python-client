@@ -11,6 +11,8 @@
 [![Latest Version](https://badgen.now.sh/github/release/ArkEcosystem/python-client)](https://github.com/ArkEcosystem/python-client/releases/latest)
 [![License: MIT](https://badgen.now.sh/badge/license/MIT/green)](https://opensource.org/licenses/MIT)
 
+> Lead Maintainer: [Brian Faust](https://github.com/faustbrian)
+
 ## Guide for contributing
 
 Before you start contributing please take some time and check our official [Python Development Guidelines](https://github.com/ArkEcosystem/development-guidelines/blob/master/Python/README.md) which follow the widely accepted PEP8 Python Style Guide. 🖋
@@ -34,11 +36,8 @@ If you discover a security vulnerability within this package, please send an e-m
 
 ## Credits
 
-- [Rok Halužan](https://github.com/roks0n)
-- [Tomaž Šifrer](https://github.com/tsifrer)
-- [Brian Faust](https://github.com/faustbrian)
-- [All Contributors](../../contributors)
+This project exists thanks to all the people who [contribute](../../contributors).
 
 ## License
 
-[MIT](LICENSE) © [ArkEcosystem](https://ark.io)
+[MIT](LICENSE) © [ARK Ecosystem](https://ark.io)
