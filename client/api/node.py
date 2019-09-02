@@ -12,6 +12,9 @@ class Node(Resource):
     def configuration(self):
         return self.request_get('node/configuration')
 
+    def crypto(self):
+        return self.request_get('node/configuration/crypto')
+
     def fees(self, days=None):
         params = {
             'days': days,
