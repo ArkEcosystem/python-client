@@ -45,6 +45,19 @@ def test_configuration_calls_correct_url():
     assert responses.calls[0].request.url == 'http://127.0.0.1:4002/node/configuration'
 
 
+def test_configuration_crypto_call_correct_url():
+    responses.add(
+        responses.GET,
+        'http://127.0.0.1:4002/node/configuration/crypto',
+        json={'success': True},
+        status=200
+    )
+
+    client = ArkClient('http://127.0.0.1:4002')
+    client.node.crypto()
+    assert len(responses.calls) == 1
+    assert responses.calls[0].request.url == 'http://127.0.0.1:4002/node/configuration/crypto'
+
 def test_fees_calls_correct_url():
     responses.add(
         responses.GET,
