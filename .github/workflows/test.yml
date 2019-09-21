@@ -1,0 +1,28 @@
+name: Test
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      max-parallel: 4
+      matrix:
+        python-version: [3.5, 3.6, 3.7]
+
+    steps:
+      - uses: actions/checkout@v1
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v1
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: install dependencies
+        run: |
+          python3 -m venv venv
+          . venv/bin/activate
+          pip install .[test]
+      - name: run tests
+        run: |
+          . venv/bin/activate
+          mkdir test-results
+          pytest -v -s --junitxml=test-reports/junit.xml --cov=crypto --cov-config=.coveragerc --cov-report xml
