@@ -31,3 +31,5 @@ jobs:
           . venv/bin/activate
           mkdir test-results
           pytest -v -s --junitxml=test-reports/junit.xml --cov=crypto --cov-config=.coveragerc --cov-report xml
+      - name: Codecov
+        run: bash <(curl -s https://codecov.io/bash) -t ${{ secrets.CODECOV_TOKEN }}
