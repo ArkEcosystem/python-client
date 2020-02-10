@@ -29,7 +29,7 @@ setup_requires = ['pytest-runner'] if {'pytest', 'test', 'ptr'}.intersection(sys
 setuptools.setup(
     name='arkecosystem-client',
     description='A simple Python API client for the ARK Blockchain.',
-    version='1.0.0',
+    version='1.1.0',
     author='Ark Ecosystem',
     author_email='info@client.io',
     url='https://github.com/ArkEcosystem/python-client',
