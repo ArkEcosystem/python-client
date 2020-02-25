@@ -12,9 +12,6 @@ class Bridgechains(Resource):
         }
         return self.request_get('bridgechains', params)
 
-    def get(self, bridgechain_id):
-        return self.request_get('bridgechains/{}'.format(bridgechain_id))
-
     def search(self, criteria, page=None, limit=100):
         params = {
             'page': page,

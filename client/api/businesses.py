@@ -22,6 +22,9 @@ class Businesses(Resource):
         }
         return self.request_get('businesses/{}/bridgechains'.format(business_id), params)
 
+    def bridgechain(self, business_id, bridgechain_id):
+        return self.request_get('businesses/{}/bridgechains/{}'.format(business_id, bridgechain_id))
+
     def search(self, criteria, page=None, limit=100):
         params = {
             'page': page,

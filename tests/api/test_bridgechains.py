@@ -52,22 +52,6 @@ def test_all_calls_correct_url_with_additional_params():
     assert 'orderBy=id' in responses.calls[0].request.url
 
 
-def test_get_calls_correct_url():
-    bridgechain_id = '12345'
-    responses.add(
-        responses.GET,
-        'http://127.0.0.1:4002/bridgechains/{}'.format(bridgechain_id),
-        json={'success': True},
-        status=200
-    )
-
-    client = ArkClient('http://127.0.0.1:4002')
-    client.bridgechains.get(bridgechain_id)
-
-    assert len(responses.calls) == 1
-    assert responses.calls[0].request.url == 'http://127.0.0.1:4002/bridgechains/12345'
-
-
 def test_search_calls_correct_url_with_default_params():
     responses.add(
         responses.POST,
