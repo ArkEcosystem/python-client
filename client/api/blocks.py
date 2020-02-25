@@ -15,6 +15,12 @@ class Blocks(Resource):
     def get(self, block_id):
         return self.request_get('blocks/{}'.format(block_id))
 
+    def first(self):
+        return self.request_get('blocks/first')
+
+    def last(self):
+        return self.request_get('blocks/last')
+
     def transactions(self, block_id, page=None, limit=100):
         params = {
             'page': page,

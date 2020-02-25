@@ -69,6 +69,36 @@ def test_get_calls_correct_url():
     assert responses.calls[0].request.url == 'http://127.0.0.1:4002/blocks/12345'
 
 
+def test_first_calls_correct_url():
+    responses.add(
+        responses.GET,
+        'http://127.0.0.1:4002/blocks/first',
+        json={'success': True},
+        status=200
+    )
+
+    client = ArkClient('http://127.0.0.1:4002')
+    client.blocks.first()
+
+    assert len(responses.calls) == 1
+    assert responses.calls[0].request.url == 'http://127.0.0.1:4002/blocks/first'
+
+
+def test_last_calls_correct_url():
+    responses.add(
+        responses.GET,
+        'http://127.0.0.1:4002/blocks/last',
+        json={'success': True},
+        status=200
+    )
+
+    client = ArkClient('http://127.0.0.1:4002')
+    client.blocks.last()
+
+    assert len(responses.calls) == 1
+    assert responses.calls[0].request.url == 'http://127.0.0.1:4002/blocks/last'
+
+
 def test_transactions_calls_correct_url_with_default_params():
     block_id = '12345'
     responses.add(
