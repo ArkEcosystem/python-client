@@ -104,6 +104,23 @@ def test_bridgechains_calls_correct_url_with_passed_in_params():
     assert 'limit=69' in responses.calls[0].request.url
 
 
+def test_bridgechain_calls_correct_url():
+    business_id = '12345'
+    bridgechain_id = '12345'
+    responses.add(
+        responses.GET,
+        'http://127.0.0.1:4002/businesses/{}/bridgechains/{}'.format(business_id, bridgechain_id),
+        json={'success': True},
+        status=200
+    )
+
+    client = ArkClient('http://127.0.0.1:4002')
+    client.businesses.bridgechain(business_id, bridgechain_id)
+
+    assert len(responses.calls) == 1
+    assert responses.calls[0].request.url == 'http://127.0.0.1:4002/businesses/12345/bridgechains/12345'
+
+
 def test_search_calls_correct_url_with_default_params():
     responses.add(
         responses.POST,
