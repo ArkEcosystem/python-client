@@ -58,10 +58,3 @@ class Wallets(Resource):
             'limit': limit,
         }
         return self.request_get('wallets/{}/votes'.format(wallet_id), params)
-
-    def search(self, criteria, page=None, limit=100):
-        params = {
-            'page': page,
-            'limit': limit,
-        }
-        return self.request_post('wallets/search', data=criteria, params=params)

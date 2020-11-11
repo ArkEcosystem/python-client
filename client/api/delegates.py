@@ -15,13 +15,6 @@ class Delegates(Resource):
     def get(self, delegate_id):
         return self.request_get('delegates/{}'.format(delegate_id))
 
-    def search(self, username, page=None, limit=100):
-        params = {
-            'page': page,
-            'limit': limit,
-        }
-        return self.request_post('delegates/search', data={'username': username}, params=params)
-
     def blocks(self, delegate_id, page=None, limit=100):
         params = {
             'page': page,

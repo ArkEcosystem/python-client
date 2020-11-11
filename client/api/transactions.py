@@ -30,13 +30,6 @@ class Transactions(Resource):
     def get_unconfirmed(self, transaction_id):
         return self.request_get('transactions/unconfirmed/{}'.format(transaction_id))
 
-    def search(self, criteria, page=None, limit=100):
-        params = {
-            'page': page,
-            'limit': limit,
-        }
-        return self.request_post('transactions/search', data=criteria, params=params)
-
     def types(self):
         return self.request_get('transactions/types')
 

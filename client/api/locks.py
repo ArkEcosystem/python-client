@@ -15,13 +15,6 @@ class Locks(Resource):
     def get(self, lock_id):
         return self.request_get('locks/{}'.format(lock_id))
 
-    def search(self, criteria, page=None, limit=100):
-        params = {
-            'page': page,
-            'limit': limit,
-        }
-        return self.request_post('locks/search', data=criteria, params=params)
-
     def unlocked(self, criteria, page=None, limit=100):
         params = {
             'page': page,
