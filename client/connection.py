@@ -71,15 +71,3 @@ class Connection(object):
     def post(self, path, data=None, params=None):
         response = self.session.post(path, json=data, params=params)
         return self._handle_response(response)
-
-    def put(self, path, data=None, params=None):
-        response = self.session.put(path, json=data, params=params)
-        return self._handle_response(response)
-
-    def patch(self, path, data=None, params=None):
-        response = self.session.patch(path, json=data, params=params)
-        return self._handle_response(response)
-
-    def delete(self, path, params=None):
-        response = self.session.delete(path, params=params)
-        return self._handle_response(response)
