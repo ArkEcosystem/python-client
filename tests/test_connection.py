@@ -101,10 +101,7 @@ def test_handle_response_retuns_body_from_request():
 
 @pytest.mark.parametrize('method,func_name', [
     (responses.GET, 'get'),
-    (responses.POST, 'post'),
-    (responses.PUT, 'put'),
-    (responses.PATCH, 'patch'),
-    (responses.DELETE, 'delete'),
+    (responses.POST, 'post')
 ])
 def test_http_methods_call_correct_url_and_return_correct_response(method, func_name):
     responses.add(
@@ -123,10 +120,7 @@ def test_http_methods_call_correct_url_and_return_correct_response(method, func_
 
 @pytest.mark.parametrize('method,func_name', [
     (responses.GET, 'get'),
-    (responses.POST, 'post'),
-    (responses.PUT, 'put'),
-    (responses.PATCH, 'patch'),
-    (responses.DELETE, 'delete'),
+    (responses.POST, 'post')
 ])
 def test_http_methods_call_correct_url_with_params_and_return_correct_response(method, func_name):
     responses.add(
