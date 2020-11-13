@@ -27,10 +27,3 @@ class Blocks(Resource):
             'limit': limit,
         }
         return self.request_get('blocks/{}/transactions'.format(block_id), params)
-
-    def search(self, criteria, page=None, limit=100):
-        params = {
-            'page': page,
-            'limit': limit,
-        }
-        return self.request_post('blocks/search', data=criteria, params=params)

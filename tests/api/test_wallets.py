@@ -295,35 +295,3 @@ def test_votes_calls_correct_url_with_passed_in_params():
     )
     assert 'page=5' in responses.calls[0].request.url
     assert 'limit=69' in responses.calls[0].request.url
-
-
-def test_search_calls_correct_url_with_default_params():
-    responses.add(
-        responses.POST,
-        'http://127.0.0.1:4002/wallets/search',
-        json={'success': True},
-        status=200
-    )
-
-    client = ArkClient('http://127.0.0.1:4002')
-    client.wallets.search({'address': 'my-address'})
-    assert len(responses.calls) == 1
-    assert responses.calls[0].request.url == 'http://127.0.0.1:4002/wallets/search?limit=100'
-    assert json.loads(responses.calls[0].request.body.decode()) == {'address': 'my-address'}
-
-
-def test_search_calls_correct_url_with_passed_in_params():
-    responses.add(
-        responses.POST,
-        'http://127.0.0.1:4002/wallets/search',
-        json={'success': True},
-        status=200
-    )
-
-    client = ArkClient('http://127.0.0.1:4002')
-    client.wallets.search({'address': 'my-address'}, page=5, limit=69)
-    assert len(responses.calls) == 1
-    assert responses.calls[0].request.url.startswith('http://127.0.0.1:4002/wallets/search?')
-    assert 'page=5' in responses.calls[0].request.url
-    assert 'limit=69' in responses.calls[0].request.url
-    assert json.loads(responses.calls[0].request.body.decode()) == {'address': 'my-address'}
