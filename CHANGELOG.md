@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## Unreleased
 
+## 2.0.0 - 2021-09-21
+
+## Added
+
+- Added methods for first and last block
+
+## Changed
+
+- Use dot notation for GET requests parameters
+
+## Removed
+
+- Removed obsolete v2 endpoints
+
 ## 1.1.0 - 2020-02-11
 
 ### Added
