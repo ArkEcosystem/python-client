@@ -3,7 +3,7 @@ import sys
 import setuptools
 
 requires = [
-   'requests==2.19.1',
+    'requests==2.32.3',
     'backoff==2.2.1',
     'flatten-dict==0.4.2',
 ]
