@@ -20,15 +20,6 @@ class Wallets(Resource):
     def get(self, wallet_id):
         return self.request_get('wallets/{}'.format(wallet_id))
 
-    def locks(self, wallet_id, page=None, limit=100, **kwargs):
-        extra_params = {name: kwargs[name] for name in kwargs if kwargs[name] is not None}
-        params = {
-            'page': page,
-            'limit': limit,
-            **extra_params
-        }
-        return self.request_get('wallets/{}/locks'.format(wallet_id), params)
-
     def transactions(self, wallet_id, page=None, limit=100, **kwargs):
         extra_params = {name: kwargs[name] for name in kwargs if kwargs[name] is not None}
         params = {
