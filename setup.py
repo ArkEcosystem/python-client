@@ -8,12 +8,12 @@ requires = [
     'backoff==2.2.1',
     'certifi==2024.6.2',
     'chardet==3.0.4',
-    'flatten_dict==0.3.0',
+    'flatten_dict==0.4.2',
     'idna==2.7',
     'importlib-metadata==6.7.0',
     'mccabe==0.6.1',
     'more-itertools==9.1.0',
-    'pluggy==0.6.0',
+    'pluggy==1.5.0',
     'py==1.11.0',
     'requests==2.19.1',
     'responses==0.10.15',
@@ -31,10 +31,10 @@ tests_require = [
     'flake8-quotes==1.0.0',
     'pycodestyle<2.4.0,>=2.0.0',
     'pyflakes==1.6.0',
-    'pytest==3.6.1',
+    'pytest==8.2.2',
     'pytest-cov==2.5.1',
     'pytest-mock==1.10.0',
-    'pytest-responses==0.3.0'
+    'pytest-responses==0.5.1'
 ]
 
 extras_require = {
