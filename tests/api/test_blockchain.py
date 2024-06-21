@@ -2,7 +2,6 @@ import responses
 from client import ArkClient
 
 
-@responses.activate
 def test_blockchain_calls_correct_url():
     responses.add(
         responses.GET,
