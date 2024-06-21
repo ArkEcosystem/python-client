@@ -1,6 +1,7 @@
 backoff==2.2.1
 certifi==2024.6.2
 chardet==3.0.4
+charset-normalizer==3.3.2
 coverage==7.5.3
 flake8==3.5.0
 flake8-import-order==0.17.1
@@ -18,7 +19,8 @@ pytest==8.2.2
 pytest-cov==2.5.1
 pytest-mock==1.10.0
 pytest-responses==0.5.1
-requests==2.19.1
+requests==2.32.3
 responses==0.10.15
+setuptools==70.1.0
 six==1.16.0
-urllib3==1.23
+urllib3==2.2.2
