@@ -134,3 +134,16 @@ def test_all_unconfirmed_calls_correct_url_with_additional_params():
     assert 'page=5' in responses.calls[0].request.url
     assert 'limit=69' in responses.calls[0].request.url
     assert 'orderBy=timestamp.epoch' in responses.calls[0].request.url
+
+def test_schemas_calls_correct_url():
+    responses.add(
+        responses.GET,
+        'http://127.0.0.1:4002/transactions/schemas',
+        json={'success': True},
+        status=200
+    )
+
+    client = ArkClient('http://127.0.0.1:4002')
+    client.transactions.schemas()
+    assert len(responses.calls) == 1
+    assert responses.calls[0].request.url == 'http://127.0.0.1:4002/transactions/schemas'
