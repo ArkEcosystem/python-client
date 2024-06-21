@@ -5,7 +5,7 @@ import setuptools
 requires = [
     'atomicwrites==1.4.1',
     'attrs==23.2.0',
-    'backoff==1.6.0',
+    'backoff==2.2.1',
     'certifi==2024.6.2',
     'chardet==3.0.4',
     'flatten_dict==0.3.0',
