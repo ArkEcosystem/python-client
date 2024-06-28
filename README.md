@@ -24,6 +24,74 @@
 
 If you have any questions, requests or ideas open an issue or ask us in #python on the [ArkEcosystem Slack](https://ark.io/slack).
 
+## Development
+
+### Prerequisites
+
+- Python >= 3.7
+
+### Setup
+
+1. **Create a virtual environment**
+
+Run the following command to create a virtual environment for the project:
+
+```bash
+python -m venv venv
+```
+
+2. Activate the virtual environment
+
+On macOS/Linux:
+
+```bash
+source venv/bin/activate
+```
+
+On Windows
+
+```bash
+.\venv\Scripts\activate
+```
+
+3. Upgrade pip and setuptools
+
+Ensure you have the latest versions of pip and setuptools:
+
+```bash
+pip install --upgrade pip setuptools
+```
+
+4. Install the dependencies
+
+Install all necessary dependencies from the requirements.txt file:
+
+```bash
+pip install -r requirements.txt
+```
+
+5. Install the package in development mode
+
+Run the following command to install the package in development mode:
+
+```bash
+python setup.py develop
+```
+
+6. Run the tests
+
+Use pytest to run the tests and ensure everything is working correctly:
+
+```bash
+python setup.py test
+```
+
+Or directly with pytest:
+
+```bash
+pytest
+```
+
 ## Documentation
 
 You can find installation instructions and detailed instructions on how to use this package at the [dedicated documentation site](https://docs.ark.io/sdk/clients/usage.html).
