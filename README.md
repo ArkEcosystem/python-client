@@ -28,7 +28,7 @@ If you have any questions, requests or ideas open an issue or ask us in #python 
 
 ### Prerequisites
 
-- Python >= 3.7
+- Python >= 3.8
 
 ### Setup
 
