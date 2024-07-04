@@ -35,3 +35,6 @@ class Transactions(Resource):
 
     def fees(self):
         return self.request_get('transactions/fees')
+
+    def schemas(self):
+        return self.request_get('transactions/schemas')
