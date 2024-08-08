@@ -40,11 +40,18 @@ class Connection(object):
 
     def __init__(self, hostname):
         self.hostname = hostname
-        self.session = Session(hostname=self.hostname)
+        self.session  = Session(hostname=self.hostname)
+        self.withEndpoint('api')
 
         self.session.headers.update({
             'Content-Type': 'application/json',
         })
+
+    def withEndpoint(self, endpoint: str):
+        """
+        :param string endpoint: endpoint name
+        """
+        self.session.hostname = f'{self.hostname}/{endpoint}'
 
     def _handle_response(self, response):
         if not response.content:
