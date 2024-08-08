@@ -25,7 +25,7 @@ class ArkClient(object):
     def api_nodes(self):
         """
         :return: Nodes API
-        :rtype: client.api.nodes.Nodes
+        :rtype: client.api.api_nodes.ApiNodes
         """
         return ApiNodes(self.connection)
 
