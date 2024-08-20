@@ -14,18 +14,42 @@ def test_connection_creation_sets_default_session_headers_and_variables():
     assert isinstance(connection.session, requests.Session)
     assert connection.session.headers['Content-Type'] == 'application/json'
 
+def test_connection_changes_api_endpoint():
+    responses.add(
+        responses.GET,
+        'http://127.0.0.1:4003/pineapple/spongebob',
+        body=requests.exceptions.RequestException())
+    responses.add(
+        responses.GET,
+        'http://127.0.0.1:4003/pineapple/spongebob',
+        body=requests.exceptions.RequestException())
+    responses.add(
+        responses.GET,
+        'http://127.0.0.1:4003/pineapple/spongebob',
+        json={'success': True},
+        status=200
+    )
+
+    connection = Connection('http://127.0.0.1:4003')
+    connection.withEndpoint('pineapple')
+
+    data = connection.get('spongebob')
+    assert data == {'success': True}
+    assert len(responses.calls) == 3
+    assert responses.calls[0].request.url == 'http://127.0.0.1:4003/pineapple/spongebob'
+
 def test_connection_request_retry_successful():
     responses.add(
         responses.GET,
-        'http://127.0.0.1:4003/spongebob',
+        'http://127.0.0.1:4003/api/spongebob',
         body=requests.exceptions.RequestException())
     responses.add(
         responses.GET,
-        'http://127.0.0.1:4003/spongebob',
+        'http://127.0.0.1:4003/api/spongebob',
         body=requests.exceptions.RequestException())
     responses.add(
         responses.GET,
-        'http://127.0.0.1:4003/spongebob',
+        'http://127.0.0.1:4003/api/spongebob',
         json={'success': True},
         status=200
     )
@@ -35,13 +59,13 @@ def test_connection_request_retry_successful():
     data = connection.get('spongebob')
     assert data == {'success': True}
     assert len(responses.calls) == 3
-    assert responses.calls[0].request.url == 'http://127.0.0.1:4003/spongebob'
+    assert responses.calls[0].request.url == 'http://127.0.0.1:4003/api/spongebob'
 
 
 def test_connection_raises_for_request_retry_failure():
     responses.add(
         responses.GET,
-        'http://127.0.0.1:4003/spongebob',
+        'http://127.0.0.1:4003/api/spongebob',
         body=requests.exceptions.RequestException())
 
     connection = Connection('http://127.0.0.1:4003')
@@ -55,12 +79,12 @@ def test_connection_raises_for_request_retry_failure():
 def test_handle_response_raises_for_no_content_in_response():
     responses.add(
         responses.GET,
-        'http://127.0.0.1:4003/spongebob',
+        'http://127.0.0.1:4003/api/spongebob',
         status=404
     )
 
     connection = Connection('http://127.0.0.1:4003')
-    response = requests.get('http://127.0.0.1:4003/spongebob')
+    response = requests.get('http://127.0.0.1:4003/api/spongebob')
     with pytest.raises(ArkHTTPException) as exception:
         connection._handle_response(response)
 
@@ -71,30 +95,30 @@ def test_handle_response_raises_for_no_content_in_response():
 def test_handle_response_raises_for_success_false_in_response():
     responses.add(
         responses.GET,
-        'http://127.0.0.1:4003/spongebob',
+        'http://127.0.0.1:4003/api/spongebob',
         json={'success': False, 'error': 'Best error ever'},
         status=404
     )
 
     connection = Connection('http://127.0.0.1:4003')
-    response = requests.get('http://127.0.0.1:4003/spongebob')
+    response = requests.get('http://127.0.0.1:4003/api/spongebob')
     with pytest.raises(ArkHTTPException) as exception:
         connection._handle_response(response)
 
-    assert str(exception.value) == 'GET 404 http://127.0.0.1:4003/spongebob - Best error ever'
+    assert str(exception.value) == 'GET 404 http://127.0.0.1:4003/api/spongebob - Best error ever'
     assert exception.value.response == response
 
 
 def test_handle_response_retuns_body_from_request():
     responses.add(
         responses.GET,
-        'http://127.0.0.1:4003/spongebob',
+        'http://127.0.0.1:4003/api/spongebob',
         json={'success': True},
         status=200
     )
 
     connection = Connection('http://127.0.0.1:4003')
-    response = requests.get('http://127.0.0.1:4003/spongebob')
+    response = requests.get('http://127.0.0.1:4003/api/spongebob')
     body = connection._handle_response(response)
     assert body == {'success': True}
 
@@ -106,7 +130,7 @@ def test_handle_response_retuns_body_from_request():
 def test_http_methods_call_correct_url_and_return_correct_response(method, func_name):
     responses.add(
         method,
-        'http://127.0.0.1:4003/spongebob',
+        'http://127.0.0.1:4003/api/spongebob',
         json={'success': True},
         status=200
     )
@@ -115,7 +139,7 @@ def test_http_methods_call_correct_url_and_return_correct_response(method, func_
     data = getattr(connection, func_name)('spongebob')
     assert data == {'success': True}
     assert len(responses.calls) == 1
-    assert responses.calls[0].request.url == 'http://127.0.0.1:4003/spongebob'
+    assert responses.calls[0].request.url == 'http://127.0.0.1:4003/api/spongebob'
 
 
 @pytest.mark.parametrize('method,func_name', [
@@ -125,7 +149,7 @@ def test_http_methods_call_correct_url_and_return_correct_response(method, func_
 def test_http_methods_call_correct_url_with_params_and_return_correct_response(method, func_name):
     responses.add(
         method,
-        'http://127.0.0.1:4003/spongebob',
+        'http://127.0.0.1:4003/api/spongebob',
         json={'success': True},
         status=200
     )
@@ -134,4 +158,4 @@ def test_http_methods_call_correct_url_with_params_and_return_correct_response(m
     data = getattr(connection, func_name)('spongebob', params={'foo': 'bar'})
     assert data == {'success': True}
     assert len(responses.calls) == 1
-    assert responses.calls[0].request.url == 'http://127.0.0.1:4003/spongebob?foo=bar'
+    assert responses.calls[0].request.url == 'http://127.0.0.1:4003/api/spongebob?foo=bar'

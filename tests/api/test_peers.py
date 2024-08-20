@@ -6,7 +6,7 @@ from client import ArkClient
 def test_all_calls_correct_url_with_default_params():
     responses.add(
         responses.GET,
-        'http://127.0.0.1:4002/peers',
+        'http://127.0.0.1:4002/api/peers',
         json={'success': True},
         status=200
     )
@@ -14,13 +14,13 @@ def test_all_calls_correct_url_with_default_params():
     client = ArkClient('http://127.0.0.1:4002')
     client.peers.all()
     assert len(responses.calls) == 1
-    assert responses.calls[0].request.url == 'http://127.0.0.1:4002/peers?limit=100'
+    assert responses.calls[0].request.url == 'http://127.0.0.1:4002/api/peers?limit=100'
 
 
 def test_all_calls_correct_url_with_passed_in_params():
     responses.add(
         responses.GET,
-        'http://127.0.0.1:4002/peers',
+        'http://127.0.0.1:4002/api/peers',
         json={'success': True},
         status=200
     )
@@ -30,7 +30,7 @@ def test_all_calls_correct_url_with_passed_in_params():
         os='a', status='live', port=1337, version='2.0.0', order_by='ip', page=5, limit=69
     )
     assert len(responses.calls) == 1
-    assert responses.calls[0].request.url.startswith('http://127.0.0.1:4002/peers?')
+    assert responses.calls[0].request.url.startswith('http://127.0.0.1:4002/api/peers?')
     assert 'os=a' in responses.calls[0].request.url
     assert 'status=live' in responses.calls[0].request.url
     assert 'port=1337' in responses.calls[0].request.url
@@ -44,7 +44,7 @@ def test_get_calls_correct_url_with_ip():
     ip = '123.4.5.67'
     responses.add(
         responses.GET,
-        'http://127.0.0.1:4002/peers/{}'.format(ip),
+        'http://127.0.0.1:4002/api/peers/{}'.format(ip),
         json={'success': True},
         status=200
     )
@@ -52,4 +52,4 @@ def test_get_calls_correct_url_with_ip():
     client = ArkClient('http://127.0.0.1:4002')
     client.peers.get(ip)
     assert len(responses.calls) == 1
-    assert responses.calls[0].request.url == 'http://127.0.0.1:4002/peers/123.4.5.67'
+    assert responses.calls[0].request.url == 'http://127.0.0.1:4002/api/peers/123.4.5.67'

@@ -18,3 +18,12 @@ def test_client():
     assert hasattr(client, 'transactions') == True
     assert hasattr(client, 'votes') == True
     assert hasattr(client, 'wallets') == True
+
+def test_client_changes_connection_endpoint():
+    client = ArkClient('http://127.0.0.1:4002')
+
+    assert client.connection.session.hostname == 'http://127.0.0.1:4002/api'
+
+    client.withApi('node')
+
+    assert client.connection.session.hostname == 'http://127.0.0.1:4002/node'
