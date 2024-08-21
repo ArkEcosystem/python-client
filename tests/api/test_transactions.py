@@ -13,7 +13,7 @@ def test_all_calls_correct_url_with_default_params():
         status=200
     )
 
-    client = ArkClient('http://127.0.0.1:4002')
+    client = ArkClient('http://127.0.0.1:4002/api')
     client.transactions.all()
     assert len(responses.calls) == 1
     assert responses.calls[0].request.url == 'http://127.0.0.1:4002/api/transactions?limit=100'
@@ -27,7 +27,7 @@ def test_all_calls_correct_url_with_passed_in_params():
         status=200
     )
 
-    client = ArkClient('http://127.0.0.1:4002')
+    client = ArkClient('http://127.0.0.1:4002/api')
     client.transactions.all(page=5, limit=69)
     assert len(responses.calls) == 1
     assert responses.calls[0].request.url.startswith('http://127.0.0.1:4002/api/transactions?')
@@ -43,7 +43,7 @@ def test_all_calls_correct_url_with_additional_params():
       status=200
     )
 
-    client = ArkClient('http://127.0.0.1:4002')
+    client = ArkClient('http://127.0.0.1:4002/api')
     client.transactions.all(page=5, limit=69, orderBy="timestamp.epoch")
     assert len(responses.calls) == 1
     assert responses.calls[0].request.url.startswith('http://127.0.0.1:4002/api/transactions?')
@@ -55,15 +55,15 @@ def test_all_calls_correct_url_with_additional_params():
 def test_create_calls_correct_url_with_data():
     responses.add(
         responses.POST,
-        'http://127.0.0.1:4002/api/transactions',
+        'http://127.0.0.1:4002/tx/api/transactions',
         json={'success': True},
         status=200
     )
 
-    client = ArkClient('http://127.0.0.1:4002')
+    client = ArkClient('http://127.0.0.1:4002/tx/api')
     client.transactions.create([{'random': 'data'}])
     assert len(responses.calls) == 1
-    assert responses.calls[0].request.url == 'http://127.0.0.1:4002/api/transactions'
+    assert responses.calls[0].request.url == 'http://127.0.0.1:4002/tx/api/transactions'
     assert json.loads(responses.calls[0].request.body.decode()) == {
         'transactions': [{'random': 'data'}]
     }
@@ -78,7 +78,7 @@ def test_get_calls_correct_url():
         status=200
     )
 
-    client = ArkClient('http://127.0.0.1:4002')
+    client = ArkClient('http://127.0.0.1:4002/api')
     client.transactions.get(transaction_id)
 
     assert len(responses.calls) == 1
@@ -93,7 +93,7 @@ def test_all_unconfirmed_calls_correct_url_with_default_params():
         status=200
     )
 
-    client = ArkClient('http://127.0.0.1:4002')
+    client = ArkClient('http://127.0.0.1:4002/api')
     client.transactions.all_unconfirmed()
     assert len(responses.calls) == 1
     assert responses.calls[0].request.url == (
@@ -109,7 +109,7 @@ def test_all_unconfirmed_calls_correct_url_with_passed_in_params():
         status=200
     )
 
-    client = ArkClient('http://127.0.0.1:4002')
+    client = ArkClient('http://127.0.0.1:4002/api')
     client.transactions.all_unconfirmed(offset=5, limit=69)
     assert len(responses.calls) == 1
     assert responses.calls[0].request.url.startswith(
@@ -127,7 +127,7 @@ def test_all_unconfirmed_calls_correct_url_with_additional_params():
       status=200
     )
 
-    client = ArkClient('http://127.0.0.1:4002')
+    client = ArkClient('http://127.0.0.1:4002/api')
     client.transactions.all_unconfirmed(page=5, limit=69, orderBy="timestamp.epoch")
     assert len(responses.calls) == 1
     assert responses.calls[0].request.url.startswith('http://127.0.0.1:4002/api/transactions/unconfirmed?')
@@ -143,7 +143,7 @@ def test_schemas_calls_correct_url():
         status=200
     )
 
-    client = ArkClient('http://127.0.0.1:4002')
+    client = ArkClient('http://127.0.0.1:4002/api')
     client.transactions.schemas()
     assert len(responses.calls) == 1
     assert responses.calls[0].request.url == 'http://127.0.0.1:4002/api/transactions/schemas'

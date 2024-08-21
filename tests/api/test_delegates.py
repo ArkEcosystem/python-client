@@ -13,7 +13,7 @@ def test_all_calls_correct_url_with_default_params():
         status=200
     )
 
-    client = ArkClient('http://127.0.0.1:4002')
+    client = ArkClient('http://127.0.0.1:4002/api')
     client.delegates.all()
     assert len(responses.calls) == 1
     assert responses.calls[0].request.url == 'http://127.0.0.1:4002/api/delegates?limit=100'
@@ -27,7 +27,7 @@ def test_all_calls_correct_url_with_passed_in_params():
         status=200
     )
 
-    client = ArkClient('http://127.0.0.1:4002')
+    client = ArkClient('http://127.0.0.1:4002/api')
     client.delegates.all(page=5, limit=69)
     assert len(responses.calls) == 1
     assert responses.calls[0].request.url.startswith('http://127.0.0.1:4002/api/delegates?')
@@ -43,7 +43,7 @@ def test_all_calls_correct_url_with_additional_params():
       status=200
     )
 
-    client = ArkClient('http://127.0.0.1:4002')
+    client = ArkClient('http://127.0.0.1:4002/api')
     client.delegates.all(page=5, limit=69, orderBy="username")
     assert len(responses.calls) == 1
     assert responses.calls[0].request.url.startswith('http://127.0.0.1:4002/api/delegates?')
@@ -61,7 +61,7 @@ def test_get_calls_correct_url():
         status=200
     )
 
-    client = ArkClient('http://127.0.0.1:4002')
+    client = ArkClient('http://127.0.0.1:4002/api')
     client.delegates.get(delegate_id)
 
     assert len(responses.calls) == 1

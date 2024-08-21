@@ -10,7 +10,7 @@ def test_all_calls_correct_url():
         status=200
     )
 
-    client = ArkClient('http://127.0.0.1:4002')
+    client = ArkClient('http://127.0.0.1:4002/api')
     client.rounds.all()
     assert len(responses.calls) == 1
     assert responses.calls[0].request.url == 'http://127.0.0.1:4002/api/rounds'
@@ -24,7 +24,7 @@ def test_all_calls_correct_url_with_params():
         status=200
     )
 
-    client = ArkClient('http://127.0.0.1:4002')
+    client = ArkClient('http://127.0.0.1:4002/api')
     client.rounds.all(query_param1='value1', query_param2='value2')
     assert len(responses.calls) == 1
     assert responses.calls[0].request.url.startswith('http://127.0.0.1:4002/api/rounds?')
@@ -36,12 +36,12 @@ def test_show_calls_correct_url():
     round_id = '12345'
     responses.add(
         responses.GET,
-        'http://127.0.0.1:4002/api/rounds/{}'.format(round_id),
+        f'http://127.0.0.1:4002/api/rounds/{round_id}',
         json={'success': True},
         status=200
     )
 
-    client = ArkClient('http://127.0.0.1:4002')
+    client = ArkClient('http://127.0.0.1:4002/api')
     client.rounds.show(round_id)
     assert len(responses.calls) == 1
     assert responses.calls[0].request.url == 'http://127.0.0.1:4002/api/rounds/12345'
@@ -51,12 +51,12 @@ def test_delegates_calls_correct_url():
     round_id = '12345'
     responses.add(
         responses.GET,
-        'http://127.0.0.1:4002/api/rounds/{}/delegates'.format(round_id),
+        f'http://127.0.0.1:4002/api/rounds/{round_id}/delegates',
         json={'success': True},
         status=200
     )
 
-    client = ArkClient('http://127.0.0.1:4002')
+    client = ArkClient('http://127.0.0.1:4002/api')
     client.rounds.delegates(round_id)
 
     assert len(responses.calls) == 1
