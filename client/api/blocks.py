@@ -13,17 +13,17 @@ class Blocks(Resource):
         return self.request_get('blocks', params)
 
     def get(self, block_id):
-        return self.request_get('blocks/{}'.format(block_id))
+        return self.with_endpoint('api').request_get(f'blocks/{block_id}')
 
     def first(self):
-        return self.request_get('blocks/first')
+        return self.with_endpoint('api').request_get('blocks/first')
 
     def last(self):
-        return self.request_get('blocks/last')
+        return self.with_endpoint('api').request_get('blocks/last')
 
     def transactions(self, block_id, page=None, limit=100):
         params = {
             'page': page,
             'limit': limit,
         }
-        return self.request_get('blocks/{}/transactions'.format(block_id), params)
+        return self.with_endpoint('api').request_get(f'blocks/{block_id}/transactions', params)

@@ -1,4 +1,4 @@
-from client.connection import Connection
+from client.connection import ClientHosts, Connection
 from client.api.api_nodes import ApiNodes
 from client.api.blockchain import Blockchain
 from client.api.blocks import Blocks
@@ -13,18 +13,11 @@ from client.api.wallets import Wallets
 
 class ArkClient(object):
 
-    def __init__(self, hostname):
+    def __init__(self, hosts: str | ClientHosts):
         """
-        :param string hostname: Node hostname. E.g.: `http://127.0.0.1:4002`
+        :param string hosts: hosts of the node
         """
-        self.connection = Connection(hostname)
-
-    def withApi(self, api: str):
-        """
-        :param string api: API name
-        :return: API instance
-        """
-        self.connection.withEndpoint(api)
+        self.connection = Connection(hosts)
 
     @property
     def api_nodes(self):

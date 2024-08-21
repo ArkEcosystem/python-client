@@ -1,8 +1,9 @@
 
+from typing import Literal, Optional, TypedDict
 import backoff
 import requests
 
-from client.exceptions import ArkHTTPException, ArkParameterException
+from client.exceptions import ArkHTTPException
 
 
 def giveup_handler(_):
@@ -15,6 +16,11 @@ retry = backoff.on_exception(backoff.expo,
                              max_tries=3,
                              on_giveup=giveup_handler)
 
+
+class ClientHosts(TypedDict):
+    api: str
+    transactions: Optional[str]
+    evm: Optional[str]
 
 class Session(requests.Session):
 
@@ -32,28 +38,41 @@ class Session(requests.Session):
 
     def prepare_request(self, request):
         if self.hostname is not None:
-            request.url = '{}/{}'.format(self.hostname, request.url)
+            request.url = f'{self.hostname}/{request.url}'
         return super().prepare_request(request)
 
-
 class Connection(object):
+    session: Session
+    hosts: ClientHosts
 
-    def __init__(self, hostname):
-        self.hostname = hostname
-        self.session  = Session(hostname=self.hostname)
-        self.withEndpoint('api')
+    def __init__(self, hosts: str | ClientHosts):
+        if isinstance(hosts, str):
+            hosts = {
+                'api': hosts,
+                'transactions': None,
+                'evm': None,
+            }
+
+        self.hosts = hosts
+
+        # Ensure we have a session
+        self.with_endpoint('api')
+
+    def with_endpoint(self, endpoint: Literal['api', 'transactions', 'evm']):
+        """
+        :param string endpoint: endpoint name
+        """
+        host = self.hosts[endpoint]
+        if host is None:
+            host = self.hosts['api']
+
+        self.session = Session(hostname=f'{host}')
 
         self.session.headers.update({
             'Content-Type': 'application/json',
         })
 
-    def withEndpoint(self, endpoint: str):
-        """
-        :param string endpoint: endpoint name
-        """
-        self.session.hostname = f'{self.hostname}/{endpoint}'
-
-    def _handle_response(self, response):
+    def _handle_response(self, response: requests.Response):
         if not response.content:
             raise ArkHTTPException('No content in response', response=response)
 
@@ -73,8 +92,10 @@ class Connection(object):
 
     def get(self, path, params=None):
         response = self.session.get(path, params=params)
+
         return self._handle_response(response)
 
     def post(self, path, data=None, params=None):
         response = self.session.post(path, json=data, params=params)
+
         return self._handle_response(response)

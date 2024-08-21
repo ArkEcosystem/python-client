@@ -15,7 +15,7 @@ class Peers(Resource):
             'page': page,
             'limit': limit,
         }
-        return self.request_get('peers', params)
+        return self.with_endpoint('api').request_get('peers', params)
 
     def get(self, ip):
-        return self.request_get('peers/{}'.format(ip))
+        return self.with_endpoint('api').request_get(f'peers/{ip}')
