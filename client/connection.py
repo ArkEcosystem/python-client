@@ -1,5 +1,5 @@
 
-from typing import Literal, Optional, TypedDict
+from typing import Literal, Optional, TypedDict, Union
 import backoff
 import requests
 
@@ -45,7 +45,7 @@ class Connection(object):
     session: Session
     hosts: ClientHosts
 
-    def __init__(self, hosts: str | ClientHosts):
+    def __init__(self, hosts: Union[str, ClientHosts]):
         if isinstance(hosts, str):
             hosts = {
                 'api': hosts,

@@ -1,3 +1,4 @@
+from typing import Union
 from client.connection import ClientHosts, Connection
 from client.api.api_nodes import ApiNodes
 from client.api.blockchain import Blockchain
@@ -13,7 +14,7 @@ from client.api.wallets import Wallets
 
 class ArkClient(object):
 
-    def __init__(self, hosts: str | ClientHosts):
+    def __init__(self, hosts: Union[str, ClientHosts]):
         """
         :param string hosts: hosts of the node
         """
