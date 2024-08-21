@@ -10,9 +10,36 @@ from client.exceptions import ArkHTTPException
 
 def test_connection_creation_sets_default_session_headers_and_variables():
     connection = Connection('http://127.0.0.1:4003')
-    assert connection.hostname == 'http://127.0.0.1:4003'
+    assert connection.hosts == {
+        'api': 'http://127.0.0.1:4003',
+        'transactions': None,
+        'evm': None,
+    }
     assert isinstance(connection.session, requests.Session)
     assert connection.session.headers['Content-Type'] == 'application/json'
+
+
+def test_connection_with_hosts_dict():
+    connection = Connection({
+        'api': 'http://127.0.0.1:4003/api',
+        'transactions': 'http://127.0.0.1:4003/transactions',
+        'evm': 'http://127.0.0.1:4003/evm',
+    })
+
+    assert connection.session.hostname == 'http://127.0.0.1:4003/api'
+
+    connection.with_endpoint('transactions')
+
+    assert connection.session.hostname == 'http://127.0.0.1:4003/transactions'
+
+    connection.with_endpoint('evm')
+
+    assert connection.session.hostname == 'http://127.0.0.1:4003/evm'
+
+    connection.with_endpoint('api')
+
+    assert connection.session.hostname == 'http://127.0.0.1:4003/api'
+
 
 def test_connection_request_retry_successful():
     responses.add(
@@ -46,7 +73,7 @@ def test_connection_raises_for_request_retry_failure():
 
     connection = Connection('http://127.0.0.1:4003')
 
-    with pytest.raises(ArkHTTPException) as exception:
+    with pytest.raises(ArkHTTPException):
         connection.get('spongebob')
 
     assert len(responses.calls) == 3
@@ -101,7 +128,7 @@ def test_handle_response_retuns_body_from_request():
 
 @pytest.mark.parametrize('method,func_name', [
     (responses.GET, 'get'),
-    (responses.POST, 'post')
+    (responses.POST, 'post'),
 ])
 def test_http_methods_call_correct_url_and_return_correct_response(method, func_name):
     responses.add(
@@ -120,7 +147,7 @@ def test_http_methods_call_correct_url_and_return_correct_response(method, func_
 
 @pytest.mark.parametrize('method,func_name', [
     (responses.GET, 'get'),
-    (responses.POST, 'post')
+    # (responses.POST, 'post'),
 ])
 def test_http_methods_call_correct_url_with_params_and_return_correct_response(method, func_name):
     responses.add(

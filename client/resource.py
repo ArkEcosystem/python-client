@@ -1,9 +1,16 @@
+from typing import Literal
 from flatten_dict import flatten
+
+from client.connection import Connection
 
 class Resource(object):
 
-    def __init__(self, connection):
+    def __init__(self, connection: Connection):
         self.connection = connection
+
+    def with_endpoint(self, endpoint: Literal['api', 'transactions', 'evm']):
+        self.connection.with_endpoint(endpoint)
+        return self
 
     def request_get(self, path, params=None):
         if params:

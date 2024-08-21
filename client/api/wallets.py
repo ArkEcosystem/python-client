@@ -8,17 +8,17 @@ class Wallets(Resource):
             'page': page,
             'limit': limit,
         }
-        return self.request_get('wallets', params)
+        return self.with_endpoint('api').request_get('wallets', params)
 
     def top(self, page=None, limit=100):
         params = {
             'page': page,
             'limit': limit
         }
-        return self.request_get('wallets/top', params)
+        return self.with_endpoint('api').request_get('wallets/top', params)
 
     def get(self, wallet_id):
-        return self.request_get('wallets/{}'.format(wallet_id))
+        return self.with_endpoint('api').request_get(f'wallets/{wallet_id}')
 
     def transactions(self, wallet_id, page=None, limit=100, **kwargs):
         extra_params = {name: kwargs[name] for name in kwargs if kwargs[name] is not None}
@@ -27,25 +27,25 @@ class Wallets(Resource):
             'limit': limit,
             **extra_params
         }
-        return self.request_get('wallets/{}/transactions'.format(wallet_id), params)
+        return self.with_endpoint('api').request_get(f'wallets/{wallet_id}/transactions', params)
 
     def transactions_sent(self, wallet_id, page=None, limit=100):
         params = {
             'page': page,
             'limit': limit,
         }
-        return self.request_get('wallets/{}/transactions/sent'.format(wallet_id), params)
+        return self.with_endpoint('api').request_get(f'wallets/{wallet_id}/transactions/sent', params)
 
     def transactions_received(self, wallet_id, page=None, limit=100):
         params = {
             'page': page,
             'limit': limit,
         }
-        return self.request_get('wallets/{}/transactions/received'.format(wallet_id), params)
+        return self.with_endpoint('api').request_get(f'wallets/{wallet_id}/transactions/received', params)
 
     def votes(self, wallet_id, page=None, limit=100):
         params = {
             'page': page,
             'limit': limit,
         }
-        return self.request_get('wallets/{}/votes'.format(wallet_id), params)
+        return self.with_endpoint('api').request_get(f'wallets/{wallet_id}/votes', params)

@@ -10,21 +10,21 @@ class Delegates(Resource):
             'limit': limit,
             **extra_params
         }
-        return self.request_get('delegates', params)
+        return self.with_endpoint('api').request_get('delegates', params)
 
     def get(self, delegate_id):
-        return self.request_get('delegates/{}'.format(delegate_id))
+        return self.with_endpoint('api').request_get(f'delegates/{delegate_id}')
 
     def blocks(self, delegate_id, page=None, limit=100):
         params = {
             'page': page,
             'limit': limit,
         }
-        return self.request_get('delegates/{}/blocks'.format(delegate_id), params)
+        return self.with_endpoint('api').request_get(f'delegates/{delegate_id}/blocks', params)
 
     def voters(self, delegate_id, page=None, limit=100):
         params = {
             'page': page,
             'limit': limit,
         }
-        return self.request_get('delegates/{}/voters'.format(delegate_id), params)
+        return self.with_endpoint('api').request_get(f'delegates/{delegate_id}/voters', params)

@@ -1,4 +1,5 @@
-from client.connection import Connection
+from typing import Union
+from client.connection import ClientHosts, Connection
 from client.api.api_nodes import ApiNodes
 from client.api.blockchain import Blockchain
 from client.api.blocks import Blocks
@@ -13,13 +14,11 @@ from client.api.wallets import Wallets
 
 class ArkClient(object):
 
-    def __init__(self, hostname):
+    def __init__(self, hosts: Union[str, ClientHosts]):
         """
-        :param string hostname: Node hostname. Examples: `http://127.0.0.1:4002` or
-            `http://my.domain.io/api/`. This is to allow people to server the api
-            on whatever url they want.
+        :param string hosts: hosts of the node
         """
-        self.connection = Connection(hostname)
+        self.connection = Connection(hosts)
 
     @property
     def api_nodes(self):
