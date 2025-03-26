@@ -80,8 +80,8 @@ class ArkClient(object):
     @property
     def receipts(self):
         """
-        :return: Rounds API
-        :rtype: client.api.rounds.Rounds
+        :return: Receipts API
+        :rtype: client.api.receipts.Receipts
         """
         return Receipts(self.connection)
 
