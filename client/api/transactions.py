@@ -32,12 +32,3 @@ class Transactions(Resource):
 
     def configuration(self):
         return self.with_endpoint('transactions').request_get('configuration')
-
-    def types(self):
-        return self.with_endpoint('api').request_get('transactions/types')
-
-    def fees(self):
-        return self.with_endpoint('api').request_get('transactions/fees')
-
-    def schemas(self):
-        return self.with_endpoint('api').request_get('transactions/schemas')
