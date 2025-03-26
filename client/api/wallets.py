@@ -29,14 +29,14 @@ class Wallets(Resource):
         }
         return self.with_endpoint('api').request_get(f'wallets/{wallet_id}/transactions', params)
 
-    def transactions_sent(self, wallet_id, page=None, limit=100):
+    def sent_transactions(self, wallet_id, page=None, limit=100):
         params = {
             'page': page,
             'limit': limit,
         }
         return self.with_endpoint('api').request_get(f'wallets/{wallet_id}/transactions/sent', params)
 
-    def transactions_received(self, wallet_id, page=None, limit=100):
+    def received_transactions(self, wallet_id, page=None, limit=100):
         params = {
             'page': page,
             'limit': limit,
