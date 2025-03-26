@@ -1,4 +1,5 @@
 from typing import Union
+from client.api.evm import EVM
 from client.connection import ClientHosts, Connection
 from client.api.api_nodes import ApiNodes
 from client.api.blockchain import Blockchain
@@ -59,6 +60,14 @@ class ArkClient(object):
         :rtype: client.api.delegates.Delegates
         """
         return Delegates(self.connection)
+
+    @property
+    def evm(self):
+        """
+        :return: EVM API
+        :rtype: client.api.evm.EVM
+        """
+        return EVM(self.connection)
 
     @property
     def node(self):
