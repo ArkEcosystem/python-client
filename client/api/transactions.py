@@ -30,6 +30,9 @@ class Transactions(Resource):
     def get_unconfirmed(self, transaction_id):
         return self.with_endpoint('api').request_get(f'transactions/unconfirmed/{transaction_id}')
 
+    def configuration(self):
+        return self.with_endpoint('transactions').request_get('configuration')
+
     def types(self):
         return self.with_endpoint('api').request_get('transactions/types')
 
