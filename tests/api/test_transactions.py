@@ -135,6 +135,22 @@ def test_all_unconfirmed_calls_correct_url_with_additional_params():
     assert 'limit=69' in responses.calls[0].request.url
     assert 'orderBy=timestamp.epoch' in responses.calls[0].request.url
 
+
+def test_get_unconfirmed_calls_correct_url():
+    transaction_id = '12345'
+
+    responses.add(
+      responses.GET,
+      'http://127.0.0.1:4002/api/transactions/unconfirmed/{}'.format(transaction_id),
+      json={'success': True},
+      status=200
+    )
+
+    client = ArkClient('http://127.0.0.1:4002/api')
+    client.transactions.get_unconfirmed(transaction_id)
+    assert len(responses.calls) == 1
+    assert responses.calls[0].request.url == 'http://127.0.0.1:4002/api/transactions/unconfirmed/12345'
+
 def test_schemas_calls_correct_url():
     responses.add(
         responses.GET,
