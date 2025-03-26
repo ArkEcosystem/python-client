@@ -25,8 +25,11 @@ class ClientHosts(TypedDict):
 class Session(requests.Session):
 
     def __init__(self, *args, **kwargs):
-        if 'hostname' in kwargs:
-            self.hostname = kwargs.pop('hostname')
+        if 'hostname' not in kwargs:
+            raise ValueError('hostname is required')
+
+        self.hostname = kwargs.pop('hostname')
+
         super().__init__(*args, **kwargs)
 
     @retry
@@ -37,8 +40,8 @@ class Session(requests.Session):
         return super().send(request, **kwargs)
 
     def prepare_request(self, request):
-        if self.hostname is not None:
-            request.url = f'{self.hostname}/{request.url}'
+        request.url = f'{self.hostname}/{request.url}'
+
         return super().prepare_request(request)
 
 class Connection(object):
