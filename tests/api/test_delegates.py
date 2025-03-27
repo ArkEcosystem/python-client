@@ -66,3 +66,39 @@ def test_get_calls_correct_url():
 
     assert len(responses.calls) == 1
     assert responses.calls[0].request.url == 'http://127.0.0.1:4002/api/delegates/12345'
+
+
+def test_blocks_calls_correct_url():
+    delegate_id = '12345'
+    responses.add(
+        responses.GET,
+        'http://127.0.0.1:4002/api/delegates/{}/blocks'.format(delegate_id),
+        json={'success': True},
+        status=200
+    )
+
+    client = ArkClient('http://127.0.0.1:4002/api')
+    client.delegates.blocks(delegate_id, limit=100, orderBy='timestamp:desc')
+
+    assert len(responses.calls) == 1
+    assert responses.calls[0].request.url.startswith('http://127.0.0.1:4002/api/delegates/12345/blocks?')
+    assert 'limit=100' in responses.calls[0].request.url
+    assert 'orderBy=timestamp%3Adesc' in responses.calls[0].request.url
+
+
+def test_voters_calls_correct_url():
+    delegate_id = '12345'
+    responses.add(
+        responses.GET,
+        'http://127.0.0.1:4002/api/delegates/{}/voters'.format(delegate_id),
+        json={'success': True},
+        status=200
+    )
+
+    client = ArkClient('http://127.0.0.1:4002/api')
+    client.delegates.voters(delegate_id, limit=100, orderBy='timestamp:desc')
+
+    assert len(responses.calls) == 1
+    assert responses.calls[0].request.url.startswith('http://127.0.0.1:4002/api/delegates/12345/voters?')
+    assert 'limit=100' in responses.calls[0].request.url
+    assert 'orderBy=timestamp%3Adesc' in responses.calls[0].request.url

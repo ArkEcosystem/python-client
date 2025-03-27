@@ -15,16 +15,8 @@ class Delegates(Resource):
     def get(self, delegate_id):
         return self.with_endpoint('api').request_get(f'delegates/{delegate_id}')
 
-    def blocks(self, delegate_id, page=None, limit=100):
-        params = {
-            'page': page,
-            'limit': limit,
-        }
-        return self.with_endpoint('api').request_get(f'delegates/{delegate_id}/blocks', params)
+    def blocks(self, delegate_id, **kwargs):
+        return self.with_endpoint('api').request_get(f'delegates/{delegate_id}/blocks', kwargs)
 
-    def voters(self, delegate_id, page=None, limit=100):
-        params = {
-            'page': page,
-            'limit': limit,
-        }
-        return self.with_endpoint('api').request_get(f'delegates/{delegate_id}/voters', params)
+    def voters(self, delegate_id, **kwargs):
+        return self.with_endpoint('api').request_get(f'delegates/{delegate_id}/voters', kwargs)
