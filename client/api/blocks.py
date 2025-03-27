@@ -10,7 +10,7 @@ class Blocks(Resource):
             'limit': limit,
             **extra_params
         }
-        return self.request_get('blocks', params)
+        return self.with_endpoint('api').request_get('blocks', params)
 
     def get(self, block_id):
         return self.with_endpoint('api').request_get(f'blocks/{block_id}')

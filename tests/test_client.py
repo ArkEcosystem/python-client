@@ -12,6 +12,7 @@ def test_client():
     assert hasattr(client, 'blocks') == True
     assert hasattr(client, 'commits') == True
     assert hasattr(client, 'delegates') == True
+    assert hasattr(client, 'evm') == True
     assert hasattr(client, 'node') == True
     assert hasattr(client, 'peers') == True
     assert hasattr(client, 'rounds') == True

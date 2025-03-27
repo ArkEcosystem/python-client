@@ -8,7 +8,7 @@ class Votes(Resource):
             'page': page,
             'limit': limit,
         }
-        return self.request_get('votes', params)
+        return self.with_endpoint('api').request_get('votes', params)
 
     def get(self, vote_id):
         return self.with_endpoint('api').request_get(f'votes/{vote_id}')
