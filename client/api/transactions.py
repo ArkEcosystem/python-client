@@ -30,11 +30,5 @@ class Transactions(Resource):
     def get_unconfirmed(self, transaction_id):
         return self.with_endpoint('api').request_get(f'transactions/unconfirmed/{transaction_id}')
 
-    def types(self):
-        return self.with_endpoint('api').request_get('transactions/types')
-
-    def fees(self):
-        return self.with_endpoint('api').request_get('transactions/fees')
-
-    def schemas(self):
-        return self.with_endpoint('api').request_get('transactions/schemas')
+    def configuration(self):
+        return self.with_endpoint('transactions').request_get('configuration')

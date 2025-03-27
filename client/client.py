@@ -1,13 +1,14 @@
 from typing import Union
-from client.api.evm import EVM
 from client.connection import ClientHosts, Connection
 from client.api.api_nodes import ApiNodes
 from client.api.blockchain import Blockchain
 from client.api.blocks import Blocks
 from client.api.commits import Commits
 from client.api.delegates import Delegates
+from client.api.evm import EVM
 from client.api.node import Node
 from client.api.peers import Peers
+from client.api.receipts import Receipts
 from client.api.rounds import Rounds
 from client.api.transactions import Transactions
 from client.api.votes import Votes
@@ -84,6 +85,14 @@ class ArkClient(object):
         :rtype: client.api.peers.Peers
         """
         return Peers(self.connection)
+
+    @property
+    def receipts(self):
+        """
+        :return: Receipts API
+        :rtype: client.api.receipts.Receipts
+        """
+        return Receipts(self.connection)
 
     @property
     def rounds(self):
