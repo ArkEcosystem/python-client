@@ -10,7 +10,7 @@ class Blocks(Resource):
             'limit': limit,
             **extra_params
         }
-        return self.request_get('blocks', params)
+        return self.with_endpoint('api').request_get('blocks', params)
 
     def get(self, block_id):
         return self.with_endpoint('api').request_get(f'blocks/{block_id}')
@@ -21,9 +21,5 @@ class Blocks(Resource):
     def last(self):
         return self.with_endpoint('api').request_get('blocks/last')
 
-    def transactions(self, block_id, page=None, limit=100):
-        params = {
-            'page': page,
-            'limit': limit,
-        }
-        return self.with_endpoint('api').request_get(f'blocks/{block_id}/transactions', params)
+    def transactions(self, block_id, **kwargs):
+        return self.with_endpoint('api').request_get(f'blocks/{block_id}/transactions', kwargs)

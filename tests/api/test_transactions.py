@@ -151,15 +151,20 @@ def test_get_unconfirmed_calls_correct_url():
     assert len(responses.calls) == 1
     assert responses.calls[0].request.url == 'http://127.0.0.1:4002/api/transactions/unconfirmed/12345'
 
-def test_schemas_calls_correct_url():
+
+def test_configuration_calls_correct_url():
     responses.add(
         responses.GET,
-        'http://127.0.0.1:4002/api/transactions/schemas',
+        'http://127.0.0.1:4002/tx/api/configuration',
         json={'success': True},
         status=200
     )
 
-    client = ArkClient('http://127.0.0.1:4002/api')
-    client.transactions.schemas()
+    client = ArkClient({
+        'api': 'http://127.0.0.1:4002/api',
+        'transactions': 'http://127.0.0.1:4002/tx/api',
+        'evm': None,
+    })
+    client.transactions.configuration()
     assert len(responses.calls) == 1
-    assert responses.calls[0].request.url == 'http://127.0.0.1:4002/api/transactions/schemas'
+    assert responses.calls[0].request.url == 'http://127.0.0.1:4002/tx/api/configuration'

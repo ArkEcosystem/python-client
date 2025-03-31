@@ -5,8 +5,10 @@ from client.api.blockchain import Blockchain
 from client.api.blocks import Blocks
 from client.api.commits import Commits
 from client.api.delegates import Delegates
+from client.api.evm import EVM
 from client.api.node import Node
 from client.api.peers import Peers
+from client.api.receipts import Receipts
 from client.api.rounds import Rounds
 from client.api.transactions import Transactions
 from client.api.votes import Votes
@@ -61,6 +63,14 @@ class ArkClient(object):
         return Delegates(self.connection)
 
     @property
+    def evm(self):
+        """
+        :return: EVM API
+        :rtype: client.api.evm.EVM
+        """
+        return EVM(self.connection)
+
+    @property
     def node(self):
         """
         :return: Node API
@@ -75,6 +85,14 @@ class ArkClient(object):
         :rtype: client.api.peers.Peers
         """
         return Peers(self.connection)
+
+    @property
+    def receipts(self):
+        """
+        :return: Receipts API
+        :rtype: client.api.receipts.Receipts
+        """
+        return Receipts(self.connection)
 
     @property
     def rounds(self):
