@@ -4,7 +4,7 @@ import requests
 
 import responses
 
-from client.connection import Connection
+from client.connection import Connection, Session
 from client.exceptions import ArkHTTPException
 
 
@@ -162,3 +162,31 @@ def test_http_methods_call_correct_url_with_params_and_return_correct_response(m
     assert data == {'success': True}
     assert len(responses.calls) == 1
     assert responses.calls[0].request.url == 'http://127.0.0.1:4003/spongebob?foo=bar'
+
+
+def test_session_detects_hostname_correctly():
+    session = Session(hostname="test.com")
+    assert session.hostname == "test.com"
+    assert isinstance(session, requests.Session)
+
+
+def test_session_throws_error_when_missing_hostname():
+    with pytest.raises(ValueError) as exception:
+        Session()
+
+        assert exception.value == 'hostname is required'
+
+
+def test_session_prepends_hostname_to_url():
+    responses.add(
+        responses.GET,
+        'http://test.com/spongebob',
+        json={'success': True},
+        status=200
+    )
+
+    session = Session(hostname="http://test.com")
+
+    session.get('spongebob')
+    assert len(responses.calls) == 1
+    assert responses.calls[0].request.url == 'http://test.com/spongebob'
