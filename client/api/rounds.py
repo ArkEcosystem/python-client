@@ -9,5 +9,5 @@ class Rounds(Resource):
     def show(self, round_id):
         return self.with_endpoint('api').request_get(f'rounds/{round_id}')
 
-    def delegates(self, round_id):
-        return self.with_endpoint('api').request_get(f'rounds/{round_id}/delegates')
+    def validators(self, round_id):
+        return self.with_endpoint('api').request_get(f'rounds/{round_id}/validators')
