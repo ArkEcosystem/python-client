@@ -1,4 +1,5 @@
 from typing import Union
+from client.api.contracts import Contracts
 from client.connection import ClientHosts, Connection
 from client.api.api_nodes import ApiNodes
 from client.api.blockchain import Blockchain
@@ -53,6 +54,14 @@ class ArkClient(object):
         :rtype: client.api.commits.Commits
         """
         return Commits(self.connection)
+
+    @property
+    def contracts(self):
+        """
+        :return: contracts API
+        :rtype: client.api.contracts.Contracts
+        """
+        return Contracts(self.connection)
 
     @property
     def evm(self):
