@@ -5,7 +5,7 @@ from client.api.api_nodes import ApiNodes
 from client.api.blockchain import Blockchain
 from client.api.blocks import Blocks
 from client.api.commits import Commits
-from client.api.delegates import Delegates
+from client.api.validators import Validators
 from client.api.evm import EVM
 from client.api.node import Node
 from client.api.peers import Peers
@@ -64,14 +64,6 @@ class ArkClient(object):
         return Contracts(self.connection)
 
     @property
-    def delegates(self):
-        """
-        :return: Delegates API
-        :rtype: client.api.delegates.Delegates
-        """
-        return Delegates(self.connection)
-
-    @property
     def evm(self):
         """
         :return: EVM API
@@ -118,6 +110,14 @@ class ArkClient(object):
         :rtype: client.api.transactions.Transactions
         """
         return Transactions(self.connection)
+
+    @property
+    def validators(self):
+        """
+        :return: Validators API
+        :rtype: client.api.validators.Validators
+        """
+        return Validators(self.connection)
 
     @property
     def votes(self):
