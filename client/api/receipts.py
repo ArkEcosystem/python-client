@@ -6,6 +6,4 @@ class Receipts(Resource):
         return self.with_endpoint('api').request_get('receipts', kwargs)
 
     def get(self, transaction_hash: str):
-        return self.with_endpoint('api').request_get('receipts', {
-            'txHash': transaction_hash,
-        })
+        return self.with_endpoint('api').request_get(f'receipts/{transaction_hash}')
