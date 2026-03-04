@@ -3,23 +3,12 @@ from client.resource import Resource
 
 class Tokens(Resource):
 
-    def all(self, page=None, limit=100, **kwargs):
-        extra_params = {k: v for k, v in kwargs.items() if v is not None}
+    def all(self, page=None, limit=100):
         params = {
             'page': page,
             'limit': limit,
-            **extra_params
         }
         return self.with_endpoint('api').request_get('tokens', params)
-
-    def all_with_whitelist(self, whitelist, page=None, limit=100):
-        params = {
-            'page': page,
-            'limit': limit,
-        }
-        return self.with_endpoint('api').request_post(
-            'tokens', data={'whitelist': whitelist}, params=params
-        )
 
     def get(self, address):
         return self.with_endpoint('api').request_get(
@@ -53,5 +42,3 @@ class Tokens(Resource):
             'tokens/transfers', params
         )
 
-    def whitelist(self):
-        return self.with_endpoint('api').request_get('tokens/whitelist')

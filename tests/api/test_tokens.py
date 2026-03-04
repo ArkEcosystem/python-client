@@ -1,5 +1,3 @@
-import json
-
 import responses
 
 from client import ArkClient
@@ -33,52 +31,6 @@ def test_all_calls_correct_url_with_passed_in_params():
     assert responses.calls[0].request.url.startswith('http://127.0.0.1:4002/api/tokens?')
     assert 'page=5' in responses.calls[0].request.url
     assert 'limit=69' in responses.calls[0].request.url
-
-
-def test_all_calls_correct_url_with_ignore_whitelist():
-    responses.add(
-        responses.GET,
-        'http://127.0.0.1:4002/api/tokens',
-        json={'success': True},
-        status=200
-    )
-
-    client = ArkClient('http://127.0.0.1:4002/api')
-    client.tokens.all(ignoreWhitelist=True)
-    assert len(responses.calls) == 1
-    assert 'ignoreWhitelist=True' in responses.calls[0].request.url
-
-
-def test_all_with_whitelist_calls_correct_url():
-    responses.add(
-        responses.POST,
-        'http://127.0.0.1:4002/api/tokens',
-        json={'success': True},
-        status=200
-    )
-
-    client = ArkClient('http://127.0.0.1:4002/api')
-    whitelist = ['0xabc', '0xdef']
-    client.tokens.all_with_whitelist(whitelist)
-    assert len(responses.calls) == 1
-    assert responses.calls[0].request.url == 'http://127.0.0.1:4002/api/tokens?limit=100'
-    body = json.loads(responses.calls[0].request.body)
-    assert body == {'whitelist': ['0xabc', '0xdef']}
-
-
-def test_all_with_whitelist_calls_correct_url_with_params():
-    responses.add(
-        responses.POST,
-        'http://127.0.0.1:4002/api/tokens',
-        json={'success': True},
-        status=200
-    )
-
-    client = ArkClient('http://127.0.0.1:4002/api')
-    client.tokens.all_with_whitelist(['0xabc'], page=2, limit=50)
-    assert len(responses.calls) == 1
-    assert 'page=2' in responses.calls[0].request.url
-    assert 'limit=50' in responses.calls[0].request.url
 
 
 def test_get_calls_correct_url():
@@ -204,17 +156,3 @@ def test_all_transfers_calls_correct_url_with_passed_in_params():
     assert 'limit=10' in responses.calls[0].request.url
 
 
-def test_whitelist_calls_correct_url():
-    responses.add(
-        responses.GET,
-        'http://127.0.0.1:4002/api/tokens/whitelist',
-        json={'success': True},
-        status=200
-    )
-
-    client = ArkClient('http://127.0.0.1:4002/api')
-    client.tokens.whitelist()
-    assert len(responses.calls) == 1
-    assert responses.calls[0].request.url == (
-        'http://127.0.0.1:4002/api/tokens/whitelist'
-    )
