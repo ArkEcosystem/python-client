@@ -278,6 +278,36 @@ def test_tokens_calls_correct_url_with_passed_in_params():
     assert 'limit=69' in responses.calls[0].request.url
 
 
+def test_tokens_calls_correct_url_with_min_balance():
+    wallet_id = '12345'
+    responses.add(
+        responses.GET,
+        'http://127.0.0.1:4002/api/wallets/{}/tokens'.format(wallet_id),
+        json={'success': True},
+        status=200
+    )
+
+    client = ArkClient('http://127.0.0.1:4002/api')
+    client.wallets.tokens(wallet_id, min_balance=0.01)
+    assert len(responses.calls) == 1
+    assert 'minBalance=0.01' in responses.calls[0].request.url
+
+
+def test_tokens_calls_correct_url_with_min_balance_zero():
+    wallet_id = '12345'
+    responses.add(
+        responses.GET,
+        'http://127.0.0.1:4002/api/wallets/{}/tokens'.format(wallet_id),
+        json={'success': True},
+        status=200
+    )
+
+    client = ArkClient('http://127.0.0.1:4002/api')
+    client.wallets.tokens(wallet_id, min_balance=0)
+    assert len(responses.calls) == 1
+    assert 'minBalance=0' in responses.calls[0].request.url
+
+
 def test_token_addresses_calls_correct_url_with_default_params():
     responses.add(
         responses.GET,

@@ -50,10 +50,11 @@ class Wallets(Resource):
         }
         return self.with_endpoint('api').request_get(f'wallets/{wallet_id}/votes', params)
 
-    def tokens(self, wallet_id, page=None, limit=100):
+    def tokens(self, wallet_id, page=None, limit=100, min_balance=None):
         params = {
             'page': page,
             'limit': limit,
+            'minBalance': min_balance,
         }
         return self.with_endpoint('api').request_get(f'wallets/{wallet_id}/tokens', params)
 
