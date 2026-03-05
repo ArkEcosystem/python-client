@@ -13,7 +13,11 @@ def test_eth_call_methods_correct_url():
     )
 
     client = ArkClient('http://127.0.0.1:4002/evm/api')
-    client.evm.eth_call([{ 'random': 'data' }])
+    client.evm.call({
+        'method': 'eth_call',
+        'params': [[{ 'random': 'data' }], 'latest'],
+        'id': None,
+    })
     assert len(responses.calls) == 1
     assert responses.calls[0].request.url == 'http://127.0.0.1:4002/evm/api/'
     assert json.loads(responses.calls[0].request.body.decode()) == {
