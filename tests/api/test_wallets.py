@@ -278,7 +278,7 @@ def test_tokens_calls_correct_url_with_passed_in_params():
     assert 'limit=69' in responses.calls[0].request.url
 
 
-def test_token_addresses_calls_correct_url_with_default_params():
+def test_tokens_for_calls_correct_url_with_default_params():
     responses.add(
         responses.GET,
         'http://127.0.0.1:4002/api/wallets/tokens',
@@ -287,7 +287,7 @@ def test_token_addresses_calls_correct_url_with_default_params():
     )
 
     client = ArkClient('http://127.0.0.1:4002/api')
-    client.wallets.token_addresses('0xabc,0xdef')
+    client.wallets.tokens_for('0xabc,0xdef')
     assert len(responses.calls) == 1
     assert responses.calls[0].request.url.startswith(
         'http://127.0.0.1:4002/api/wallets/tokens?'
@@ -296,7 +296,7 @@ def test_token_addresses_calls_correct_url_with_default_params():
     assert 'limit=100' in responses.calls[0].request.url
 
 
-def test_token_addresses_calls_correct_url_with_passed_in_params():
+def test_tokens_for_calls_correct_url_with_passed_in_params():
     responses.add(
         responses.GET,
         'http://127.0.0.1:4002/api/wallets/tokens',
@@ -305,7 +305,7 @@ def test_token_addresses_calls_correct_url_with_passed_in_params():
     )
 
     client = ArkClient('http://127.0.0.1:4002/api')
-    client.wallets.token_addresses('0xabc,0xdef', page=2, limit=50)
+    client.wallets.tokens_for('0xabc,0xdef', page=2, limit=50)
     assert len(responses.calls) == 1
     assert responses.calls[0].request.url.startswith(
         'http://127.0.0.1:4002/api/wallets/tokens?'
