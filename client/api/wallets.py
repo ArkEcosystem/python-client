@@ -58,7 +58,7 @@ class Wallets(Resource):
         }
         return self.with_endpoint('api').request_get(f'wallets/{wallet_id}/tokens', params)
 
-    def token_addresses(self, addresses, page=None, limit=100):
+    def tokens_for(self, addresses, page=None, limit=100):
         params = {
             'addresses': addresses,
             'page': page,
