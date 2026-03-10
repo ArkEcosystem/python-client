@@ -24,7 +24,7 @@ class Tokens(Resource):
             f'tokens/{address}/holders', params
         )
 
-    def transfers(self, address, page=None, limit=100):
+    def transfers_by_token(self, address, page=None, limit=100):
         params = {
             'page': page,
             'limit': limit,
@@ -33,7 +33,7 @@ class Tokens(Resource):
             f'tokens/{address}/transfers', params
         )
 
-    def all_transfers(self, page=None, limit=100):
+    def transfers(self, page=None, limit=100):
         params = {
             'page': page,
             'limit': limit,
@@ -41,4 +41,3 @@ class Tokens(Resource):
         return self.with_endpoint('api').request_get(
             'tokens/transfers', params
         )
-

@@ -86,7 +86,7 @@ def test_holders_calls_correct_url_with_passed_in_params():
     assert 'limit=50' in responses.calls[0].request.url
 
 
-def test_transfers_calls_correct_url_with_default_params():
+def test_transfers_by_token_calls_correct_url_with_default_params():
     address = '0x1234567890abcdef'
     responses.add(
         responses.GET,
@@ -96,14 +96,14 @@ def test_transfers_calls_correct_url_with_default_params():
     )
 
     client = ArkClient('http://127.0.0.1:4002/api')
-    client.tokens.transfers(address)
+    client.tokens.transfers_by_token(address)
     assert len(responses.calls) == 1
     assert responses.calls[0].request.url == (
         'http://127.0.0.1:4002/api/tokens/0x1234567890abcdef/transfers?limit=100'
     )
 
 
-def test_transfers_calls_correct_url_with_passed_in_params():
+def test_transfers_by_token_calls_correct_url_with_passed_in_params():
     address = '0x1234567890abcdef'
     responses.add(
         responses.GET,
@@ -113,7 +113,7 @@ def test_transfers_calls_correct_url_with_passed_in_params():
     )
 
     client = ArkClient('http://127.0.0.1:4002/api')
-    client.tokens.transfers(address, page=2, limit=25)
+    client.tokens.transfers_by_token(address, page=2, limit=25)
     assert len(responses.calls) == 1
     assert responses.calls[0].request.url.startswith(
         'http://127.0.0.1:4002/api/tokens/0x1234567890abcdef/transfers?'
@@ -122,7 +122,7 @@ def test_transfers_calls_correct_url_with_passed_in_params():
     assert 'limit=25' in responses.calls[0].request.url
 
 
-def test_all_transfers_calls_correct_url_with_default_params():
+def test_transfers_calls_correct_url_with_default_params():
     responses.add(
         responses.GET,
         'http://127.0.0.1:4002/api/tokens/transfers',
@@ -131,14 +131,14 @@ def test_all_transfers_calls_correct_url_with_default_params():
     )
 
     client = ArkClient('http://127.0.0.1:4002/api')
-    client.tokens.all_transfers()
+    client.tokens.transfers()
     assert len(responses.calls) == 1
     assert responses.calls[0].request.url == (
         'http://127.0.0.1:4002/api/tokens/transfers?limit=100'
     )
 
 
-def test_all_transfers_calls_correct_url_with_passed_in_params():
+def test_transfers_calls_correct_url_with_passed_in_params():
     responses.add(
         responses.GET,
         'http://127.0.0.1:4002/api/tokens/transfers',
@@ -147,12 +147,10 @@ def test_all_transfers_calls_correct_url_with_passed_in_params():
     )
 
     client = ArkClient('http://127.0.0.1:4002/api')
-    client.tokens.all_transfers(page=1, limit=10)
+    client.tokens.transfers(page=1, limit=10)
     assert len(responses.calls) == 1
     assert responses.calls[0].request.url.startswith(
         'http://127.0.0.1:4002/api/tokens/transfers?'
     )
     assert 'page=1' in responses.calls[0].request.url
     assert 'limit=10' in responses.calls[0].request.url
-
-
