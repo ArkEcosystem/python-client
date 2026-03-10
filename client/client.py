@@ -11,6 +11,7 @@ from client.api.node import Node
 from client.api.peers import Peers
 from client.api.receipts import Receipts
 from client.api.rounds import Rounds
+from client.api.tokens import Tokens
 from client.api.transactions import Transactions
 from client.api.votes import Votes
 from client.api.wallets import Wallets
@@ -102,6 +103,14 @@ class ArkClient(object):
         :rtype: client.api.rounds.Rounds
         """
         return Rounds(self.connection)
+
+    @property
+    def tokens(self):
+        """
+        :return: Tokens API
+        :rtype: client.api.tokens.Tokens
+        """
+        return Tokens(self.connection)
 
     @property
     def transactions(self):
