@@ -13,7 +13,9 @@ def test_all_calls_correct_url():
     client = ArkClient('http://127.0.0.1:4002/api')
     client.receipts.all()
     assert len(responses.calls) == 1
-    assert responses.calls[0].request.url == 'http://127.0.0.1:4002/api/receipts'
+    assert responses.calls[0].request.url == (
+        'http://127.0.0.1:4002/api/receipts'
+    )
 
 
 def test_all_calls_correct_url_with_params():
@@ -25,11 +27,15 @@ def test_all_calls_correct_url_with_params():
     )
 
     client = ArkClient('http://127.0.0.1:4002/api')
-    client.receipts.all(query_param1='value1', query_param2='value2')
+    client.receipts.all({
+        'query_param1': 'value1',
+        'query_param2': 'value2',
+    })
     assert len(responses.calls) == 1
-    assert responses.calls[0].request.url.startswith('http://127.0.0.1:4002/api/receipts?')
-    assert 'query_param1=value1' in responses.calls[0].request.url
-    assert 'query_param2=value2' in responses.calls[0].request.url
+    url = responses.calls[0].request.url
+    assert url.startswith('http://127.0.0.1:4002/api/receipts?')
+    assert 'query_param1=value1' in url
+    assert 'query_param2=value2' in url
 
 
 def test_get_calls_correct_url():
@@ -44,4 +50,6 @@ def test_get_calls_correct_url():
     client = ArkClient('http://127.0.0.1:4002/api')
     client.receipts.get(transaction_hash)
     assert len(responses.calls) == 1
-    assert responses.calls[0].request.url == f'http://127.0.0.1:4002/api/receipts/{transaction_hash}'
+    assert responses.calls[0].request.url == (
+        f'http://127.0.0.1:4002/api/receipts/{transaction_hash}'
+    )

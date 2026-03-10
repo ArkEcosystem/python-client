@@ -3,7 +3,7 @@ import responses
 from client import ArkClient
 
 
-def test_all_calls_correct_url_with_default_params():
+def test_all_calls_correct_url():
     responses.add(
         responses.GET,
         'http://127.0.0.1:4002/api/votes',
@@ -14,10 +14,12 @@ def test_all_calls_correct_url_with_default_params():
     client = ArkClient('http://127.0.0.1:4002/api')
     client.votes.all()
     assert len(responses.calls) == 1
-    assert responses.calls[0].request.url == 'http://127.0.0.1:4002/api/votes?limit=100'
+    assert responses.calls[0].request.url == (
+        'http://127.0.0.1:4002/api/votes'
+    )
 
 
-def test_all_calls_correct_url_with_passed_in_params():
+def test_all_calls_correct_url_with_params():
     responses.add(
         responses.GET,
         'http://127.0.0.1:4002/api/votes',
@@ -26,11 +28,12 @@ def test_all_calls_correct_url_with_passed_in_params():
     )
 
     client = ArkClient('http://127.0.0.1:4002/api')
-    client.votes.all(page=5, limit=69)
+    client.votes.all({'page': 5, 'limit': 69})
     assert len(responses.calls) == 1
-    assert responses.calls[0].request.url.startswith('http://127.0.0.1:4002/api/votes?')
-    assert 'page=5' in responses.calls[0].request.url
-    assert 'limit=69' in responses.calls[0].request.url
+    url = responses.calls[0].request.url
+    assert url.startswith('http://127.0.0.1:4002/api/votes?')
+    assert 'page=5' in url
+    assert 'limit=69' in url
 
 
 def test_get_calls_correct_url():
@@ -46,4 +49,6 @@ def test_get_calls_correct_url():
     client.votes.get(vote_id)
 
     assert len(responses.calls) == 1
-    assert responses.calls[0].request.url == 'http://127.0.0.1:4002/api/votes/12345'
+    assert responses.calls[0].request.url == (
+        'http://127.0.0.1:4002/api/votes/12345'
+    )

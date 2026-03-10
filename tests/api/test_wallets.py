@@ -1,11 +1,9 @@
-import json
-
 import responses
 
 from client import ArkClient
 
 
-def test_all_calls_correct_url_with_default_params():
+def test_all_calls_correct_url():
     responses.add(
         responses.GET,
         'http://127.0.0.1:4002/api/wallets',
@@ -16,10 +14,12 @@ def test_all_calls_correct_url_with_default_params():
     client = ArkClient('http://127.0.0.1:4002/api')
     client.wallets.all()
     assert len(responses.calls) == 1
-    assert responses.calls[0].request.url == 'http://127.0.0.1:4002/api/wallets?limit=100'
+    assert responses.calls[0].request.url == (
+        'http://127.0.0.1:4002/api/wallets'
+    )
 
 
-def test_all_calls_correct_url_with_passed_in_params():
+def test_all_calls_correct_url_with_params():
     responses.add(
         responses.GET,
         'http://127.0.0.1:4002/api/wallets',
@@ -28,14 +28,15 @@ def test_all_calls_correct_url_with_passed_in_params():
     )
 
     client = ArkClient('http://127.0.0.1:4002/api')
-    client.wallets.all(page=5, limit=69)
+    client.wallets.all({'page': 5, 'limit': 69})
     assert len(responses.calls) == 1
-    assert responses.calls[0].request.url.startswith('http://127.0.0.1:4002/api/wallets?')
-    assert 'page=5' in responses.calls[0].request.url
-    assert 'limit=69' in responses.calls[0].request.url
+    url = responses.calls[0].request.url
+    assert url.startswith('http://127.0.0.1:4002/api/wallets?')
+    assert 'page=5' in url
+    assert 'limit=69' in url
 
 
-def test_top_calls_correct_url_with_default_params():
+def test_top_calls_correct_url():
     responses.add(
         responses.GET,
         'http://127.0.0.1:4002/api/wallets/top',
@@ -46,10 +47,12 @@ def test_top_calls_correct_url_with_default_params():
     client = ArkClient('http://127.0.0.1:4002/api')
     client.wallets.top()
     assert len(responses.calls) == 1
-    assert responses.calls[0].request.url == 'http://127.0.0.1:4002/api/wallets/top?limit=100'
+    assert responses.calls[0].request.url == (
+        'http://127.0.0.1:4002/api/wallets/top'
+    )
 
 
-def test_top_calls_correct_url_with_passed_in_params():
+def test_top_calls_correct_url_with_params():
     responses.add(
         responses.GET,
         'http://127.0.0.1:4002/api/wallets/top',
@@ -58,11 +61,12 @@ def test_top_calls_correct_url_with_passed_in_params():
     )
 
     client = ArkClient('http://127.0.0.1:4002/api')
-    client.wallets.top(page=5, limit=69)
+    client.wallets.top({'page': 5, 'limit': 69})
     assert len(responses.calls) == 1
-    assert responses.calls[0].request.url.startswith('http://127.0.0.1:4002/api/wallets/top?')
-    assert 'page=5' in responses.calls[0].request.url
-    assert 'limit=69' in responses.calls[0].request.url
+    url = responses.calls[0].request.url
+    assert url.startswith('http://127.0.0.1:4002/api/wallets/top?')
+    assert 'page=5' in url
+    assert 'limit=69' in url
 
 
 def test_get_calls_correct_url():
@@ -78,13 +82,18 @@ def test_get_calls_correct_url():
     client.wallets.get(wallet_id)
 
     assert len(responses.calls) == 1
-    assert responses.calls[0].request.url == 'http://127.0.0.1:4002/api/wallets/12345'
+    assert responses.calls[0].request.url == (
+        'http://127.0.0.1:4002/api/wallets/12345'
+    )
 
-def test_transactions_calls_correct_url_with_default_params():
+
+def test_transactions_calls_correct_url():
     wallet_id = '12345'
     responses.add(
         responses.GET,
-        'http://127.0.0.1:4002/api/wallets/{}/transactions'.format(wallet_id),
+        'http://127.0.0.1:4002/api/wallets/{}/transactions'.format(
+            wallet_id
+        ),
         json={'success': True},
         status=200
     )
@@ -93,52 +102,44 @@ def test_transactions_calls_correct_url_with_default_params():
     client.wallets.transactions(wallet_id)
     assert len(responses.calls) == 1
     assert responses.calls[0].request.url == (
-        'http://127.0.0.1:4002/api/wallets/12345/transactions?limit=100'
+        'http://127.0.0.1:4002/api/wallets/12345/transactions'
     )
 
 
-def test_transactions_calls_correct_url_with_additional_params():
-    wallet_id = '12345'
-    responses.add(
-      responses.GET,
-      'http://127.0.0.1:4002/api/wallets/{}/transactions'.format(wallet_id),
-      json={'success': True},
-      status=200
-    )
-
-    client = ArkClient('http://127.0.0.1:4002/api')
-    client.wallets.transactions(wallet_id=wallet_id, page=5, limit=69, orderBy="timestamp.epoch")
-    assert len(responses.calls) == 1
-    assert responses.calls[0].request.url.startswith('http://127.0.0.1:4002/api/wallets/12345/transactions?')
-    assert 'page=5' in responses.calls[0].request.url
-    assert 'limit=69' in responses.calls[0].request.url
-    assert 'orderBy=timestamp.epoch' in responses.calls[0].request.url
-
-
-def test_transactions_calls_correct_url_with_passed_in_params():
+def test_transactions_calls_correct_url_with_params():
     wallet_id = '12345'
     responses.add(
         responses.GET,
-        'http://127.0.0.1:4002/api/wallets/{}/transactions'.format(wallet_id),
+        'http://127.0.0.1:4002/api/wallets/{}/transactions'.format(
+            wallet_id
+        ),
         json={'success': True},
         status=200
     )
 
     client = ArkClient('http://127.0.0.1:4002/api')
-    client.wallets.transactions(wallet_id, page=5, limit=69)
+    client.wallets.transactions(wallet_id, {
+        'page': 5,
+        'limit': 69,
+        'orderBy': 'timestamp.epoch',
+    })
     assert len(responses.calls) == 1
-    assert responses.calls[0].request.url.startswith(
+    url = responses.calls[0].request.url
+    assert url.startswith(
         'http://127.0.0.1:4002/api/wallets/12345/transactions?'
     )
-    assert 'page=5' in responses.calls[0].request.url
-    assert 'limit=69' in responses.calls[0].request.url
+    assert 'page=5' in url
+    assert 'limit=69' in url
+    assert 'orderBy=timestamp.epoch' in url
 
 
-def test_sent_transactions_calls_correct_url_with_default_params():
+def test_sent_transactions_calls_correct_url():
     wallet_id = '12345'
     responses.add(
         responses.GET,
-        'http://127.0.0.1:4002/api/wallets/{}/transactions/sent'.format(wallet_id),
+        'http://127.0.0.1:4002/api/wallets/{}/transactions/sent'.format(
+            wallet_id
+        ),
         json={'success': True},
         status=200
     )
@@ -147,34 +148,41 @@ def test_sent_transactions_calls_correct_url_with_default_params():
     client.wallets.sent_transactions(wallet_id)
     assert len(responses.calls) == 1
     assert responses.calls[0].request.url == (
-        'http://127.0.0.1:4002/api/wallets/12345/transactions/sent?limit=100'
+        'http://127.0.0.1:4002/api/wallets/12345/transactions/sent'
     )
 
 
-def test_sent_transactions_calls_correct_url_with_passed_in_params():
+def test_sent_transactions_calls_correct_url_with_params():
     wallet_id = '12345'
     responses.add(
         responses.GET,
-        'http://127.0.0.1:4002/api/wallets/{}/transactions/sent'.format(wallet_id),
+        'http://127.0.0.1:4002/api/wallets/{}/transactions/sent'.format(
+            wallet_id
+        ),
         json={'success': True},
         status=200
     )
 
     client = ArkClient('http://127.0.0.1:4002/api')
-    client.wallets.sent_transactions(wallet_id, page=5, limit=69)
+    client.wallets.sent_transactions(wallet_id, {
+        'page': 5,
+        'limit': 69,
+    })
     assert len(responses.calls) == 1
-    assert responses.calls[0].request.url.startswith(
+    url = responses.calls[0].request.url
+    assert url.startswith(
         'http://127.0.0.1:4002/api/wallets/12345/transactions/sent?'
     )
-    assert 'page=5' in responses.calls[0].request.url
-    assert 'limit=69' in responses.calls[0].request.url
+    assert 'page=5' in url
+    assert 'limit=69' in url
 
 
-def test_received_transactions_calls_correct_url_with_default_params():
+def test_received_transactions_calls_correct_url():
     wallet_id = '12345'
     responses.add(
         responses.GET,
-        'http://127.0.0.1:4002/api/wallets/{}/transactions/received'.format(wallet_id),
+        'http://127.0.0.1:4002/api/wallets/{}/transactions/received'
+        .format(wallet_id),
         json={'success': True},
         status=200
     )
@@ -183,30 +191,36 @@ def test_received_transactions_calls_correct_url_with_default_params():
     client.wallets.received_transactions(wallet_id)
     assert len(responses.calls) == 1
     assert responses.calls[0].request.url == (
-        'http://127.0.0.1:4002/api/wallets/12345/transactions/received?limit=100'
+        'http://127.0.0.1:4002/api/wallets/12345/transactions/received'
     )
 
 
-def test_received_transactions_calls_correct_url_with_passed_in_params():
+def test_received_transactions_calls_correct_url_with_params():
     wallet_id = '12345'
     responses.add(
         responses.GET,
-        'http://127.0.0.1:4002/api/wallets/{}/transactions/received'.format(wallet_id),
+        'http://127.0.0.1:4002/api/wallets/{}/transactions/received'
+        .format(wallet_id),
         json={'success': True},
         status=200
     )
 
     client = ArkClient('http://127.0.0.1:4002/api')
-    client.wallets.received_transactions(wallet_id, page=5, limit=69)
+    client.wallets.received_transactions(wallet_id, {
+        'page': 5,
+        'limit': 69,
+    })
     assert len(responses.calls) == 1
-    assert responses.calls[0].request.url.startswith(
-        'http://127.0.0.1:4002/api/wallets/12345/transactions/received?'
+    url = responses.calls[0].request.url
+    assert url.startswith(
+        'http://127.0.0.1:4002/api/wallets/12345'
+        '/transactions/received?'
     )
-    assert 'page=5' in responses.calls[0].request.url
-    assert 'limit=69' in responses.calls[0].request.url
+    assert 'page=5' in url
+    assert 'limit=69' in url
 
 
-def test_votes_calls_correct_url_with_default_params():
+def test_votes_calls_correct_url():
     wallet_id = '12345'
     responses.add(
         responses.GET,
@@ -219,11 +233,11 @@ def test_votes_calls_correct_url_with_default_params():
     client.wallets.votes(wallet_id)
     assert len(responses.calls) == 1
     assert responses.calls[0].request.url == (
-        'http://127.0.0.1:4002/api/wallets/12345/votes?limit=100'
+        'http://127.0.0.1:4002/api/wallets/12345/votes'
     )
 
 
-def test_votes_calls_correct_url_with_passed_in_params():
+def test_votes_calls_correct_url_with_params():
     wallet_id = '12345'
     responses.add(
         responses.GET,
@@ -233,16 +247,17 @@ def test_votes_calls_correct_url_with_passed_in_params():
     )
 
     client = ArkClient('http://127.0.0.1:4002/api')
-    client.wallets.votes(wallet_id, page=5, limit=69)
+    client.wallets.votes(wallet_id, {'page': 5, 'limit': 69})
     assert len(responses.calls) == 1
-    assert responses.calls[0].request.url.startswith(
+    url = responses.calls[0].request.url
+    assert url.startswith(
         'http://127.0.0.1:4002/api/wallets/12345/votes?'
     )
-    assert 'page=5' in responses.calls[0].request.url
-    assert 'limit=69' in responses.calls[0].request.url
+    assert 'page=5' in url
+    assert 'limit=69' in url
 
 
-def test_tokens_calls_correct_url_with_default_params():
+def test_tokens_calls_correct_url():
     wallet_id = '12345'
     responses.add(
         responses.GET,
@@ -255,11 +270,11 @@ def test_tokens_calls_correct_url_with_default_params():
     client.wallets.tokens(wallet_id)
     assert len(responses.calls) == 1
     assert responses.calls[0].request.url == (
-        'http://127.0.0.1:4002/api/wallets/12345/tokens?limit=100'
+        'http://127.0.0.1:4002/api/wallets/12345/tokens'
     )
 
 
-def test_tokens_calls_correct_url_with_passed_in_params():
+def test_tokens_calls_correct_url_with_params():
     wallet_id = '12345'
     responses.add(
         responses.GET,
@@ -269,16 +284,17 @@ def test_tokens_calls_correct_url_with_passed_in_params():
     )
 
     client = ArkClient('http://127.0.0.1:4002/api')
-    client.wallets.tokens(wallet_id, page=5, limit=69)
+    client.wallets.tokens(wallet_id, {'page': 5, 'limit': 69})
     assert len(responses.calls) == 1
-    assert responses.calls[0].request.url.startswith(
+    url = responses.calls[0].request.url
+    assert url.startswith(
         'http://127.0.0.1:4002/api/wallets/12345/tokens?'
     )
-    assert 'page=5' in responses.calls[0].request.url
-    assert 'limit=69' in responses.calls[0].request.url
+    assert 'page=5' in url
+    assert 'limit=69' in url
 
 
-def test_tokens_for_calls_correct_url_with_default_params():
+def test_tokens_for_calls_correct_url():
     responses.add(
         responses.GET,
         'http://127.0.0.1:4002/api/wallets/tokens',
@@ -287,16 +303,18 @@ def test_tokens_for_calls_correct_url_with_default_params():
     )
 
     client = ArkClient('http://127.0.0.1:4002/api')
-    client.wallets.tokens_for('0xabc,0xdef')
+    client.wallets.tokens_for({
+        'addresses': '0xabc,0xdef',
+    })
     assert len(responses.calls) == 1
-    assert responses.calls[0].request.url.startswith(
+    url = responses.calls[0].request.url
+    assert url.startswith(
         'http://127.0.0.1:4002/api/wallets/tokens?'
     )
-    assert 'addresses=0xabc%2C0xdef' in responses.calls[0].request.url
-    assert 'limit=100' in responses.calls[0].request.url
+    assert 'addresses=0xabc%2C0xdef' in url
 
 
-def test_tokens_for_calls_correct_url_with_passed_in_params():
+def test_tokens_for_calls_correct_url_with_params():
     responses.add(
         responses.GET,
         'http://127.0.0.1:4002/api/wallets/tokens',
@@ -305,10 +323,15 @@ def test_tokens_for_calls_correct_url_with_passed_in_params():
     )
 
     client = ArkClient('http://127.0.0.1:4002/api')
-    client.wallets.tokens_for('0xabc,0xdef', page=2, limit=50)
+    client.wallets.tokens_for({
+        'addresses': '0xabc,0xdef',
+        'page': 2,
+        'limit': 50,
+    })
     assert len(responses.calls) == 1
-    assert responses.calls[0].request.url.startswith(
+    url = responses.calls[0].request.url
+    assert url.startswith(
         'http://127.0.0.1:4002/api/wallets/tokens?'
     )
-    assert 'page=2' in responses.calls[0].request.url
-    assert 'limit=50' in responses.calls[0].request.url
+    assert 'page=2' in url
+    assert 'limit=50' in url

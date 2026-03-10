@@ -3,64 +3,43 @@ from client.resource import Resource
 
 class Wallets(Resource):
 
-    def all(self, page=None, limit=100):
-        params = {
-            'page': page,
-            'limit': limit,
-        }
-        return self.with_endpoint('api').request_get('wallets', params)
+    def all(self, query={}):
+        return self.with_endpoint('api').request_get('wallets', query)
 
-    def top(self, page=None, limit=100):
-        params = {
-            'page': page,
-            'limit': limit
-        }
-        return self.with_endpoint('api').request_get('wallets/top', params)
+    def top(self, query={}):
+        return self.with_endpoint('api').request_get('wallets/top', query)
 
     def get(self, wallet_id):
-        return self.with_endpoint('api').request_get(f'wallets/{wallet_id}')
+        return self.with_endpoint('api').request_get(
+            f'wallets/{wallet_id}'
+        )
 
-    def transactions(self, wallet_id, page=None, limit=100, **kwargs):
-        extra_params = {name: kwargs[name] for name in kwargs if kwargs[name] is not None}
-        params = {
-            'page': page,
-            'limit': limit,
-            **extra_params
-        }
-        return self.with_endpoint('api').request_get(f'wallets/{wallet_id}/transactions', params)
+    def transactions(self, wallet_id, query={}):
+        return self.with_endpoint('api').request_get(
+            f'wallets/{wallet_id}/transactions', query
+        )
 
-    def sent_transactions(self, wallet_id, page=None, limit=100):
-        params = {
-            'page': page,
-            'limit': limit,
-        }
-        return self.with_endpoint('api').request_get(f'wallets/{wallet_id}/transactions/sent', params)
+    def sent_transactions(self, wallet_id, query={}):
+        return self.with_endpoint('api').request_get(
+            f'wallets/{wallet_id}/transactions/sent', query
+        )
 
-    def received_transactions(self, wallet_id, page=None, limit=100):
-        params = {
-            'page': page,
-            'limit': limit,
-        }
-        return self.with_endpoint('api').request_get(f'wallets/{wallet_id}/transactions/received', params)
+    def received_transactions(self, wallet_id, query={}):
+        return self.with_endpoint('api').request_get(
+            f'wallets/{wallet_id}/transactions/received', query
+        )
 
-    def votes(self, wallet_id, page=None, limit=100):
-        params = {
-            'page': page,
-            'limit': limit,
-        }
-        return self.with_endpoint('api').request_get(f'wallets/{wallet_id}/votes', params)
+    def votes(self, wallet_id, query={}):
+        return self.with_endpoint('api').request_get(
+            f'wallets/{wallet_id}/votes', query
+        )
 
-    def tokens(self, wallet_id, page=None, limit=100):
-        params = {
-            'page': page,
-            'limit': limit,
-        }
-        return self.with_endpoint('api').request_get(f'wallets/{wallet_id}/tokens', params)
+    def tokens(self, wallet_id, query={}):
+        return self.with_endpoint('api').request_get(
+            f'wallets/{wallet_id}/tokens', query
+        )
 
-    def tokens_for(self, addresses, page=None, limit=100):
-        params = {
-            'addresses': addresses,
-            'page': page,
-            'limit': limit,
-        }
-        return self.with_endpoint('api').request_get('wallets/tokens', params)
+    def tokens_for(self, query={}):
+        return self.with_endpoint('api').request_get(
+            'wallets/tokens', query
+        )
