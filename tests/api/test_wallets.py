@@ -240,3 +240,75 @@ def test_votes_calls_correct_url_with_passed_in_params():
     )
     assert 'page=5' in responses.calls[0].request.url
     assert 'limit=69' in responses.calls[0].request.url
+
+
+def test_tokens_calls_correct_url_with_default_params():
+    wallet_id = '12345'
+    responses.add(
+        responses.GET,
+        'http://127.0.0.1:4002/api/wallets/{}/tokens'.format(wallet_id),
+        json={'success': True},
+        status=200
+    )
+
+    client = ArkClient('http://127.0.0.1:4002/api')
+    client.wallets.tokens(wallet_id)
+    assert len(responses.calls) == 1
+    assert responses.calls[0].request.url == (
+        'http://127.0.0.1:4002/api/wallets/12345/tokens?limit=100'
+    )
+
+
+def test_tokens_calls_correct_url_with_passed_in_params():
+    wallet_id = '12345'
+    responses.add(
+        responses.GET,
+        'http://127.0.0.1:4002/api/wallets/{}/tokens'.format(wallet_id),
+        json={'success': True},
+        status=200
+    )
+
+    client = ArkClient('http://127.0.0.1:4002/api')
+    client.wallets.tokens(wallet_id, page=5, limit=69)
+    assert len(responses.calls) == 1
+    assert responses.calls[0].request.url.startswith(
+        'http://127.0.0.1:4002/api/wallets/12345/tokens?'
+    )
+    assert 'page=5' in responses.calls[0].request.url
+    assert 'limit=69' in responses.calls[0].request.url
+
+
+def test_tokens_for_calls_correct_url_with_default_params():
+    responses.add(
+        responses.GET,
+        'http://127.0.0.1:4002/api/wallets/tokens',
+        json={'success': True},
+        status=200
+    )
+
+    client = ArkClient('http://127.0.0.1:4002/api')
+    client.wallets.tokens_for('0xabc,0xdef')
+    assert len(responses.calls) == 1
+    assert responses.calls[0].request.url.startswith(
+        'http://127.0.0.1:4002/api/wallets/tokens?'
+    )
+    assert 'addresses=0xabc%2C0xdef' in responses.calls[0].request.url
+    assert 'limit=100' in responses.calls[0].request.url
+
+
+def test_tokens_for_calls_correct_url_with_passed_in_params():
+    responses.add(
+        responses.GET,
+        'http://127.0.0.1:4002/api/wallets/tokens',
+        json={'success': True},
+        status=200
+    )
+
+    client = ArkClient('http://127.0.0.1:4002/api')
+    client.wallets.tokens_for('0xabc,0xdef', page=2, limit=50)
+    assert len(responses.calls) == 1
+    assert responses.calls[0].request.url.startswith(
+        'http://127.0.0.1:4002/api/wallets/tokens?'
+    )
+    assert 'page=2' in responses.calls[0].request.url
+    assert 'limit=50' in responses.calls[0].request.url

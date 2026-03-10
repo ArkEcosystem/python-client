@@ -49,3 +49,18 @@ class Wallets(Resource):
             'limit': limit,
         }
         return self.with_endpoint('api').request_get(f'wallets/{wallet_id}/votes', params)
+
+    def tokens(self, wallet_id, page=None, limit=100):
+        params = {
+            'page': page,
+            'limit': limit,
+        }
+        return self.with_endpoint('api').request_get(f'wallets/{wallet_id}/tokens', params)
+
+    def tokens_for(self, addresses, page=None, limit=100):
+        params = {
+            'addresses': addresses,
+            'page': page,
+            'limit': limit,
+        }
+        return self.with_endpoint('api').request_get('wallets/tokens', params)
