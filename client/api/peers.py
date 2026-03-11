@@ -3,19 +3,8 @@ from client.resource import Resource
 
 class Peers(Resource):
 
-    def all(self, os=None, status=None, port=None, version=None, order_by=None,
-            page=None, limit=100):
-
-        params = {
-            'os': os,
-            'status': status,
-            'port': port,
-            'version': version,
-            'orderBy': order_by,
-            'page': page,
-            'limit': limit,
-        }
-        return self.with_endpoint('api').request_get('peers', params)
+    def all(self, query={}):
+        return self.with_endpoint('api').request_get('peers', query)
 
     def get(self, ip):
         return self.with_endpoint('api').request_get(f'peers/{ip}')

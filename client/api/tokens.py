@@ -3,41 +3,25 @@ from client.resource import Resource
 
 class Tokens(Resource):
 
-    def all(self, page=None, limit=100):
-        params = {
-            'page': page,
-            'limit': limit,
-        }
-        return self.with_endpoint('api').request_get('tokens', params)
+    def all(self, query={}):
+        return self.with_endpoint('api').request_get('tokens', query)
 
     def get(self, address):
         return self.with_endpoint('api').request_get(
             f'tokens/{address}'
         )
 
-    def holders(self, address, page=None, limit=100):
-        params = {
-            'page': page,
-            'limit': limit,
-        }
+    def holders(self, address, query={}):
         return self.with_endpoint('api').request_get(
-            f'tokens/{address}/holders', params
+            f'tokens/{address}/holders', query
         )
 
-    def transfers_by_token(self, address, page=None, limit=100):
-        params = {
-            'page': page,
-            'limit': limit,
-        }
+    def transfers_by_token(self, address, query={}):
         return self.with_endpoint('api').request_get(
-            f'tokens/{address}/transfers', params
+            f'tokens/{address}/transfers', query
         )
 
-    def transfers(self, page=None, limit=100):
-        params = {
-            'page': page,
-            'limit': limit,
-        }
+    def transfers(self, query={}):
         return self.with_endpoint('api').request_get(
-            'tokens/transfers', params
+            'tokens/transfers', query
         )

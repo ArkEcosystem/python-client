@@ -3,20 +3,20 @@ from client.resource import Resource
 
 class Validators(Resource):
 
-    def all(self, page=None, limit=100, **kwargs):
-        extra_params = {name: kwargs[name] for name in kwargs if kwargs[name] is not None}
-        params = {
-            'page': page,
-            'limit': limit,
-            **extra_params
-        }
-        return self.with_endpoint('api').request_get('validators', params)
+    def all(self, query={}):
+        return self.with_endpoint('api').request_get('validators', query)
 
     def get(self, validator_id):
-        return self.with_endpoint('api').request_get(f'validators/{validator_id}')
+        return self.with_endpoint('api').request_get(
+            f'validators/{validator_id}'
+        )
 
-    def blocks(self, validator_id, **kwargs):
-        return self.with_endpoint('api').request_get(f'validators/{validator_id}/blocks', kwargs)
+    def blocks(self, validator_id, query={}):
+        return self.with_endpoint('api').request_get(
+            f'validators/{validator_id}/blocks', query
+        )
 
-    def voters(self, validator_id, **kwargs):
-        return self.with_endpoint('api').request_get(f'validators/{validator_id}/voters', kwargs)
+    def voters(self, validator_id, query={}):
+        return self.with_endpoint('api').request_get(
+            f'validators/{validator_id}/voters', query
+        )

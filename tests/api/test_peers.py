@@ -3,7 +3,7 @@ import responses
 from client import ArkClient
 
 
-def test_all_calls_correct_url_with_default_params():
+def test_all_calls_correct_url():
     responses.add(
         responses.GET,
         'http://127.0.0.1:4002/api/peers',
@@ -14,10 +14,12 @@ def test_all_calls_correct_url_with_default_params():
     client = ArkClient('http://127.0.0.1:4002/api')
     client.peers.all()
     assert len(responses.calls) == 1
-    assert responses.calls[0].request.url == 'http://127.0.0.1:4002/api/peers?limit=100'
+    assert responses.calls[0].request.url == (
+        'http://127.0.0.1:4002/api/peers'
+    )
 
 
-def test_all_calls_correct_url_with_passed_in_params():
+def test_all_calls_correct_url_with_params():
     responses.add(
         responses.GET,
         'http://127.0.0.1:4002/api/peers',
@@ -26,18 +28,25 @@ def test_all_calls_correct_url_with_passed_in_params():
     )
 
     client = ArkClient('http://127.0.0.1:4002/api')
-    client.peers.all(
-        os='a', status='live', port=1337, version='2.0.0', order_by='ip', page=5, limit=69
-    )
+    client.peers.all({
+        'os': 'a',
+        'status': 'live',
+        'port': 1337,
+        'version': '2.0.0',
+        'orderBy': 'ip',
+        'page': 5,
+        'limit': 69,
+    })
     assert len(responses.calls) == 1
-    assert responses.calls[0].request.url.startswith('http://127.0.0.1:4002/api/peers?')
-    assert 'os=a' in responses.calls[0].request.url
-    assert 'status=live' in responses.calls[0].request.url
-    assert 'port=1337' in responses.calls[0].request.url
-    assert 'version=2.0.0' in responses.calls[0].request.url
-    assert 'orderBy=ip' in responses.calls[0].request.url
-    assert 'page=5' in responses.calls[0].request.url
-    assert 'limit=69' in responses.calls[0].request.url
+    url = responses.calls[0].request.url
+    assert url.startswith('http://127.0.0.1:4002/api/peers?')
+    assert 'os=a' in url
+    assert 'status=live' in url
+    assert 'port=1337' in url
+    assert 'version=2.0.0' in url
+    assert 'orderBy=ip' in url
+    assert 'page=5' in url
+    assert 'limit=69' in url
 
 
 def test_get_calls_correct_url_with_ip():
@@ -52,4 +61,6 @@ def test_get_calls_correct_url_with_ip():
     client = ArkClient('http://127.0.0.1:4002/api')
     client.peers.get(ip)
     assert len(responses.calls) == 1
-    assert responses.calls[0].request.url == 'http://127.0.0.1:4002/api/peers/123.4.5.67'
+    assert responses.calls[0].request.url == (
+        'http://127.0.0.1:4002/api/peers/123.4.5.67'
+    )
