@@ -3,5 +3,5 @@ from client.resource import Resource
 
 class Commits(Resource):
 
-    def show(self, block_number):
-        return self.with_endpoint('api').request_get(f'commits/{block_number}')
+    def get(self, height: int):
+        return self.with_endpoint('api').request_get(f'commits/{height}')
