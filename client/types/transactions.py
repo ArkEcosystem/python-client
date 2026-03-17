@@ -1,6 +1,84 @@
 from typing import List, TypedDict
 
+from client.types import PaginatedQuery
 
+
+# Functional form required: keys include 'from' which is a reserved Python keyword
+Transaction = TypedDict(
+    'Transaction',
+    {
+        'hash': str,
+        'fee': str,
+        'type': int,
+        'nonce': str,
+        'value': str,
+        'network': int,
+        'version': int,
+        'sequence': int,
+        'signature': str,
+        'typeGroup': int,
+        'expiration': int,
+        'to': str,
+        'senderPublicKey': str,
+        'from': str,
+    },
+)
+
+
+class TransactionReceipt(TypedDict):
+    gasRefunded: int
+    gasUsed: int
+    success: bool
+
+
+# Functional form required: keys include 'from' which is a reserved Python keyword
+TransactionResponse = TypedDict(
+    'TransactionResponse',
+    {
+        'hash': str,
+        'value': str,
+        'blockNumber': str,
+        'confirmations': int,
+        'data': str,
+        'gas': str,
+        'gasPrice': str,
+        'nonce': str,
+        'to': str,
+        'from': str,
+        'senderPublicKey': str,
+        'signature': str,
+        'timestamp': str,
+        'receipt': TransactionReceipt,
+    },
+)
+
+
+class TransactionConfigurationTransactionPool(TypedDict):
+    maxTransactionAge: int
+    maxTransactionBytes: int
+    maxTransactionsInPool: int
+    maxTransactionsPerRequest: int
+    maxTransactionsPerSender: int
+
+
+class TransactionConfigurationCore(TypedDict):
+    version: str
+
+
+class TransactionConfigurationResponse(TypedDict):
+    core: TransactionConfigurationCore
+    height: int
+    transactionPool: TransactionConfigurationTransactionPool
+
+
+class TransactionCreateResponse(TypedDict):
+    accept: list[int]
+    broadcast: list[int]
+    excess: list[int]
+    invalid: list[int]
+
+
+# Functional form required: keys include 'from' which is a reserved Python keyword
 TransactionsQuery = TypedDict(
     'TransactionsQuery',
     {
@@ -27,28 +105,15 @@ TransactionsQuery = TypedDict(
     total=False,
 )
 
-UnconfirmedTransactionsQuery = TypedDict(
-    'UnconfirmedTransactionsQuery',
-    {
-        'page': int,
-        'limit': int,
-        'orderBy': str,
-    },
-    total=False,
-)
 
-TransactionGetQuery = TypedDict(
-    'TransactionGetQuery',
-    {
-        'fullReceipt': bool,
-        'includeTokens': bool,
-    },
-    total=False,
-)
+class UnconfirmedTransactionsQuery(PaginatedQuery, total=False):
+    orderBy: str
 
-TransactionCreateParams = TypedDict(
-    'TransactionCreateParams',
-    {
-        'transactions': List[str],
-    },
-)
+
+class TransactionGetQuery(TypedDict, total=False):
+    fullReceipt: bool
+    includeTokens: bool
+
+
+class TransactionCreateParams(TypedDict):
+    transactions: List[str]

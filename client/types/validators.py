@@ -1,6 +1,7 @@
 from typing import TypedDict
 
 
+# Functional form required: keys contain dots (e.g. 'blocks.last.hash') which are not valid Python identifiers
 ValidatorsQuery = TypedDict(
     'ValidatorsQuery',
     {

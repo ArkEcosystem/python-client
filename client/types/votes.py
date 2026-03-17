@@ -1,6 +1,7 @@
 from typing import TypedDict
 
 
+# Functional form required: keys include 'from' which is a reserved Python keyword
 VotesQuery = TypedDict(
     'VotesQuery',
     {
@@ -26,10 +27,6 @@ VotesQuery = TypedDict(
     total=False,
 )
 
-VoteQuery = TypedDict(
-    'VoteQuery',
-    {
-        'fullReceipt': bool,
-    },
-    total=False,
-)
+
+class VoteQuery(TypedDict, total=False):
+    fullReceipt: bool

@@ -1,19 +1,21 @@
 from typing import Optional
 
 from client.resource import Resource
-from client.types.transactions import TransactionsQuery
-from client.types.wallets import WalletTokensForQuery, WalletTokensQuery, WalletsQuery
+from client.types import PaginatedResponse, Response
+from client.types.transactions import TransactionResponse, TransactionsQuery
+from client.types.wallets import WalletResponse, WalletTokensForQuery, WalletTokensQuery, WalletsQuery
+from client.types.tokens import TokenActionsResponse, TokenPaginatedResponseResults
 
 
 class Wallets(Resource):
 
-    def all(self, query: Optional[WalletsQuery] = None):
+    def all(self, query: Optional[WalletsQuery] = None) -> PaginatedResponse[WalletResponse]:
         return self.with_endpoint('api').request_get('wallets', query)
 
-    def top(self, query: Optional[WalletsQuery] = None):
+    def top(self, query: Optional[WalletsQuery] = None) -> PaginatedResponse[WalletResponse]:
         return self.with_endpoint('api').request_get('wallets/top', query)
 
-    def get(self, wallet_id: str):
+    def get(self, wallet_id: str) -> Response[WalletResponse]:
         return self.with_endpoint('api').request_get(
             f'wallets/{wallet_id}'
         )
@@ -22,7 +24,7 @@ class Wallets(Resource):
         self,
         wallet_id: str,
         query: Optional[TransactionsQuery] = None,
-    ):
+    ) -> PaginatedResponse[TransactionResponse]:
         return self.with_endpoint('api').request_get(
             f'wallets/{wallet_id}/transactions', query
         )
@@ -31,7 +33,7 @@ class Wallets(Resource):
         self,
         wallet_id: str,
         query: Optional[TransactionsQuery] = None,
-    ):
+    ) -> PaginatedResponse[TransactionResponse]:
         return self.with_endpoint('api').request_get(
             f'wallets/{wallet_id}/transactions/sent', query
         )
@@ -40,7 +42,7 @@ class Wallets(Resource):
         self,
         wallet_id: str,
         query: Optional[TransactionsQuery] = None,
-    ):
+    ) -> PaginatedResponse[TransactionResponse]:
         return self.with_endpoint('api').request_get(
             f'wallets/{wallet_id}/transactions/received', query
         )
@@ -49,7 +51,7 @@ class Wallets(Resource):
         self,
         wallet_id: str,
         query: Optional[TransactionsQuery] = None,
-    ):
+    ) -> PaginatedResponse[TransactionResponse]:
         return self.with_endpoint('api').request_get(
             f'wallets/{wallet_id}/votes', query
         )
@@ -58,12 +60,12 @@ class Wallets(Resource):
         self,
         address: str,
         query: Optional[WalletTokensForQuery] = None,
-    ):
+    ) -> TokenPaginatedResponseResults[TokenActionsResponse]:
         return self.with_endpoint('api').request_get(
             f'wallets/{address}/tokens', query
         )
 
-    def tokens(self, query: Optional[WalletTokensQuery] = None):
+    def tokens(self, query: Optional[WalletTokensQuery] = None) -> TokenPaginatedResponseResults[TokenActionsResponse]:
         return self.with_endpoint('api').request_get(
             'wallets/tokens', query
         )

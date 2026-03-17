@@ -1,19 +1,78 @@
-from typing import List, TypedDict
+from typing import Generic, List, TypeVar, TypedDict
+
+from client.types import PaginatedQuery, ResponseMeta
+
+T = TypeVar('T')
 
 
-TokensQuery = TypedDict(
-    'TokensQuery',
+class TokenResponse(TypedDict):
+    address: str
+    decimals: int
+    deploymentHash: str
+    name: str
+    totalSupply: str
+
+
+class TokenAddressesResponse(TypedDict):
+    addresses: dict[str, str]
+    decimals: int
+    name: str
+    supply: str
+    symbol: str
+    token: str
+
+
+class TokenActionToken(TypedDict):
+    address: str
+    name: str
+    symbol: str
+    decimals: int
+
+
+# Functional form required: keys include 'from' which is a reserved Python keyword
+TokenActionsResponse = TypedDict(
+    'TokenActionsResponse',
     {
-        'page': int,
-        'limit': int,
-        'offset': int,
-        'ignoreWhitelist': bool,
-        'name': str,
-        'whitelist': List[str],
+        'transactionHash': str,
+        'from': str,
+        'to': str,
+        'value': str,
+        'functionSig': str,
+        'blockNumber': str,
+        'timestamp': str,
+        'token': TokenActionToken,
     },
-    total=False,
 )
 
+
+class TokenWhitelistResponse(TypedDict):
+    address: str
+    comment: str
+    createdAt: str
+
+
+class TokenAddressHoldersResponse(TypedDict):
+    address: str
+    balance: int
+    tokenAddress: str
+
+
+class TokenPaginatedResponseData(TypedDict, Generic[T]):
+    data: T
+
+
+class TokenPaginatedResponseResults(TypedDict, Generic[T]):
+    meta: ResponseMeta
+    results: list[T]
+
+
+class TokensQuery(PaginatedQuery, total=False):
+    ignoreWhitelist: bool
+    name: str
+    whitelist: List[str]
+
+
+# Functional form required: keys include 'from' which is a reserved Python keyword
 TokenLookupQuery = TypedDict(
     'TokenLookupQuery',
     {
@@ -27,6 +86,7 @@ TokenLookupQuery = TypedDict(
     total=False,
 )
 
+# Functional form required: keys include 'from' which is a reserved Python keyword
 TokenTransfersQuery = TypedDict(
     'TokenTransfersQuery',
     {
@@ -43,6 +103,7 @@ TokenTransfersQuery = TypedDict(
     total=False,
 )
 
+# Functional form required: keys include 'from' which is a reserved Python keyword
 TokenApprovalsQuery = TypedDict(
     'TokenApprovalsQuery',
     {
