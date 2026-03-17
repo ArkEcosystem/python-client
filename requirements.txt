@@ -23,4 +23,5 @@ requests==2.32.3
 responses==0.10.15
 setuptools==70.1.0
 six==1.16.0
+typing_extensions==4.15.0
 urllib3==2.2.2
