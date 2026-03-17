@@ -22,10 +22,10 @@ class ResponseMeta(TypedDict):
     totalCount: int
 
 
-class Response(TypedDict, Generic[T]):
+class Response(Generic[T]):
     data: T
 
 
-class PaginatedResponse(TypedDict, Generic[T]):
+class PaginatedResponse(Generic[T]):
     meta: ResponseMeta
     data: list[T]

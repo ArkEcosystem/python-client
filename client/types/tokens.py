@@ -57,11 +57,11 @@ class TokenAddressHoldersResponse(TypedDict):
     tokenAddress: str
 
 
-class TokenPaginatedResponseData(TypedDict, Generic[T]):
+class TokenPaginatedResponseData(Generic[T]):
     data: T
 
 
-class TokenPaginatedResponseResults(TypedDict, Generic[T]):
+class TokenPaginatedResponseResults(Generic[T]):
     meta: ResponseMeta
     results: list[T]
 
