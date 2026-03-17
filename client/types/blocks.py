@@ -1,7 +1,5 @@
 from typing import TypedDict
 
-from typing_extensions import NotRequired
-
 from client.types import PaginatedQuery
 from client.types.transactions import Transaction
 
@@ -26,7 +24,7 @@ class Block(TypedDict):
     transactionCount: int
 
 
-class BlockResponse(TypedDict):
+class BlockResponse(TypedDict, total=False):
     hash: str
     number: int
     confirmations: int
@@ -36,7 +34,7 @@ class BlockResponse(TypedDict):
     total: str
     proposer: str
     publicKey: str
-    username: NotRequired[str]
+    username: str
     transactionsRoot: str
     payloadSize: int
     parentHash: str
