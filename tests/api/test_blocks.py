@@ -32,7 +32,7 @@ def test_all_calls_correct_url_with_params():
         'page': 5,
         'limit': 69,
         'orderBy': 'timestamp.epoch',
-        'height': 6838329,
+        'number': 6838329,
     })
     assert len(responses.calls) == 1
     url = responses.calls[0].request.url
@@ -40,7 +40,7 @@ def test_all_calls_correct_url_with_params():
     assert 'page=5' in url
     assert 'limit=69' in url
     assert 'orderBy=timestamp.epoch' in url
-    assert 'height=6838329' in url
+    assert 'number=6838329' in url
 
 
 def test_get_calls_correct_url():

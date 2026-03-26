@@ -87,28 +87,36 @@ def test_get_calls_correct_url():
 def test_all_unconfirmed_calls_correct_url():
     responses.add(
         responses.GET,
-        'http://127.0.0.1:4002/api/transactions/unconfirmed',
+        'http://127.0.0.1:4002/tx/api/transactions/unconfirmed',
         json={'success': True},
         status=200
     )
 
-    client = ArkClient('http://127.0.0.1:4002/api')
+    client = ArkClient({
+        'api': 'http://127.0.0.1:4002/api',
+        'transactions': 'http://127.0.0.1:4002/tx/api',
+        'evm': None,
+    })
     client.transactions.all_unconfirmed()
     assert len(responses.calls) == 1
     assert responses.calls[0].request.url == (
-        'http://127.0.0.1:4002/api/transactions/unconfirmed'
+        'http://127.0.0.1:4002/tx/api/transactions/unconfirmed'
     )
 
 
 def test_all_unconfirmed_calls_correct_url_with_params():
     responses.add(
         responses.GET,
-        'http://127.0.0.1:4002/api/transactions/unconfirmed',
+        'http://127.0.0.1:4002/tx/api/transactions/unconfirmed',
         json={'success': True},
         status=200
     )
 
-    client = ArkClient('http://127.0.0.1:4002/api')
+    client = ArkClient({
+        'api': 'http://127.0.0.1:4002/api',
+        'transactions': 'http://127.0.0.1:4002/tx/api',
+        'evm': None,
+    })
     client.transactions.all_unconfirmed({
         'page': 5,
         'limit': 69,
@@ -117,7 +125,7 @@ def test_all_unconfirmed_calls_correct_url_with_params():
     assert len(responses.calls) == 1
     url = responses.calls[0].request.url
     assert url.startswith(
-        'http://127.0.0.1:4002/api/transactions/unconfirmed?'
+        'http://127.0.0.1:4002/tx/api/transactions/unconfirmed?'
     )
     assert 'page=5' in url
     assert 'limit=69' in url
@@ -129,18 +137,22 @@ def test_get_unconfirmed_calls_correct_url():
 
     responses.add(
         responses.GET,
-        'http://127.0.0.1:4002/api/transactions/unconfirmed/{}'.format(
+        'http://127.0.0.1:4002/tx/api/transactions/unconfirmed/{}'.format(
             transaction_id
         ),
         json={'success': True},
         status=200
     )
 
-    client = ArkClient('http://127.0.0.1:4002/api')
+    client = ArkClient({
+        'api': 'http://127.0.0.1:4002/api',
+        'transactions': 'http://127.0.0.1:4002/tx/api',
+        'evm': None,
+    })
     client.transactions.get_unconfirmed(transaction_id)
     assert len(responses.calls) == 1
     assert responses.calls[0].request.url == (
-        'http://127.0.0.1:4002/api/transactions/unconfirmed/12345'
+        'http://127.0.0.1:4002/tx/api/transactions/unconfirmed/12345'
     )
 
 

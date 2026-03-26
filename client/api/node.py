@@ -1,4 +1,7 @@
+from typing import Optional
+
 from client.resource import Resource
+from client.types.node import NodeFeesQuery
 
 
 class Node(Resource):
@@ -19,5 +22,5 @@ class Node(Resource):
             'node/configuration/crypto'
         )
 
-    def fees(self, query={}):
+    def fees(self, query: Optional[NodeFeesQuery] = None):
         return self.with_endpoint('api').request_get('node/fees', query)
