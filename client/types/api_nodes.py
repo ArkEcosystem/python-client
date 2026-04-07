@@ -1,12 +1,15 @@
 from typing import TypedDict
 
 
-ApiNodesQuery = TypedDict(
-    'ApiNodesQuery',
-    {
-        'ip': str,
-        'orderBy': str,
-        'version': str,
-    },
-    total=False,
-)
+class ApiNodeResponse(TypedDict):
+    url: str
+    version: str
+    height: int
+    latency: int
+    status: str
+
+
+class ApiNodesQuery(TypedDict, total=False):
+    ip: str
+    orderBy: str
+    version: str

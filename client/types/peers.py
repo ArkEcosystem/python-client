@@ -1,14 +1,25 @@
 from typing import TypedDict
 
+from client.types import PaginatedQuery
 
-PeersQuery = TypedDict(
-    'PeersQuery',
-    {
-        'page': int,
-        'limit': int,
-        'ip': str,
-        'orderBy': str,
-        'version': str,
-    },
-    total=False,
-)
+
+class Plugin(TypedDict):
+    enabled: bool
+    estimateTotalCount: bool
+    port: int
+
+
+class PeerResponse(TypedDict):
+    blockNumber: int
+    ip: str
+    latency: int
+    plugins: dict[str, Plugin]
+    port: int
+    ports: dict[str, int]
+    version: str
+
+
+class PeersQuery(PaginatedQuery, total=False):
+    ip: str
+    orderBy: str
+    version: str
