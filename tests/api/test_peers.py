@@ -1,6 +1,6 @@
 import responses
 
-from client import ArkClient
+from client import Client
 
 
 def test_all_calls_correct_url():
@@ -11,7 +11,7 @@ def test_all_calls_correct_url():
         status=200
     )
 
-    client = ArkClient('http://127.0.0.1:4002/api')
+    client = Client('http://127.0.0.1:4002/api')
     client.peers.all()
     assert len(responses.calls) == 1
     assert responses.calls[0].request.url == (
@@ -27,7 +27,7 @@ def test_all_calls_correct_url_with_params():
         status=200
     )
 
-    client = ArkClient('http://127.0.0.1:4002/api')
+    client = Client('http://127.0.0.1:4002/api')
     client.peers.all({
         'os': 'a',
         'status': 'live',
@@ -58,7 +58,7 @@ def test_get_calls_correct_url_with_ip():
         status=200
     )
 
-    client = ArkClient('http://127.0.0.1:4002/api')
+    client = Client('http://127.0.0.1:4002/api')
     client.peers.get(ip)
     assert len(responses.calls) == 1
     assert responses.calls[0].request.url == (

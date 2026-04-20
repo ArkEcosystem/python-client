@@ -1,5 +1,5 @@
 import responses
-from client import ArkClient
+from client import Client
 
 
 def test_all_calls_correct_url():
@@ -10,7 +10,7 @@ def test_all_calls_correct_url():
         status=200
     )
 
-    client = ArkClient('http://127.0.0.1:4002/api')
+    client = Client('http://127.0.0.1:4002/api')
     client.receipts.all()
     assert len(responses.calls) == 1
     assert responses.calls[0].request.url == (
@@ -26,7 +26,7 @@ def test_all_calls_correct_url_with_params():
         status=200
     )
 
-    client = ArkClient('http://127.0.0.1:4002/api')
+    client = Client('http://127.0.0.1:4002/api')
     client.receipts.all({
         'query_param1': 'value1',
         'query_param2': 'value2',
@@ -47,7 +47,7 @@ def test_get_calls_correct_url():
         status=200
     )
 
-    client = ArkClient('http://127.0.0.1:4002/api')
+    client = Client('http://127.0.0.1:4002/api')
     client.receipts.get(transaction_hash)
     assert len(responses.calls) == 1
     assert responses.calls[0].request.url == (
@@ -64,7 +64,7 @@ def test_get_calls_correct_url_with_params():
         status=200
     )
 
-    client = ArkClient('http://127.0.0.1:4002/api')
+    client = Client('http://127.0.0.1:4002/api')
     client.receipts.get(transaction_hash, {'format': 'hex'})
     assert len(responses.calls) == 1
     url = responses.calls[0].request.url
@@ -80,7 +80,7 @@ def test_contracts_calls_correct_url():
         status=200
     )
 
-    client = ArkClient('http://127.0.0.1:4002/api')
+    client = Client('http://127.0.0.1:4002/api')
     client.receipts.contracts()
     assert len(responses.calls) == 1
     assert responses.calls[0].request.url == (
@@ -96,7 +96,7 @@ def test_contracts_calls_correct_url_with_params():
         status=200
     )
 
-    client = ArkClient('http://127.0.0.1:4002/api')
+    client = Client('http://127.0.0.1:4002/api')
     client.receipts.contracts({'status': 'success'})
     assert len(responses.calls) == 1
     url = responses.calls[0].request.url

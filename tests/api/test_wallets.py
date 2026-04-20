@@ -1,6 +1,6 @@
 import responses
 
-from client import ArkClient
+from client import Client
 
 
 def test_all_calls_correct_url():
@@ -11,7 +11,7 @@ def test_all_calls_correct_url():
         status=200
     )
 
-    client = ArkClient('http://127.0.0.1:4002/api')
+    client = Client('http://127.0.0.1:4002/api')
     client.wallets.all()
     assert len(responses.calls) == 1
     assert responses.calls[0].request.url == (
@@ -27,7 +27,7 @@ def test_all_calls_correct_url_with_params():
         status=200
     )
 
-    client = ArkClient('http://127.0.0.1:4002/api')
+    client = Client('http://127.0.0.1:4002/api')
     client.wallets.all({'page': 5, 'limit': 69})
     assert len(responses.calls) == 1
     url = responses.calls[0].request.url
@@ -44,7 +44,7 @@ def test_top_calls_correct_url():
         status=200
     )
 
-    client = ArkClient('http://127.0.0.1:4002/api')
+    client = Client('http://127.0.0.1:4002/api')
     client.wallets.top()
     assert len(responses.calls) == 1
     assert responses.calls[0].request.url == (
@@ -60,7 +60,7 @@ def test_top_calls_correct_url_with_params():
         status=200
     )
 
-    client = ArkClient('http://127.0.0.1:4002/api')
+    client = Client('http://127.0.0.1:4002/api')
     client.wallets.top({'page': 5, 'limit': 69})
     assert len(responses.calls) == 1
     url = responses.calls[0].request.url
@@ -78,7 +78,7 @@ def test_get_calls_correct_url():
         status=200
     )
 
-    client = ArkClient('http://127.0.0.1:4002/api')
+    client = Client('http://127.0.0.1:4002/api')
     client.wallets.get(wallet_id)
 
     assert len(responses.calls) == 1
@@ -98,7 +98,7 @@ def test_transactions_calls_correct_url():
         status=200
     )
 
-    client = ArkClient('http://127.0.0.1:4002/api')
+    client = Client('http://127.0.0.1:4002/api')
     client.wallets.transactions(wallet_id)
     assert len(responses.calls) == 1
     assert responses.calls[0].request.url == (
@@ -117,7 +117,7 @@ def test_transactions_calls_correct_url_with_params():
         status=200
     )
 
-    client = ArkClient('http://127.0.0.1:4002/api')
+    client = Client('http://127.0.0.1:4002/api')
     client.wallets.transactions(wallet_id, {
         'page': 5,
         'limit': 69,
@@ -144,7 +144,7 @@ def test_sent_transactions_calls_correct_url():
         status=200
     )
 
-    client = ArkClient('http://127.0.0.1:4002/api')
+    client = Client('http://127.0.0.1:4002/api')
     client.wallets.sent_transactions(wallet_id)
     assert len(responses.calls) == 1
     assert responses.calls[0].request.url == (
@@ -163,7 +163,7 @@ def test_sent_transactions_calls_correct_url_with_params():
         status=200
     )
 
-    client = ArkClient('http://127.0.0.1:4002/api')
+    client = Client('http://127.0.0.1:4002/api')
     client.wallets.sent_transactions(wallet_id, {
         'page': 5,
         'limit': 69,
@@ -187,7 +187,7 @@ def test_received_transactions_calls_correct_url():
         status=200
     )
 
-    client = ArkClient('http://127.0.0.1:4002/api')
+    client = Client('http://127.0.0.1:4002/api')
     client.wallets.received_transactions(wallet_id)
     assert len(responses.calls) == 1
     assert responses.calls[0].request.url == (
@@ -205,7 +205,7 @@ def test_received_transactions_calls_correct_url_with_params():
         status=200
     )
 
-    client = ArkClient('http://127.0.0.1:4002/api')
+    client = Client('http://127.0.0.1:4002/api')
     client.wallets.received_transactions(wallet_id, {
         'page': 5,
         'limit': 69,
@@ -229,7 +229,7 @@ def test_votes_calls_correct_url():
         status=200
     )
 
-    client = ArkClient('http://127.0.0.1:4002/api')
+    client = Client('http://127.0.0.1:4002/api')
     client.wallets.votes(wallet_id)
     assert len(responses.calls) == 1
     assert responses.calls[0].request.url == (
@@ -246,7 +246,7 @@ def test_votes_calls_correct_url_with_params():
         status=200
     )
 
-    client = ArkClient('http://127.0.0.1:4002/api')
+    client = Client('http://127.0.0.1:4002/api')
     client.wallets.votes(wallet_id, {'page': 5, 'limit': 69})
     assert len(responses.calls) == 1
     url = responses.calls[0].request.url
@@ -266,7 +266,7 @@ def test_tokens_for_calls_correct_url():
         status=200
     )
 
-    client = ArkClient('http://127.0.0.1:4002/api')
+    client = Client('http://127.0.0.1:4002/api')
     client.wallets.tokens_for(wallet_id)
     assert len(responses.calls) == 1
     assert responses.calls[0].request.url == (
@@ -283,7 +283,7 @@ def test_tokens_for_calls_correct_url_with_params():
         status=200
     )
 
-    client = ArkClient('http://127.0.0.1:4002/api')
+    client = Client('http://127.0.0.1:4002/api')
     client.wallets.tokens_for(wallet_id, {'page': 5, 'limit': 69})
     assert len(responses.calls) == 1
     url = responses.calls[0].request.url
@@ -302,7 +302,7 @@ def test_tokens_calls_correct_url():
         status=200
     )
 
-    client = ArkClient('http://127.0.0.1:4002/api')
+    client = Client('http://127.0.0.1:4002/api')
     client.wallets.tokens({'addresses': '0xabc,0xdef'})
     assert len(responses.calls) == 1
     url = responses.calls[0].request.url
@@ -320,7 +320,7 @@ def test_tokens_calls_correct_url_with_params():
         status=200
     )
 
-    client = ArkClient('http://127.0.0.1:4002/api')
+    client = Client('http://127.0.0.1:4002/api')
     client.wallets.tokens({
         'addresses': '0xabc,0xdef',
         'page': 2,

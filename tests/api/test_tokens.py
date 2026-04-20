@@ -1,6 +1,6 @@
 import responses
 
-from client import ArkClient
+from client import Client
 
 
 def test_all_calls_correct_url():
@@ -11,7 +11,7 @@ def test_all_calls_correct_url():
         status=200
     )
 
-    client = ArkClient('http://127.0.0.1:4002/api')
+    client = Client('http://127.0.0.1:4002/api')
     client.tokens.all()
     assert len(responses.calls) == 1
     assert responses.calls[0].request.url == (
@@ -27,7 +27,7 @@ def test_all_calls_correct_url_with_params():
         status=200
     )
 
-    client = ArkClient('http://127.0.0.1:4002/api')
+    client = Client('http://127.0.0.1:4002/api')
     client.tokens.all({'page': 5, 'limit': 69})
     assert len(responses.calls) == 1
     url = responses.calls[0].request.url
@@ -45,7 +45,7 @@ def test_get_calls_correct_url():
         status=200
     )
 
-    client = ArkClient('http://127.0.0.1:4002/api')
+    client = Client('http://127.0.0.1:4002/api')
     client.tokens.get(address)
     assert len(responses.calls) == 1
     assert responses.calls[0].request.url == (
@@ -62,7 +62,7 @@ def test_holders_for_calls_correct_url():
         status=200
     )
 
-    client = ArkClient('http://127.0.0.1:4002/api')
+    client = Client('http://127.0.0.1:4002/api')
     client.tokens.holders_for(address)
     assert len(responses.calls) == 1
     assert responses.calls[0].request.url == (
@@ -79,7 +79,7 @@ def test_transfers_for_calls_correct_url():
         status=200
     )
 
-    client = ArkClient('http://127.0.0.1:4002/api')
+    client = Client('http://127.0.0.1:4002/api')
     client.tokens.transfers_for(address)
     assert len(responses.calls) == 1
     assert responses.calls[0].request.url == (
@@ -96,7 +96,7 @@ def test_transfers_for_calls_correct_url_with_params():
         status=200
     )
 
-    client = ArkClient('http://127.0.0.1:4002/api')
+    client = Client('http://127.0.0.1:4002/api')
     client.tokens.transfers_for(address, {'page': 2, 'limit': 25})
     assert len(responses.calls) == 1
     url = responses.calls[0].request.url
@@ -116,7 +116,7 @@ def test_approvals_for_calls_correct_url():
         status=200
     )
 
-    client = ArkClient('http://127.0.0.1:4002/api')
+    client = Client('http://127.0.0.1:4002/api')
     client.tokens.approvals_for(address)
     assert len(responses.calls) == 1
     assert responses.calls[0].request.url == (
@@ -133,7 +133,7 @@ def test_approvals_for_calls_correct_url_with_params():
         status=200
     )
 
-    client = ArkClient('http://127.0.0.1:4002/api')
+    client = Client('http://127.0.0.1:4002/api')
     client.tokens.approvals_for(address, {'page': 2, 'limit': 25})
     assert len(responses.calls) == 1
     url = responses.calls[0].request.url
@@ -152,7 +152,7 @@ def test_transfers_calls_correct_url():
         status=200
     )
 
-    client = ArkClient('http://127.0.0.1:4002/api')
+    client = Client('http://127.0.0.1:4002/api')
     client.tokens.transfers()
     assert len(responses.calls) == 1
     assert responses.calls[0].request.url == (
@@ -168,7 +168,7 @@ def test_transfers_calls_correct_url_with_params():
         status=200
     )
 
-    client = ArkClient('http://127.0.0.1:4002/api')
+    client = Client('http://127.0.0.1:4002/api')
     client.tokens.transfers({'page': 1, 'limit': 10})
     assert len(responses.calls) == 1
     url = responses.calls[0].request.url
@@ -187,7 +187,7 @@ def test_approvals_calls_correct_url():
         status=200
     )
 
-    client = ArkClient('http://127.0.0.1:4002/api')
+    client = Client('http://127.0.0.1:4002/api')
     client.tokens.approvals()
     assert len(responses.calls) == 1
     assert responses.calls[0].request.url == (
@@ -203,7 +203,7 @@ def test_approvals_calls_correct_url_with_params():
         status=200
     )
 
-    client = ArkClient('http://127.0.0.1:4002/api')
+    client = Client('http://127.0.0.1:4002/api')
     client.tokens.approvals({'page': 1, 'limit': 10})
     assert len(responses.calls) == 1
     url = responses.calls[0].request.url
@@ -222,7 +222,7 @@ def test_whitelist_calls_correct_url():
         status=200
     )
 
-    client = ArkClient('http://127.0.0.1:4002/api')
+    client = Client('http://127.0.0.1:4002/api')
     client.tokens.whitelist()
     assert len(responses.calls) == 1
     assert responses.calls[0].request.url == (
@@ -238,7 +238,7 @@ def test_whitelist_calls_correct_url_with_params():
         status=200
     )
 
-    client = ArkClient('http://127.0.0.1:4002/api')
+    client = Client('http://127.0.0.1:4002/api')
     client.tokens.whitelist({'page': 3, 'limit': 50})
     assert len(responses.calls) == 1
     url = responses.calls[0].request.url

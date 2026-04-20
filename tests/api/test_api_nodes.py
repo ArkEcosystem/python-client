@@ -1,5 +1,5 @@
 import responses
-from client import ArkClient
+from client import Client
 
 
 def test_api_nodes_calls_correct_url():
@@ -10,7 +10,7 @@ def test_api_nodes_calls_correct_url():
         status=200
     )
 
-    client = ArkClient('http://127.0.0.1:4002/api')
+    client = Client('http://127.0.0.1:4002/api')
     client.api_nodes.all()
     assert len(responses.calls) == 1
     assert responses.calls[0].request.url == (
@@ -26,7 +26,7 @@ def test_api_nodes_calls_correct_url_with_params():
         status=200
     )
 
-    client = ArkClient('http://127.0.0.1:4002/api')
+    client = Client('http://127.0.0.1:4002/api')
     client.api_nodes.all({
         'query_param1': 'value1',
         'query_param2': 'value2',
