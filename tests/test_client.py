@@ -1,10 +1,10 @@
 import pytest
 
-from client.client import ArkClient
+from client.client import Client
 
 
 def test_client():
-    client = ArkClient('http://127.0.0.1:4002')
+    client = Client('http://127.0.0.1:4002')
 
     assert hasattr(client, 'connection') == True
     assert hasattr(client, 'api_nodes') == True

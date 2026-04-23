@@ -1,5 +1,5 @@
 import responses
-from client import ArkClient
+from client import Client
 
 
 def test_all_calls_correct_url():
@@ -10,7 +10,7 @@ def test_all_calls_correct_url():
         status=200
     )
 
-    client = ArkClient('http://127.0.0.1:4002/api')
+    client = Client('http://127.0.0.1:4002/api')
     client.contracts.all()
     assert len(responses.calls) == 1
     assert responses.calls[0].request.url == 'http://127.0.0.1:4002/api/contracts'
@@ -24,7 +24,7 @@ def test_abi_calls_correct_url():
         status=200
     )
 
-    client = ArkClient('http://127.0.0.1:4002/api')
+    client = Client('http://127.0.0.1:4002/api')
     client.contracts.abi('consensus', 'some-address')
     assert len(responses.calls) == 1
     assert responses.calls[0].request.url == 'http://127.0.0.1:4002/api/contracts/consensus/some-address/abi'

@@ -1,7 +1,7 @@
 import json
 import responses
 
-from client import ArkClient
+from client import Client
 
 
 def test_eth_call_methods_correct_url():
@@ -12,7 +12,7 @@ def test_eth_call_methods_correct_url():
         status=200
     )
 
-    client = ArkClient('http://127.0.0.1:4002/evm/api')
+    client = Client('http://127.0.0.1:4002/evm/api')
     client.evm.call({
         'method': 'eth_call',
         'params': [[{ 'random': 'data' }], 'latest'],

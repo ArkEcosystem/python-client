@@ -1,6 +1,6 @@
 import responses
 
-from client import ArkClient
+from client import Client
 
 
 def test_all_calls_correct_url():
@@ -11,7 +11,7 @@ def test_all_calls_correct_url():
         status=200
     )
 
-    client = ArkClient('http://127.0.0.1:4002/api')
+    client = Client('http://127.0.0.1:4002/api')
     client.blocks.all()
     assert len(responses.calls) == 1
     assert responses.calls[0].request.url == (
@@ -27,7 +27,7 @@ def test_all_calls_correct_url_with_params():
         status=200
     )
 
-    client = ArkClient('http://127.0.0.1:4002/api')
+    client = Client('http://127.0.0.1:4002/api')
     client.blocks.all({
         'page': 5,
         'limit': 69,
@@ -52,7 +52,7 @@ def test_get_calls_correct_url():
         status=200
     )
 
-    client = ArkClient('http://127.0.0.1:4002/api')
+    client = Client('http://127.0.0.1:4002/api')
     client.blocks.get(block_id)
 
     assert len(responses.calls) == 1
@@ -69,7 +69,7 @@ def test_first_calls_correct_url():
         status=200
     )
 
-    client = ArkClient('http://127.0.0.1:4002/api')
+    client = Client('http://127.0.0.1:4002/api')
     client.blocks.first()
 
     assert len(responses.calls) == 1
@@ -86,7 +86,7 @@ def test_last_calls_correct_url():
         status=200
     )
 
-    client = ArkClient('http://127.0.0.1:4002/api')
+    client = Client('http://127.0.0.1:4002/api')
     client.blocks.last()
 
     assert len(responses.calls) == 1
@@ -106,7 +106,7 @@ def test_transactions_calls_correct_url_with_params():
         status=200
     )
 
-    client = ArkClient('http://127.0.0.1:4002/api')
+    client = Client('http://127.0.0.1:4002/api')
     client.blocks.transactions(block_id, {
         'page': 5,
         'limit': 69,

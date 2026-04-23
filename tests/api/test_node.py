@@ -1,6 +1,6 @@
 import responses
 
-from client import ArkClient
+from client import Client
 
 
 def test_status_calls_correct_url():
@@ -11,7 +11,7 @@ def test_status_calls_correct_url():
         status=200
     )
 
-    client = ArkClient('http://127.0.0.1:4002/api')
+    client = Client('http://127.0.0.1:4002/api')
     client.node.status()
     assert len(responses.calls) == 1
     assert responses.calls[0].request.url == (
@@ -27,7 +27,7 @@ def test_syncing_calls_correct_url():
         status=200
     )
 
-    client = ArkClient('http://127.0.0.1:4002/api')
+    client = Client('http://127.0.0.1:4002/api')
     client.node.syncing()
     assert len(responses.calls) == 1
     assert responses.calls[0].request.url == (
@@ -43,7 +43,7 @@ def test_configuration_calls_correct_url():
         status=200
     )
 
-    client = ArkClient('http://127.0.0.1:4002/api')
+    client = Client('http://127.0.0.1:4002/api')
     client.node.configuration()
     assert len(responses.calls) == 1
     assert responses.calls[0].request.url == (
@@ -59,7 +59,7 @@ def test_configuration_crypto_call_correct_url():
         status=200
     )
 
-    client = ArkClient('http://127.0.0.1:4002/api')
+    client = Client('http://127.0.0.1:4002/api')
     client.node.crypto()
     assert len(responses.calls) == 1
     assert responses.calls[0].request.url == (
@@ -75,7 +75,7 @@ def test_fees_calls_correct_url():
         status=200
     )
 
-    client = ArkClient('http://127.0.0.1:4002/api')
+    client = Client('http://127.0.0.1:4002/api')
     client.node.fees()
     assert len(responses.calls) == 1
     assert responses.calls[0].request.url == (
@@ -91,7 +91,7 @@ def test_fees_calls_correct_url_with_params():
         status=200
     )
 
-    client = ArkClient('http://127.0.0.1:4002/api')
+    client = Client('http://127.0.0.1:4002/api')
     client.node.fees({'days': 14})
     assert len(responses.calls) == 1
     url = responses.calls[0].request.url

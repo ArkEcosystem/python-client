@@ -1,6 +1,6 @@
 import responses
 
-from client import ArkClient
+from client import Client
 
 
 def test_all_calls_correct_url():
@@ -11,7 +11,7 @@ def test_all_calls_correct_url():
         status=200
     )
 
-    client = ArkClient('http://127.0.0.1:4002/api')
+    client = Client('http://127.0.0.1:4002/api')
     client.validators.all()
     assert len(responses.calls) == 1
     assert responses.calls[0].request.url == (
@@ -27,7 +27,7 @@ def test_all_calls_correct_url_with_params():
         status=200
     )
 
-    client = ArkClient('http://127.0.0.1:4002/api')
+    client = Client('http://127.0.0.1:4002/api')
     client.validators.all({
         'page': 5,
         'limit': 69,
@@ -52,7 +52,7 @@ def test_get_calls_correct_url():
         status=200
     )
 
-    client = ArkClient('http://127.0.0.1:4002/api')
+    client = Client('http://127.0.0.1:4002/api')
     client.validators.get(validator_id)
 
     assert len(responses.calls) == 1
@@ -72,7 +72,7 @@ def test_blocks_calls_correct_url():
         status=200
     )
 
-    client = ArkClient('http://127.0.0.1:4002/api')
+    client = Client('http://127.0.0.1:4002/api')
     client.validators.blocks(validator_id, {
         'limit': 100,
         'orderBy': 'timestamp:desc',
@@ -98,7 +98,7 @@ def test_voters_calls_correct_url():
         status=200
     )
 
-    client = ArkClient('http://127.0.0.1:4002/api')
+    client = Client('http://127.0.0.1:4002/api')
     client.validators.voters(validator_id, {
         'limit': 100,
         'orderBy': 'timestamp:desc',

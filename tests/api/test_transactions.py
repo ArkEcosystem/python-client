@@ -2,7 +2,7 @@ import json
 
 import responses
 
-from client import ArkClient
+from client import Client
 
 
 def test_all_calls_correct_url():
@@ -13,7 +13,7 @@ def test_all_calls_correct_url():
         status=200
     )
 
-    client = ArkClient('http://127.0.0.1:4002/api')
+    client = Client('http://127.0.0.1:4002/api')
     client.transactions.all()
     assert len(responses.calls) == 1
     assert responses.calls[0].request.url == (
@@ -29,7 +29,7 @@ def test_all_calls_correct_url_with_params():
         status=200
     )
 
-    client = ArkClient('http://127.0.0.1:4002/api')
+    client = Client('http://127.0.0.1:4002/api')
     client.transactions.all({
         'page': 5,
         'limit': 69,
@@ -53,7 +53,7 @@ def test_create_calls_correct_url_with_data():
         status=200
     )
 
-    client = ArkClient('http://127.0.0.1:4002/tx/api')
+    client = Client('http://127.0.0.1:4002/tx/api')
     client.transactions.create([{'random': 'data'}])
     assert len(responses.calls) == 1
     assert responses.calls[0].request.url == (
@@ -75,7 +75,7 @@ def test_get_calls_correct_url():
         status=200
     )
 
-    client = ArkClient('http://127.0.0.1:4002/api')
+    client = Client('http://127.0.0.1:4002/api')
     client.transactions.get(transaction_id)
 
     assert len(responses.calls) == 1
@@ -92,7 +92,7 @@ def test_all_unconfirmed_calls_correct_url():
         status=200
     )
 
-    client = ArkClient({
+    client = Client({
         'api': 'http://127.0.0.1:4002/api',
         'transactions': 'http://127.0.0.1:4002/tx/api',
         'evm': None,
@@ -112,7 +112,7 @@ def test_all_unconfirmed_calls_correct_url_with_params():
         status=200
     )
 
-    client = ArkClient({
+    client = Client({
         'api': 'http://127.0.0.1:4002/api',
         'transactions': 'http://127.0.0.1:4002/tx/api',
         'evm': None,
@@ -144,7 +144,7 @@ def test_get_unconfirmed_calls_correct_url():
         status=200
     )
 
-    client = ArkClient({
+    client = Client({
         'api': 'http://127.0.0.1:4002/api',
         'transactions': 'http://127.0.0.1:4002/tx/api',
         'evm': None,
@@ -164,7 +164,7 @@ def test_configuration_calls_correct_url():
         status=200
     )
 
-    client = ArkClient({
+    client = Client({
         'api': 'http://127.0.0.1:4002/api',
         'transactions': 'http://127.0.0.1:4002/tx/api',
         'evm': None,

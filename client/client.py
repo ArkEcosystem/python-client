@@ -16,7 +16,7 @@ from client.api.transactions import Transactions
 from client.api.votes import Votes
 from client.api.wallets import Wallets
 
-class ArkClient(object):
+class Client(object):
 
     def __init__(self, hosts: Union[str, ClientHosts]):
         """
